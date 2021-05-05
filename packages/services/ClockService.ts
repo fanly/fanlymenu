@@ -9,7 +9,7 @@ const Moment = require('moment');
 export default class ClockService {
   format: any;
   onTickHandler: any;
-  intervalId: NodeJS.Timeout | undefined;
+  intervalId: any;
   constructor() {
     Moment.locale(app.getLocale());
 

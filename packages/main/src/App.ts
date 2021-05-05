@@ -71,7 +71,7 @@ export default class App {
       lunar.getJieQi() ||
       `${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`;
 
-    this.clockService.onTick((clock) => {
+    this.clockService.onTick((clock: { toString: () => string; }) => {
       this.trayService.setLabel(dayTextInChinese + ' ' + clock.toString());
     });
 
