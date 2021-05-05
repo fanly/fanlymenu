@@ -30,7 +30,7 @@ export default defineComponent({
       eventService.value.getEvents().then((data) => (events.value = data));
     });
 
-    const events = ref(null);
+    const events = ref([]);
     const eventService = ref(new EventService());
     return {
       events,
