@@ -25,6 +25,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
+      '~/': join(PACKAGE_ROOT, 'assets') + '/',
     },
   },
   plugins: [vue()],
