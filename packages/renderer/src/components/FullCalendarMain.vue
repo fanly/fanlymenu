@@ -100,11 +100,18 @@ export default defineComponent({
   position: relative;
   z-index: 4;
   padding: 4px;
-  color: var(--text-color-secondary);
 }
 
 ::v-deep(.fc-day-today) {
-  background-color: $fc-today-bg-color !important;
+  --fc-today-bg-color: var(--green-100);
+}
+
+::v-deep(.fc-day-sat) {
+  color: var(--cyan-300) !important;
+}
+
+::v-deep(.fc-day-sun) {
+  color: var(--cyan-300) !important;
 }
 
 </style>
