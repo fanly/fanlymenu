@@ -4,6 +4,15 @@
       :events="events"
       :options="calendarOptions"
     />
+    <Sidebar
+      v-model:visible="visibleFullSetting"
+      :base-z-index="1000"
+      position="full"
+    >
+      <h3>Full Screen</h3>
+      <h4>显示农历</h4>
+      <InputSwitch v-model="checkedInChinese" />
+    </Sidebar>
   </div>
 </template>
 
@@ -13,6 +22,8 @@ import '@fullcalendar/core/vdom';
 import '@fullcalendar/core';
 import {PrimeIcons} from 'primevue/api';
 import Fullcalendar from 'primevue/fullcalendar';
+import Sidebar from 'primevue/Sidebar';
+import InputSwitch from 'primevue/inputswitch';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
@@ -24,6 +35,8 @@ export default defineComponent({
   name: 'FullCalendarMain',
   components: {
     Fullcalendar,
+    Sidebar,
+    InputSwitch,
   },
   setup() {
     onMounted(() => {
@@ -32,9 +45,13 @@ export default defineComponent({
 
     const events = ref([]);
     const eventService = ref(new EventService());
+    const visibleFullSetting = ref(false);
+    const checkedInChinese = ref(true);
     return {
       events,
       eventService,
+      visibleFullSetting,
+      checkedInChinese,
     };
   },
   data() {
@@ -45,9 +62,7 @@ export default defineComponent({
           settingButton: {
             text: '',
             icon: PrimeIcons.COG,
-            click: () => {
-              alert('设置');
-            },
+            click: this.settingClick,
           },
         },
         headerToolbar: {
@@ -76,6 +91,11 @@ export default defineComponent({
         locale: zhLocale,
       },
     };
+  },
+  methods: {
+    settingClick() {
+      this.visibleFullSetting = true;
+    },
   },
 });
 </script>
