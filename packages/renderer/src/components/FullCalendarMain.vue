@@ -28,7 +28,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
 import EventService from '../../../services/EventService';
-import { Lunar } from 'lunar-typescript';
+import LunarService from '../../../services/LunarService';
 import 'primeicons/primeicons.css';
 
 export default defineComponent({
@@ -77,10 +77,8 @@ export default defineComponent({
         views: {
           dayGridMonth: {
             dayCellContent(item: any) {
-              const lunar = Lunar.fromDate(new Date(item.date));
-              const dayTextInChinese =
-                lunar.getJieQi() ||
-                `${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`;
+              const lunarService = new LunarService(new Date(item.date));
+              const dayTextInChinese = lunarService.inDayCellContent();
               return {
                 html: `<div class="fc-daygrid-day-number">${item.dayNumberText}</div>
                       <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>`,
