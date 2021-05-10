@@ -91,10 +91,10 @@ export default defineComponent({
   computed: {
     changeShowFestivals: {
       get() {
-        return this.$store.state.showFestivals;
+        return (this.$store as any).state.showFestivals;
       },
       set(value) {
-        this.$store.commit('changeShowFestivals', value);
+        (this.$store as any).commit('changeShowFestivals', value);
       },
     },
   },
