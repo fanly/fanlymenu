@@ -11,7 +11,7 @@
     >
       <h3>Full Screen</h3>
       <h4>显示农历</h4>
-      <InputSwitch v-model="checkedInChinese" />
+      <InputSwitch v-model="changeShowFestivals" />
     </Sidebar>
   </div>
 </template>
@@ -46,12 +46,10 @@ export default defineComponent({
     const events = ref([]);
     const eventService = ref(new EventService());
     const visibleFullSetting = ref(false);
-    const checkedInChinese = ref(true);
     return {
       events,
       eventService,
       visibleFullSetting,
-      checkedInChinese,
     };
   },
   data() {
@@ -89,6 +87,16 @@ export default defineComponent({
         locale: zhLocale,
       },
     };
+  },
+  computed: {
+    changeShowFestivals: {
+      get() {
+        return this.$store.state.showFestivals;
+      },
+      set(value) {
+        this.$store.commit('changeShowFestivals', value);
+      },
+    },
   },
   methods: {
     settingClick() {
