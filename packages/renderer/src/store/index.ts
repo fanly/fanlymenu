@@ -8,7 +8,6 @@ export const store = createStore({
   state,
   mutations: {
     changeShowFestivals(state) {
-      console.log(state.showFestivals);
       state.showFestivals = !state.showFestivals;
     },
   },
