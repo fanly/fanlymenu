@@ -60,7 +60,7 @@ export default defineComponent({
   },
   data() {
     return {
-      changeShowFestivals: this.showFestivals,
+      changeShowFestivals: true,
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
         customButtons: {
@@ -104,6 +104,12 @@ export default defineComponent({
     settingClick() {
       this.visibleFullSetting = true;
     },
+    setShowFestivals() {
+      this.changeShowFestivals = this.store.state.showFestivals;
+    },
+  },
+  mounte() {
+    this.setShowFestivals();
   },
 });
 </script>
