@@ -9,8 +9,6 @@ export interface State {
 // define injection key
 export const key: InjectionKey<Store<State>> = Symbol();
 
-// const state: State = { showFestivals: true };
-
 export const store = createStore<State>({
   state: {
     showFestivals: true,
