@@ -18,6 +18,8 @@
 
 <script lang='ts'>
 import { defineComponent, ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { key } from '/@/store';
 import '@fullcalendar/core/vdom';
 import '@fullcalendar/core';
 import {PrimeIcons} from 'primevue/api';
@@ -46,14 +48,19 @@ export default defineComponent({
     const events = ref([]);
     const eventService = ref(new EventService());
     const visibleFullSetting = ref(false);
+    const store = useStore(key);
+    const showFestivals = store.state.showFestivals;
     return {
       events,
       eventService,
       visibleFullSetting,
+      store,
+      showFestivals,
     };
   },
   data() {
     return {
+      changeShowFestivals: this.showFestivals,
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
         customButtons: {
@@ -88,14 +95,9 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    changeShowFestivals: {
-      get() {
-        return this.$store.state.showFestivals;
-      },
-      set(value) {
-        this.$store.commit('changeShowFestivals', value);
-      },
+  watch: {
+    changeShowFestivals(val, newval) {
+      this.store.commit('changeShowFestivals', newval);
     },
   },
   methods: {
