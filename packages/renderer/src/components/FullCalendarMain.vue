@@ -1,13 +1,16 @@
 <template>
   <div class="p-grid">
-    <FullcalendarSub @settingClick="visibleFullSetting = true" />
+    <FullcalendarSub
+      v-model:changeShowFestivals="changeShowFestivals"
+      @settingClick="visibleFullSetting = true"
+    />
     <Sidebar
       v-model:visible="visibleFullSetting"
       :base-z-index="1000"
       position="full"
     >
       <h3>Full Screen</h3>
-      <h4>显示农历</h4>
+      <h4>显示节假日</h4>
       <InputSwitch v-model="changeShowFestivals" />
     </Sidebar>
   </div>
@@ -15,8 +18,7 @@
 
 <script lang='ts'>
 import { defineComponent, ref } from 'vue';
-import { useStore } from 'vuex';
-import { key } from '/@/store';
+import { useStore } from '/@/store';
 import Sidebar from 'primevue/Sidebar';
 import InputSwitch from 'primevue/inputswitch';
 import 'primeicons/primeicons.css';
@@ -31,12 +33,10 @@ export default defineComponent({
   },
   setup() {
     const visibleFullSetting = ref(false);
-    const store = useStore(key);
-    const showFestivals = store.state.showFestivals;
+    const store = useStore();
     return {
       visibleFullSetting,
       store,
-      showFestivals,
     };
   },
   data() {
@@ -45,7 +45,7 @@ export default defineComponent({
     };
   },
   watch: {
-    changeShowFestivals(val, newval) {
+    changeShowFestivals(newval) {
       this.store.commit('changeShowFestivals', newval);
     },
   },

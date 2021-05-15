@@ -1,5 +1,6 @@
 <template>
   <Fullcalendar
+    ref="fullcalendar"
     :events="events"
     :options="calendarOptions"
   />
@@ -23,6 +24,9 @@ export default defineComponent({
   components: {
     Fullcalendar,
   },
+  props: {
+    changeShowFestivals: Boolean,
+  },
   setup() {
     onMounted(() => {
       eventService.value.getEvents().then((data) => (events.value = data));
@@ -37,7 +41,6 @@ export default defineComponent({
   },
   data() {
     return {
-      changeShowFestivals: true,
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
         customButtons: {
@@ -56,25 +59,39 @@ export default defineComponent({
         height: 680,
         // contentHeight: 600,
         aspectRatio: 1, // 单元格宽高的比例，宽是高的2倍
-        views: {
-          dayGridMonth: {
-            dayCellContent(item: any) {
-              const lunarService = new LunarService(new Date(item.date));
-              const dayTextInChinese = lunarService.inDayCellContent();
-              return {
-                html: `<div class="fc-daygrid-day-number">${item.dayNumberText}</div>
-                      <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>`,
-              };
-            },
-          },
-        },
+        views: this.dayCellNewContent(),
         locale: zhLocale,
       },
     };
   },
+  watch: {
+    changeShowFestivals(): void {
+      let calendarArray = this.$refs['fullcalendar'] as any;
+      let calendar = calendarArray['calendar'];
+      const viewContent = this.dayCellNewContent();
+      calendar.changeView('dayGridMonth', viewContent['dayGridMonth']);
+      // 这种成本可能更高
+      // calendar.render();
+    },
+  },
   methods: {
     settingClick() {
       this.$emit('settingClick');
+    },
+    dayCellNewContent() {
+      const that = this;
+      return {
+        dayGridMonth: {
+          dayCellContent(item: any) {
+            const lunarService = new LunarService(new Date(item.date));
+            const dayTextInChinese = lunarService.inDayCellContent(that.changeShowFestivals);
+            return {
+              html: `<div class="fc-daygrid-day-number">${item.dayNumberText}</div>
+                    <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>`,
+            };
+          },
+        },
+      };
     },
   },
 });
