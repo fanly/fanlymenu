@@ -31,6 +31,7 @@ export default class App {
       show: false,
       frame: false,
       webPreferences: {
+        webSecurity: false,
         preload: join(__dirname, '../../preload/dist/index.cjs'),
         contextIsolation: this.env.MODE !== 'test',   // Spectron tests can't work with contextIsolation: true
         enableRemoteModule: this.env.MODE === 'test', // Spectron tests can't work with enableRemoteModule: false

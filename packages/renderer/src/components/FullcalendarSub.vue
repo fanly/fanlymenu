@@ -16,7 +16,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
 import EventService from '../../../services/EventService';
-import LunarService from '../../../services/LunarService';
+import CalendarViewService from '../../../services/CalendarViewService';
 import 'primeicons/primeicons.css';
 
 export default defineComponent({
@@ -26,6 +26,7 @@ export default defineComponent({
   },
   props: {
     changeShowFestivals: Boolean,
+    weather: Object,
   },
   setup() {
     onMounted(() => {
@@ -66,6 +67,14 @@ export default defineComponent({
   },
   watch: {
     changeShowFestivals(): void {
+      this.updateView();
+    },
+    weather(): void {
+      this.updateView();
+    },
+  },
+  methods: {
+    updateView() {
       let calendarArray = this.$refs['fullcalendar'] as any;
       let calendar = calendarArray['calendar'];
       const viewContent = this.dayCellNewContent();
@@ -73,8 +82,6 @@ export default defineComponent({
       // 这种成本可能更高
       // calendar.render();
     },
-  },
-  methods: {
     settingClick() {
       this.$emit('settingClick');
     },
@@ -83,12 +90,9 @@ export default defineComponent({
       return {
         dayGridMonth: {
           dayCellContent(item: any) {
-            const lunarService = new LunarService(new Date(item.date));
-            const dayTextInChinese = lunarService.inDayCellContent(that.changeShowFestivals);
-            return {
-              html: `<div class="fc-daygrid-day-number">${item.dayNumberText}</div>
-                    <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>`,
-            };
+            const date = new Date(item.date);
+            const calendarViewService = new CalendarViewService();
+            return calendarViewService.showView(item.dayNumberText, date, that.changeShowFestivals, that.weather);
           },
         },
       };
