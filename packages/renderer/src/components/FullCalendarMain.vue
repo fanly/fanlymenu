@@ -2,6 +2,7 @@
   <div class="p-grid">
     <FullcalendarSub
       v-model:changeShowFestivals="changeShowFestivals"
+      v-model:weather="weather"
       @settingClick="visibleFullSetting = true"
     />
     <Sidebar
@@ -23,6 +24,7 @@ import Sidebar from 'primevue/Sidebar';
 import InputSwitch from 'primevue/inputswitch';
 import 'primeicons/primeicons.css';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
+import WeatherService from '../../../services/WeatherService';
 
 export default defineComponent({
   name: 'FullCalendarMain',
@@ -41,6 +43,7 @@ export default defineComponent({
   },
   data() {
     return {
+      weather: Object,
       changeShowFestivals: true,
     };
   },
@@ -49,13 +52,18 @@ export default defineComponent({
       this.store.commit('changeShowFestivals', newval);
     },
   },
+  mounted() {
+    this.setShowFestivals();
+    this.getWeather();
+  },
   methods: {
     setShowFestivals() {
       this.changeShowFestivals = this.store.state.showFestivals;
     },
-  },
-  mounte() {
-    this.setShowFestivals();
+    getWeather() {
+      const weatherService = new WeatherService();
+      weatherService.getWeathers().then((data) => (this.weather = data));
+    },
   },
 });
 </script>
