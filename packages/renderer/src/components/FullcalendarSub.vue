@@ -26,7 +26,7 @@ export default defineComponent({
   },
   props: {
     changeShowFestivals: Boolean,
-    weather: Object,
+    weather: {},
   },
   setup() {
     onMounted(() => {
