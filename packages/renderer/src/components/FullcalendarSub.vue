@@ -124,6 +124,21 @@ export default defineComponent({
   padding: 4px;
 }
 
+::v-deep(.fc-daygrid-dayweather) {
+  text-align: center;
+}
+
+::v-deep(.fc-daygrid-dayweather-iconday) {
+  padding-top: 4px;
+  float: left;
+  width: 20px;
+}
+
+::v-deep(.fc-daygrid-dayweather-temp) {
+  padding-top: 4px;
+  font-size: 0.6rem;
+}
+
 ::v-deep(.fc-day-today) {
   --fc-today-bg-color: var(--green-100);
 }

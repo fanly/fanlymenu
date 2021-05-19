@@ -1,5 +1,5 @@
 <template>
-  <div class="p-grid">
+  <div>
     <FullcalendarSub
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:weather="weather"

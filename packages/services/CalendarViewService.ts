@@ -1,5 +1,6 @@
 import * as Moment from 'moment';
 import LunarService from './LunarService';
+import weathericons from '~/images/weathericons/100.png';
 
 export default class CalendarViewService {
   // 综合显示
@@ -14,11 +15,14 @@ export default class CalendarViewService {
             <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>`,
       };
     } else {
+      const imgSrc = weathericons + '/../' + dateWeather.iconDay +'.png';
       return {
         html: `<div class="fc-daygrid-day-number">${dayNumberText}</div>
-            <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>
-            <div class="fc-daygrid-day-chinese">${dateWeather.textDay}</div>
-            <div class="fc-daygrid-day-chinese">${dateWeather.tempMin}-${dateWeather.tempMax}</div>`,
+          <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>
+          <div class="fc-daygrid-dayweather">
+            <img class="fc-daygrid-dayweather-iconday" src=${imgSrc}/>
+            <span class="fc-daygrid-dayweather-temp">${dateWeather.textDay} ${dateWeather.tempMin}-${dateWeather.tempMax}°C</span>
+          </div>`,
       };
     }
   }
