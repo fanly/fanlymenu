@@ -43,7 +43,7 @@ export default defineComponent({
   },
   data() {
     return {
-      weather: Object,
+      weather: {},
       changeShowFestivals: true,
     };
   },

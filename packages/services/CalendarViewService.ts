@@ -25,8 +25,9 @@ export default class CalendarViewService {
 
   // 先显示当天的天气情况
   showWeather(date: Date, weather: any) {
-    if (weather == null) {
-      return false;
+
+    if (weather == null || weather.weatherDailies == null) {
+      return undefined;
     }
     const dateString = Moment(date).format('YYYY-MM-DD');
     const result = weather.weatherDailies.find((dateWeather: { fxDate: string; }) => dateWeather.fxDate == dateString);
