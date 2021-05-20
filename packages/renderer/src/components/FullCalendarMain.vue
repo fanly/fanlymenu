@@ -5,6 +5,9 @@
       v-model:weather="weather"
       @settingClick="visibleFullSetting = true"
     />
+    <WeatherSub
+      v-model:weather="weather"
+    />
     <Sidebar
       v-model:visible="visibleFullSetting"
       :base-z-index="1000"
@@ -24,12 +27,14 @@ import Sidebar from 'primevue/Sidebar';
 import InputSwitch from 'primevue/inputswitch';
 import 'primeicons/primeicons.css';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
+import WeatherSub from '/@/components/WeatherSub.vue';
 import WeatherService from '../../../services/WeatherService';
 
 export default defineComponent({
   name: 'FullCalendarMain',
   components: {
     FullcalendarSub,
+    WeatherSub,
     Sidebar,
     InputSwitch,
   },

@@ -8,6 +8,6 @@ import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 
 const app = createApp(App);
-app.use(PrimeVue).use(router).use(store, key);
+app.use(PrimeVue, {ripple: true}).use(router).use(store, key);
 
 app.mount('#app');
