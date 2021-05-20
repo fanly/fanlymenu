@@ -43,7 +43,6 @@ export default defineComponent({
         this.weatherIcon = weathericons + '/../' + this.weather.weatherNow.icon +'.png';
         this.temp = this.weather.weatherNow.temp + '°C';
       }
-
     },
   },
   methods: {

@@ -1,33 +1,27 @@
 <template>
   <div>
-    <FullcalendarSub
+    <fullcalendar-sub
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:weather="weather"
       @settingClick="visibleFullSetting = true"
     />
-    <WeatherSub
+    <weather-sub
       v-model:weather="weather"
     />
-    <Sidebar
-      v-model:visible="visibleFullSetting"
-      :base-z-index="1000"
-      position="full"
-    >
-      <h3>Full Screen</h3>
-      <h4>显示节假日</h4>
-      <InputSwitch v-model="changeShowFestivals" />
-    </Sidebar>
+    <setting-sub
+      v-model:visibleFullSetting="visibleFullSetting"
+      v-model:changeShowFestivals="changeShowFestivals"
+    />
   </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, ref } from 'vue';
 import { useStore } from '/@/store';
-import Sidebar from 'primevue/Sidebar';
-import InputSwitch from 'primevue/inputswitch';
 import 'primeicons/primeicons.css';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
+import SettingSub from '/@/components/SettingSub.vue';
 import WeatherService from '../../../services/WeatherService';
 
 export default defineComponent({
@@ -35,8 +29,7 @@ export default defineComponent({
   components: {
     FullcalendarSub,
     WeatherSub,
-    Sidebar,
-    InputSwitch,
+    SettingSub,
   },
   setup() {
     const visibleFullSetting = ref(false);
