@@ -4,17 +4,20 @@
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:changeShowWeather="changeShowWeather"
       v-model:weather="weather"
+      v-model:location="location"
       @settingClick="visibleFullSetting = true"
     />
     <weather-sub
       v-if="changeShowWeather"
       v-model:changeShowWeather="changeShowWeather"
       v-model:weather="weather"
+      v-model:location="location"
     />
     <setting-sub
       v-model:visibleFullSetting="visibleFullSetting"
       v-model:changeShowWeather="changeShowWeather"
       v-model:changeShowFestivals="changeShowFestivals"
+      v-model:location="location"
     />
   </div>
 </template>
@@ -47,8 +50,8 @@ export default defineComponent({
     return {
       weather: {},
       location: {},
-      changeShowFestivals: true,
-      changeShowWeather: true,
+      changeShowFestivals: false,
+      changeShowWeather: false,
     };
   },
   watch: {
@@ -57,20 +60,29 @@ export default defineComponent({
     },
     changeShowWeather(newval) {
       this.store.commit('changeShowWeather', newval);
+      if (this.changeShowWeather) {
+        this.getWeather();
+      }
+    },
+    location(newval) {
+      this.store.commit('changeLocation', newval);
+      if (this.changeShowWeather) {
+        this.getWeather();
+      }
     },
   },
   mounted() {
     this.setShowData();
-    this.getWeather();
   },
   methods: {
     setShowData() {
       this.changeShowFestivals = this.store.state.showFestivals;
       this.changeShowWeather = this.store.state.showWeather;
+      this.location = this.store.state.location;
     },
     getWeather() {
       const weatherService = new WeatherService();
-      weatherService.getWeathers().then((data) => (this.weather = data));
+      weatherService.getWeathers(this.location).then((data) => (this.weather = data));
     },
   },
 });

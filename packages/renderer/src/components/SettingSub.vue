@@ -16,6 +16,17 @@
       v-model="inputSwitchWeatherModel"
       @change="$emit('update:changeShowWeather', inputSwitchWeatherModel)"
     />
+    <div
+      v-show="inputSwitchWeatherModel"
+      class="p-field"
+    >
+      <label for="location">经纬度：</label>
+      <InputMask
+        v-model="locationStr"
+        mask="999.99,99.99"
+        @complete="changeLocalLocation"
+      />
+    </div>
   </Sidebar>
 </template>
 
@@ -23,25 +34,33 @@
 import { defineComponent} from 'vue';
 import Sidebar from 'primevue/Sidebar';
 import InputSwitch from 'primevue/inputswitch';
+import InputMask from 'primevue/InputMask';
 
 export default defineComponent({
   name: 'SettingSub',
   components: {
     Sidebar,
     InputSwitch,
+    InputMask,
   },
   props: {
     visibleFullSetting: Boolean,
     changeShowFestivals: Boolean,
     changeShowWeather: Boolean,
+    location: Object,
   },
-  emits: ['update:visibleFullSetting', 'update:changeShowFestivals', 'update:changeShowWeather'],
+  emits: [
+    'update:visibleFullSetting',
+    'update:changeShowFestivals',
+    'update:changeShowWeather',
+    'update:location',
+  ],
   data() {
     return {
       sidebarVisible: this.visibleFullSetting,
       inputSwitchFestivalsModel: this.changeShowFestivals,
       inputSwitchWeatherModel: this.changeShowWeather,
-      location:'',
+      locationStr: '',
     };
   },
   watch: {
@@ -54,11 +73,21 @@ export default defineComponent({
     changeShowWeather(): void {
       this.inputSwitchWeatherModel = this.changeShowWeather;
     },
+    location(): void {
+      this.locationStr = this.location?.longitude + ',' + this.location?.latitude;
+    },
   },
   mounted() {
 
   },
   methods: {
+    changeLocalLocation(): void {
+      const loc = this.locationStr.split(',', 2);
+      this.$emit('update:location', {
+        'longitude': loc[0],
+        'latitude': loc[1],
+      });
+    },
   },
 });
 </script>

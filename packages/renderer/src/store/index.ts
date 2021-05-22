@@ -6,6 +6,10 @@ import createPersistedState from 'vuex-persistedstate';
 export interface State {
   showFestivals: boolean,
   showWeather: boolean,
+  location: {
+    longitude: number, // 经度
+    latitude: number,  // 纬度
+  },
 }
 
 // define injection key
@@ -17,8 +21,12 @@ const dataState = createPersistedState({
 
 export const store = createStore<State>({
   state: {
-    showFestivals: true,
-    showWeather: true,
+    showFestivals: false,
+    showWeather: false,
+    location: {
+      longitude: 114.52,
+      latitude: 38.02,
+    },
   },
   mutations: {
     changeShowFestivals(state) {
@@ -27,6 +35,12 @@ export const store = createStore<State>({
     changeShowWeather(state) {
       state.showWeather = !state.showWeather;
     },
+    changeLocation(state, location) {
+      state.location = {
+        longitude: location.longitude,
+        latitude: location.latitude,
+      };
+    },
   },
   actions: {
     changeShowFestivals({ commit }) {
@@ -34,6 +48,9 @@ export const store = createStore<State>({
     },
     changeShowWeather({ commit }) {
       commit('changeShowWeather');
+    },
+    changeLocation({ commit }) {
+      commit('changeLocation');
     },
   },
   plugins: [dataState],
