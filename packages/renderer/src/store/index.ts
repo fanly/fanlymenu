@@ -4,7 +4,8 @@ import { createStore, useStore as baseUseStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
 export interface State {
-  showFestivals: boolean
+  showFestivals: boolean,
+  showWeather: boolean,
 }
 
 // define injection key
@@ -17,15 +18,22 @@ const dataState = createPersistedState({
 export const store = createStore<State>({
   state: {
     showFestivals: true,
+    showWeather: true,
   },
   mutations: {
     changeShowFestivals(state) {
       state.showFestivals = !state.showFestivals;
     },
+    changeShowWeather(state) {
+      state.showWeather = !state.showWeather;
+    },
   },
   actions: {
     changeShowFestivals({ commit }) {
       commit('changeShowFestivals');
+    },
+    changeShowWeather({ commit }) {
+      commit('changeShowWeather');
     },
   },
   plugins: [dataState],

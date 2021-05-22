@@ -5,11 +5,16 @@
     position="full"
     @click="$emit('update:visibleFullSetting', sidebarVisible)"
   >
-    <h3>Full Screen</h3>
-    <h4>显示节假日</h4>
+    <h1>设置</h1>
+    <h2>显示节假日</h2>
     <InputSwitch
-      v-model="inputSwitchModel"
-      @change="$emit('update:changeShowFestivals', inputSwitchModel)"
+      v-model="inputSwitchFestivalsModel"
+      @change="$emit('update:changeShowFestivals', inputSwitchFestivalsModel)"
+    />
+    <h2>显示天气预报</h2>
+    <InputSwitch
+      v-model="inputSwitchWeatherModel"
+      @change="$emit('update:changeShowWeather', inputSwitchWeatherModel)"
     />
   </Sidebar>
 </template>
@@ -28,12 +33,15 @@ export default defineComponent({
   props: {
     visibleFullSetting: Boolean,
     changeShowFestivals: Boolean,
+    changeShowWeather: Boolean,
   },
-  emits: ['update:visibleFullSetting', 'update:changeShowFestivals'],
+  emits: ['update:visibleFullSetting', 'update:changeShowFestivals', 'update:changeShowWeather'],
   data() {
     return {
       sidebarVisible: this.visibleFullSetting,
-      inputSwitchModel: this.changeShowFestivals,
+      inputSwitchFestivalsModel: this.changeShowFestivals,
+      inputSwitchWeatherModel: this.changeShowWeather,
+      location:'',
     };
   },
   watch: {
@@ -41,8 +49,14 @@ export default defineComponent({
       this.sidebarVisible = this.visibleFullSetting;
     },
     changeShowFestivals(): void {
-      this.inputSwitchModel = this.changeShowFestivals;
+      this.inputSwitchFestivalsModel = this.changeShowFestivals;
     },
+    changeShowWeather(): void {
+      this.inputSwitchWeatherModel = this.changeShowWeather;
+    },
+  },
+  mounted() {
+
   },
   methods: {
   },
@@ -52,6 +66,11 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "~/styles/default.scss";
+
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+}
 
 .weather {
   position: absolute;

@@ -2,14 +2,18 @@
   <div>
     <fullcalendar-sub
       v-model:changeShowFestivals="changeShowFestivals"
+      v-model:changeShowWeather="changeShowWeather"
       v-model:weather="weather"
       @settingClick="visibleFullSetting = true"
     />
     <weather-sub
+      v-if="changeShowWeather"
+      v-model:changeShowWeather="changeShowWeather"
       v-model:weather="weather"
     />
     <setting-sub
       v-model:visibleFullSetting="visibleFullSetting"
+      v-model:changeShowWeather="changeShowWeather"
       v-model:changeShowFestivals="changeShowFestivals"
     />
   </div>
@@ -42,21 +46,27 @@ export default defineComponent({
   data() {
     return {
       weather: {},
+      location: {},
       changeShowFestivals: true,
+      changeShowWeather: true,
     };
   },
   watch: {
     changeShowFestivals(newval) {
       this.store.commit('changeShowFestivals', newval);
     },
+    changeShowWeather(newval) {
+      this.store.commit('changeShowWeather', newval);
+    },
   },
   mounted() {
-    this.setShowFestivals();
+    this.setShowData();
     this.getWeather();
   },
   methods: {
-    setShowFestivals() {
+    setShowData() {
       this.changeShowFestivals = this.store.state.showFestivals;
+      this.changeShowWeather = this.store.state.showWeather;
     },
     getWeather() {
       const weatherService = new WeatherService();

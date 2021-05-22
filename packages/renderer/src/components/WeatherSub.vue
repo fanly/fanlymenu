@@ -26,7 +26,6 @@ export default defineComponent({
     Avatar,
   },
   props: {
-    changeShowWeather: Boolean,
     weather: Object,
   },
   data() {

@@ -4,11 +4,22 @@ import weathericons from '~/images/weathericons/100.png';
 
 export default class CalendarViewService {
   // 综合显示
-  showView(dayNumberText: string, date: Date, changeShowFestivals: boolean, weather: any) {
+  showView(
+    dayNumberText: string,
+    date: Date,
+    changeShowFestivals: boolean,
+    changeShowWeather: boolean,
+    weather: any) {
     const lunarService = new LunarService(date);
     const dayTextInChinese = lunarService.inDayCellContent(changeShowFestivals);
-    const dateWeather = this.showWeather(date, weather);
 
+    if (!changeShowWeather) {
+      return {
+        html: `<div class="fc-daygrid-day-number">${dayNumberText}</div>
+            <div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>`,
+      };
+    }
+    const dateWeather = this.showWeather(date, weather);
     if (dateWeather == undefined) {
       return {
         html: `<div class="fc-daygrid-day-number">${dayNumberText}</div>

@@ -26,6 +26,7 @@ export default defineComponent({
   },
   props: {
     changeShowFestivals: Boolean,
+    changeShowWeather: Boolean,
     weather: {},
   },
   setup() {
@@ -69,6 +70,9 @@ export default defineComponent({
     changeShowFestivals(): void {
       this.updateView();
     },
+    changeShowWeather(): void {
+      this.updateView();
+    },
     weather(): void {
       this.updateView();
     },
@@ -92,7 +96,7 @@ export default defineComponent({
           dayCellContent(item: any) {
             const date = new Date(item.date);
             const calendarViewService = new CalendarViewService();
-            return calendarViewService.showView(item.dayNumberText, date, that.changeShowFestivals, that.weather);
+            return calendarViewService.showView(item.dayNumberText, date, that.changeShowFestivals, that.changeShowWeather, that.weather);
           },
         },
       };
