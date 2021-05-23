@@ -6,6 +6,7 @@
       v-model:weather="weather"
       v-model:location="location"
       @settingClick="visibleFullSetting = true"
+      @dateClick="dateClick"
     />
     <weather-sub
       v-if="changeShowWeather"
@@ -19,6 +20,10 @@
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:location="location"
     />
+    <date-view-sub
+      v-model:visibleFullDateView="visibleFullDateView"
+      v-model:date="date"
+    />
   </div>
 </template>
 
@@ -29,6 +34,7 @@ import 'primeicons/primeicons.css';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
 import SettingSub from '/@/components/SettingSub.vue';
+import DateViewSub from '/@/components/DateViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
 
 export default defineComponent({
@@ -37,6 +43,7 @@ export default defineComponent({
     FullcalendarSub,
     WeatherSub,
     SettingSub,
+    DateViewSub,
   },
   setup() {
     const visibleFullSetting = ref(false);
@@ -52,6 +59,8 @@ export default defineComponent({
       location: {},
       changeShowFestivals: false,
       changeShowWeather: false,
+      visibleFullDateView: false,
+      date: '',
     };
   },
   watch: {
@@ -83,6 +92,10 @@ export default defineComponent({
     getWeather() {
       const weatherService = new WeatherService();
       weatherService.getWeathers(this.location).then((data) => (this.weather = data));
+    },
+    dateClick(date: string) {
+      this.date = date;
+      this.visibleFullDateView = true;
     },
   },
 });

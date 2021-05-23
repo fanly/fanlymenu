@@ -57,6 +57,7 @@ export default defineComponent({
           center: 'title',
           right: 'settingButton',
         },
+        dateClick: this.dateClick,
         editable: false,
         height: 680,
         // contentHeight: 600,
@@ -88,6 +89,9 @@ export default defineComponent({
     },
     settingClick() {
       this.$emit('settingClick');
+    },
+    dateClick(target: any) {
+      this.$emit('dateClick', target.date);
     },
     dayCellNewContent() {
       const that = this;
