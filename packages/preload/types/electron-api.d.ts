@@ -7,3 +7,5 @@ declare interface Window {
   electron: Readonly<ElectronApi>
   electronRequire?: NodeRequire
 }
+
+declare module 'axios-cache-plugin';

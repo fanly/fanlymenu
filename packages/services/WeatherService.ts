@@ -1,10 +1,26 @@
 'use strict';
-
 import axios from 'axios';
-
+import wrapper from 'axios-cache-plugin';
 export default class WeatherService {
-  async getWeathers() {
-    const res = await axios.get('https://***.com/weatherdata');
+
+  async getWeathers(location: any) {
+    const locationStr = location.longitude + ',' + location.latitude;
+    const http = wrapper(axios, {
+      maxCacheSize: 15,
+      ttl: 7200000, //ms
+    });
+    http.__addFilter(/weatherdata/);
+
+    const res = await http({
+      url: 'https://www.api.com/weather',
+      method: 'get',
+      params: {
+        param: JSON.stringify({
+          location: locationStr,
+        }),
+      },
+    });
+
     return res.data;
   }
 }
