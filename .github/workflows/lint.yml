@@ -7,14 +7,14 @@ on:
       - '**.js'
       - '**.ts'
       - '**.vue'
-      - 'package-lock.json'
+      - 'yarn.lock'
       - '.github/workflows/lint.yml'
   pull_request:
     paths:
       - '**.js'
       - '**.ts'
       - '**.vue'
-      - 'package-lock.json'
+      - 'yarn.lock'
       - '.github/workflows/lint.yml'
 
 
@@ -35,12 +35,12 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       # TODO: Install not all dependencies, but only those required for this workflow
       - name: Install dependencies
-        run: npm ci
+        run: npm install -g yarn && yarn install --immutable
 
-      - run: npm run lint
+      - run: yarn lint
