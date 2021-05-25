@@ -6,13 +6,13 @@ on:
     paths:
       - 'packages/**'
       - 'tests/**'
-      - 'package-lock.json'
+      - 'yarn.lock'
       - '.github/workflows/tests.yml'
   pull_request:
     paths:
       - 'packages/**'
       - 'tests/**'
-      - 'package-lock.json'
+      - 'yarn.lock'
       - '.github/workflows/tests.yml'
 
 defaults:
@@ -41,12 +41,12 @@ jobs:
         id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       # TODO: Install not all dependencies, but only those required for this workflow
       - name: Install dependencies
-        run: npm ci
+        run: npm install -g yarn && yarn install --immutable
 
-      - run: npm test
+      - run: yarn test
