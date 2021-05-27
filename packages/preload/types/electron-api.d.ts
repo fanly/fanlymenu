@@ -1,6 +1,7 @@
 
 interface ElectronApi {
   readonly versions: Readonly<NodeJS.ProcessVersions>
+  readonly ipcRenderer: IpcRenderer
 }
 
 declare interface Window {

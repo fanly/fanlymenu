@@ -27,6 +27,15 @@
         @complete="changeLocalLocation"
       />
     </div>
+    <div class="p-p-4">
+      <Button
+        type="button"
+        label="退出应用"
+        icon="pi pi-times"
+        class="p-d-block p-mx-auto p-button-danger"
+        @click="quit"
+      />
+    </div>
   </Sidebar>
 </template>
 
@@ -35,6 +44,7 @@ import { defineComponent} from 'vue';
 import Sidebar from 'primevue/Sidebar';
 import InputSwitch from 'primevue/inputswitch';
 import InputMask from 'primevue/InputMask';
+import Button from 'primevue/button';
 
 export default defineComponent({
   name: 'SettingSub',
@@ -42,6 +52,7 @@ export default defineComponent({
     Sidebar,
     InputSwitch,
     InputMask,
+    Button,
   },
   props: {
     visibleFullSetting: Boolean,
@@ -87,6 +98,9 @@ export default defineComponent({
         'longitude': loc[0],
         'latitude': loc[1],
       });
+    },
+    quit(): void {
+      window.electron.ipcRenderer.send('quit');
     },
   },
 });

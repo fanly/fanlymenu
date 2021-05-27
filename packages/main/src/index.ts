@@ -1,6 +1,6 @@
 'use strict';
 
-import { app, protocol } from 'electron';
+import { app, protocol, ipcMain } from 'electron';
 import App from './App';
 const env = import.meta.env;
 
@@ -21,6 +21,10 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+ipcMain.on('quit', () => {
+  app.quit();
 });
 
 if (env.MODE === 'development') {

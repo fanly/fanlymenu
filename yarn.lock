@@ -392,14 +392,14 @@
   integrity sha1-8Owl2/Lw5LGGRzE6wDETTKWySyE=
 
 "@types/node@*":
-  version "15.6.0"
-  resolved "https://registry.nlark.com/@types/node/download/@types/node-15.6.0.tgz#f0ddca5a61e52627c9dcb771a6039d44694597bc"
-  integrity sha1-8N3KWmHlJifJ3LdxpgOdRGlFl7w=
+  version "15.6.1"
+  resolved "https://registry.nlark.com/@types/node/download/@types/node-15.6.1.tgz#32d43390d5c62c5b6ec486a9bc9c59544de39a08"
+  integrity sha1-MtQzkNXGLFtuxIapvJxZVE3jmgg=
 
 "@types/node@^14.6.2":
-  version "14.17.0"
-  resolved "https://registry.nlark.com/@types/node/download/@types/node-14.17.0.tgz#3ba770047723b3eeb8dc9fca02cce8a7fb6378da"
-  integrity sha1-O6dwBHcjs+643J/KAszop/tjeNo=
+  version "14.17.1"
+  resolved "https://registry.nlark.com/@types/node/download/@types/node-14.17.1.tgz#5e07e0cb2ff793aa7a1b41deae76221e6166049f"
+  integrity sha1-Xgfgyy/3k6p6G0HernYiHmFmBJ8=
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -491,12 +491,12 @@
     "@types/node" "*"
 
 "@typescript-eslint/eslint-plugin@^4.22.0":
-  version "4.24.0"
-  resolved "https://registry.nlark.com/@typescript-eslint/eslint-plugin/download/@typescript-eslint/eslint-plugin-4.24.0.tgz#03801ffc25b2af9d08f3dc9bccfc0b7ce3780d0f"
-  integrity sha1-A4Af/CWyr50I89ybzPwLfON4DQ8=
+  version "4.25.0"
+  resolved "https://registry.nlark.com/@typescript-eslint/eslint-plugin/download/@typescript-eslint/eslint-plugin-4.25.0.tgz?cache=0&sync_timestamp=1621906324894&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Feslint-plugin%2Fdownload%2F%40typescript-eslint%2Feslint-plugin-4.25.0.tgz#d82657b6ab4caa4c3f888ff923175fadc2f31f2a"
+  integrity sha1-2CZXtqtMqkw/iI/5IxdfrcLzHyo=
   dependencies:
-    "@typescript-eslint/experimental-utils" "4.24.0"
-    "@typescript-eslint/scope-manager" "4.24.0"
+    "@typescript-eslint/experimental-utils" "4.25.0"
+    "@typescript-eslint/scope-manager" "4.25.0"
     debug "^4.1.1"
     functional-red-black-tree "^1.0.1"
     lodash "^4.17.15"
@@ -504,60 +504,60 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
-"@typescript-eslint/experimental-utils@4.24.0":
-  version "4.24.0"
-  resolved "https://registry.nlark.com/@typescript-eslint/experimental-utils/download/@typescript-eslint/experimental-utils-4.24.0.tgz#c23ead9de44b99c3a5fd925c33a106b00165e172"
-  integrity sha1-wj6tneRLmcOl/ZJcM6EGsAFl4XI=
+"@typescript-eslint/experimental-utils@4.25.0":
+  version "4.25.0"
+  resolved "https://registry.nlark.com/@typescript-eslint/experimental-utils/download/@typescript-eslint/experimental-utils-4.25.0.tgz?cache=0&sync_timestamp=1621906312617&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Fexperimental-utils%2Fdownload%2F%40typescript-eslint%2Fexperimental-utils-4.25.0.tgz#b2febcfa715d2c1806fd5f0335193a6cd270df54"
+  integrity sha1-sv68+nFdLBgG/V8DNRk6bNJw31Q=
   dependencies:
     "@types/json-schema" "^7.0.3"
-    "@typescript-eslint/scope-manager" "4.24.0"
-    "@typescript-eslint/types" "4.24.0"
-    "@typescript-eslint/typescript-estree" "4.24.0"
+    "@typescript-eslint/scope-manager" "4.25.0"
+    "@typescript-eslint/types" "4.25.0"
+    "@typescript-eslint/typescript-estree" "4.25.0"
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
 
 "@typescript-eslint/parser@^4.23.0":
-  version "4.24.0"
-  resolved "https://registry.nlark.com/@typescript-eslint/parser/download/@typescript-eslint/parser-4.24.0.tgz#2e5f1cc78ffefe43bfac7e5659309a92b09a51bd"
-  integrity sha1-Ll8cx4/+/kO/rH5WWTCakrCaUb0=
+  version "4.25.0"
+  resolved "https://registry.nlark.com/@typescript-eslint/parser/download/@typescript-eslint/parser-4.25.0.tgz?cache=0&sync_timestamp=1621906207850&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Fparser%2Fdownload%2F%40typescript-eslint%2Fparser-4.25.0.tgz#6b2cb6285aa3d55bfb263c650739091b0f19aceb"
+  integrity sha1-ayy2KFqj1Vv7JjxlBzkJGw8ZrOs=
   dependencies:
-    "@typescript-eslint/scope-manager" "4.24.0"
-    "@typescript-eslint/types" "4.24.0"
-    "@typescript-eslint/typescript-estree" "4.24.0"
+    "@typescript-eslint/scope-manager" "4.25.0"
+    "@typescript-eslint/types" "4.25.0"
+    "@typescript-eslint/typescript-estree" "4.25.0"
     debug "^4.1.1"
 
-"@typescript-eslint/scope-manager@4.24.0":
-  version "4.24.0"
-  resolved "https://registry.nlark.com/@typescript-eslint/scope-manager/download/@typescript-eslint/scope-manager-4.24.0.tgz?cache=0&sync_timestamp=1621729818263&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Fscope-manager%2Fdownload%2F%40typescript-eslint%2Fscope-manager-4.24.0.tgz#38088216f0eaf235fa30ed8cabf6948ec734f359"
-  integrity sha1-OAiCFvDq8jX6MO2Mq/aUjsc081k=
+"@typescript-eslint/scope-manager@4.25.0":
+  version "4.25.0"
+  resolved "https://registry.nlark.com/@typescript-eslint/scope-manager/download/@typescript-eslint/scope-manager-4.25.0.tgz#9d86a5bcc46ef40acd03d85ad4e908e5aab8d4ca"
+  integrity sha1-nYalvMRu9ArNA9ha1OkI5aq41Mo=
   dependencies:
-    "@typescript-eslint/types" "4.24.0"
-    "@typescript-eslint/visitor-keys" "4.24.0"
+    "@typescript-eslint/types" "4.25.0"
+    "@typescript-eslint/visitor-keys" "4.25.0"
 
-"@typescript-eslint/types@4.24.0":
-  version "4.24.0"
-  resolved "https://registry.nlark.com/@typescript-eslint/types/download/@typescript-eslint/types-4.24.0.tgz?cache=0&sync_timestamp=1621729818858&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Ftypes%2Fdownload%2F%40typescript-eslint%2Ftypes-4.24.0.tgz#6d0cca2048cbda4e265e0c4db9c2a62aaad8228c"
-  integrity sha1-bQzKIEjL2k4mXgxNucKmKqrYIow=
+"@typescript-eslint/types@4.25.0":
+  version "4.25.0"
+  resolved "https://registry.nlark.com/@typescript-eslint/types/download/@typescript-eslint/types-4.25.0.tgz?cache=0&sync_timestamp=1621906918623&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Ftypes%2Fdownload%2F%40typescript-eslint%2Ftypes-4.25.0.tgz#0e444a5c5e3c22d7ffa5e16e0e60510b3de5af87"
+  integrity sha1-DkRKXF48Itf/peFuDmBRCz3lr4c=
 
-"@typescript-eslint/typescript-estree@4.24.0":
-  version "4.24.0"
-  resolved "https://registry.nlark.com/@typescript-eslint/typescript-estree/download/@typescript-eslint/typescript-estree-4.24.0.tgz?cache=0&sync_timestamp=1621729819120&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Ftypescript-estree%2Fdownload%2F%40typescript-eslint%2Ftypescript-estree-4.24.0.tgz#b49249679a98014d8b03e8d4b70864b950e3c90f"
-  integrity sha1-tJJJZ5qYAU2LA+jUtwhkuVDjyQ8=
+"@typescript-eslint/typescript-estree@4.25.0":
+  version "4.25.0"
+  resolved "https://registry.nlark.com/@typescript-eslint/typescript-estree/download/@typescript-eslint/typescript-estree-4.25.0.tgz#942e4e25888736bff5b360d9b0b61e013d0cfa25"
+  integrity sha1-lC5OJYiHNr/1s2DZsLYeAT0M+iU=
   dependencies:
-    "@typescript-eslint/types" "4.24.0"
-    "@typescript-eslint/visitor-keys" "4.24.0"
+    "@typescript-eslint/types" "4.25.0"
+    "@typescript-eslint/visitor-keys" "4.25.0"
     debug "^4.1.1"
     globby "^11.0.1"
     is-glob "^4.0.1"
     semver "^7.3.2"
     tsutils "^3.17.1"
 
-"@typescript-eslint/visitor-keys@4.24.0":
-  version "4.24.0"
-  resolved "https://registry.nlark.com/@typescript-eslint/visitor-keys/download/@typescript-eslint/visitor-keys-4.24.0.tgz?cache=0&sync_timestamp=1621729819809&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Fvisitor-keys%2Fdownload%2F%40typescript-eslint%2Fvisitor-keys-4.24.0.tgz#a8fafdc76cad4e04a681a945fbbac4e35e98e297"
-  integrity sha1-qPr9x2ytTgSmgalF+7rE416Y4pc=
+"@typescript-eslint/visitor-keys@4.25.0":
+  version "4.25.0"
+  resolved "https://registry.nlark.com/@typescript-eslint/visitor-keys/download/@typescript-eslint/visitor-keys-4.25.0.tgz?cache=0&sync_timestamp=1621906222173&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40typescript-eslint%2Fvisitor-keys%2Fdownload%2F%40typescript-eslint%2Fvisitor-keys-4.25.0.tgz#863e7ed23da4287c5b469b13223255d0fde6aaa7"
+  integrity sha1-hj5+0j2kKHxbRpsTIjJV0P3mqqc=
   dependencies:
-    "@typescript-eslint/types" "4.24.0"
+    "@typescript-eslint/types" "4.25.0"
     eslint-visitor-keys "^2.0.0"
 
 "@vitejs/plugin-vue@^1.2.2":
@@ -654,7 +654,7 @@
     "@vue/compiler-dom" "3.0.11"
     "@vue/shared" "3.0.11"
 
-"@vue/devtools-api@^6.0.0-beta.10":
+"@vue/devtools-api@^6.0.0-beta.10", "@vue/devtools-api@^6.0.0-beta.11":
   version "6.0.0-beta.11"
   resolved "https://registry.nlark.com/@vue/devtools-api/download/@vue/devtools-api-6.0.0-beta.11.tgz?cache=0&sync_timestamp=1621616522740&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fdevtools-api%2Fdownload%2F%40vue%2Fdevtools-api-6.0.0-beta.11.tgz#4fb4161ee41ba75f3f5198d4bfd80e4ffb7f2462"
   integrity sha1-T7QWHuQbp18/UZjUv9gOT/t/JGI=
@@ -685,7 +685,7 @@
 
 "@vue/shared@3.0.11", "@vue/shared@^3.0.11":
   version "3.0.11"
-  resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.0.11.tgz#20d22dd0da7d358bb21c17f9bde8628152642c77"
+  resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.0.11.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.0.11.tgz#20d22dd0da7d358bb21c17f9bde8628152642c77"
   integrity sha1-INIt0Np9NYuyHBf5vehigVJkLHc=
 
 "@wdio/config@6.12.1":
@@ -1241,7 +1241,7 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
+chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.1"
   resolved "https://registry.nlark.com/chalk/download/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
   integrity sha1-yAs/qyi/Y3HmhjMl7uZ+YYt35q0=
@@ -1305,12 +1305,12 @@ chromium-pickle-js@^0.2.0:
 
 ci-info@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.nlark.com/ci-info/download/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
+  resolved "https://registry.nlark.com/ci-info/download/ci-info-2.0.0.tgz?cache=0&sync_timestamp=1622039942508&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fci-info%2Fdownload%2Fci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
   integrity sha1-Z6npZL4xpR4V5QENWObxKDQAL0Y=
 
 clean-stack@^2.0.0:
   version "2.2.0"
-  resolved "https://registry.nlark.com/clean-stack/download/clean-stack-2.2.0.tgz?cache=0&sync_timestamp=1621332789084&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fclean-stack%2Fdownload%2Fclean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
+  resolved "https://registry.nlark.com/clean-stack/download/clean-stack-2.2.0.tgz?cache=0&sync_timestamp=1621915066376&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fclean-stack%2Fdownload%2Fclean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
   integrity sha1-7oRy27Ep5yezHooQpCfe6d/kAIs=
 
 cli-boxes@^2.2.0, cli-boxes@^2.2.1:
@@ -1491,9 +1491,9 @@ constantinople@^4.0.1:
     "@babel/types" "^7.6.1"
 
 core-js@^3.6.5:
-  version "3.12.1"
-  resolved "https://registry.nlark.com/core-js/download/core-js-3.12.1.tgz?cache=0&sync_timestamp=1620507873758&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcore-js%2Fdownload%2Fcore-js-3.12.1.tgz#6b5af4ff55616c08a44d386f1f510917ff204112"
-  integrity sha1-a1r0/1VhbAikTThvH1EJF/8gQRI=
+  version "3.13.0"
+  resolved "https://registry.nlark.com/core-js/download/core-js-3.13.0.tgz?cache=0&sync_timestamp=1621970016244&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcore-js%2Fdownload%2Fcore-js-3.13.0.tgz#58ca436bf01d6903aee3d364089868d0d89fe58d"
+  integrity sha1-WMpDa/AdaQOu49NkCJho0Nif5Y0=
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -1536,7 +1536,7 @@ crc@^3.8.0:
 
 cross-env@^7.0.3:
   version "7.0.3"
-  resolved "https://registry.npm.taobao.org/cross-env/download/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
+  resolved "https://registry.nlark.com/cross-env/download/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
   integrity sha1-hlJkspZ33AFbqEGJGJZd0jL8VM8=
   dependencies:
     cross-spawn "^7.0.1"
@@ -1700,7 +1700,7 @@ dev-null@^0.1.1:
 
 devtools-protocol@0.0.818844:
   version "0.0.818844"
-  resolved "https://registry.nlark.com/devtools-protocol/download/devtools-protocol-0.0.818844.tgz#d1947278ec85b53e4c8ca598f607a28fa785ba9e"
+  resolved "https://registry.nlark.com/devtools-protocol/download/devtools-protocol-0.0.818844.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdevtools-protocol%2Fdownload%2Fdevtools-protocol-0.0.818844.tgz#d1947278ec85b53e4c8ca598f607a28fa785ba9e"
   integrity sha1-0ZRyeOyFtT5MjKWY9geij6eFup4=
 
 devtools@6.12.1:
@@ -1860,7 +1860,7 @@ ejs@^3.1.6:
 
 electron-builder@^22.10.5:
   version "22.10.5"
-  resolved "https://registry.nlark.com/electron-builder/download/electron-builder-22.10.5.tgz#03b156b93e6012609027c3aaa69201a3ad21e454"
+  resolved "https://registry.nlark.com/electron-builder/download/electron-builder-22.10.5.tgz?cache=0&sync_timestamp=1621440000176&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felectron-builder%2Fdownload%2Felectron-builder-22.10.5.tgz#03b156b93e6012609027c3aaa69201a3ad21e454"
   integrity sha1-A7FWuT5gEmCQJ8OqppIBo60h5FQ=
   dependencies:
     "@types/yargs" "^15.0.13"
@@ -1880,7 +1880,7 @@ electron-builder@^22.10.5:
 
 electron-chromedriver@^12.0.0:
   version "12.0.0"
-  resolved "https://registry.npm.taobao.org/electron-chromedriver/download/electron-chromedriver-12.0.0.tgz?cache=0&sync_timestamp=1614722914308&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron-chromedriver%2Fdownload%2Felectron-chromedriver-12.0.0.tgz#55bdc451b938b384642d613a05eadacb1fe476ee"
+  resolved "https://registry.nlark.com/electron-chromedriver/download/electron-chromedriver-12.0.0.tgz#55bdc451b938b384642d613a05eadacb1fe476ee"
   integrity sha1-Vb3EUbk4s4RkLWE6Berayx/kdu4=
   dependencies:
     "@electron/get" "^1.12.4"
@@ -1888,7 +1888,7 @@ electron-chromedriver@^12.0.0:
 
 electron-devtools-installer@^3.2.0:
   version "3.2.0"
-  resolved "https://registry.nlark.com/electron-devtools-installer/download/electron-devtools-installer-3.2.0.tgz#acc48d24eb7033fe5af284a19667e73b78d406d0"
+  resolved "https://registry.nlark.com/electron-devtools-installer/download/electron-devtools-installer-3.2.0.tgz?cache=0&sync_timestamp=1618787318461&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felectron-devtools-installer%2Fdownload%2Felectron-devtools-installer-3.2.0.tgz#acc48d24eb7033fe5af284a19667e73b78d406d0"
   integrity sha1-rMSNJOtwM/5a8oShlmfnO3jUBtA=
   dependencies:
     rimraf "^3.0.2"
@@ -1912,7 +1912,7 @@ electron-publish@22.10.5:
 
 electron-updater@^4.3.8:
   version "4.3.9"
-  resolved "https://registry.nlark.com/electron-updater/download/electron-updater-4.3.9.tgz#247c660bafad7c07935e1b81acd3e9a5fd733154"
+  resolved "https://registry.nlark.com/electron-updater/download/electron-updater-4.3.9.tgz?cache=0&sync_timestamp=1620719279941&other_urls=https%3A%2F%2Fregistry.nlark.com%2Felectron-updater%2Fdownload%2Felectron-updater-4.3.9.tgz#247c660bafad7c07935e1b81acd3e9a5fd733154"
   integrity sha1-JHxmC6+tfAeTXhuBrNPppf1zMVQ=
   dependencies:
     "@types/semver" "^7.3.5"
@@ -2004,7 +2004,7 @@ es6-error@^4.1.1:
 
 esbuild@^0.11.23:
   version "0.11.23"
-  resolved "https://registry.nlark.com/esbuild/download/esbuild-0.11.23.tgz?cache=0&sync_timestamp=1621409384062&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.11.23.tgz#c42534f632e165120671d64db67883634333b4b8"
+  resolved "https://registry.nlark.com/esbuild/download/esbuild-0.11.23.tgz?cache=0&sync_timestamp=1622080632605&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.11.23.tgz#c42534f632e165120671d64db67883634333b4b8"
   integrity sha1-xCU09jLhZRIGcdZNtniDY0MztLg=
 
 escalade@^3.1.1:
@@ -2029,7 +2029,7 @@ escape-string-regexp@^4.0.0:
 
 eslint-plugin-vue@^7.9.0:
   version "7.9.0"
-  resolved "https://registry.nlark.com/eslint-plugin-vue/download/eslint-plugin-vue-7.9.0.tgz#f8e83a2a908f4c43fc8304f5401d4ff671f3d560"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-vue/download/eslint-plugin-vue-7.9.0.tgz#f8e83a2a908f4c43fc8304f5401d4ff671f3d560"
   integrity sha1-+Og6KpCPTEP8gwT1QB1P9nHz1WA=
   dependencies:
     eslint-utils "^2.1.0"
@@ -2513,15 +2513,15 @@ global-tunnel-ng@^2.7.1:
 
 globals@^12.1.0:
   version "12.4.0"
-  resolved "https://registry.nlark.com/globals/download/globals-12.4.0.tgz#a18813576a41b00a24a97e7f815918c2e19925f8"
+  resolved "https://registry.nlark.com/globals/download/globals-12.4.0.tgz?cache=0&sync_timestamp=1622088036473&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fglobals%2Fdownload%2Fglobals-12.4.0.tgz#a18813576a41b00a24a97e7f815918c2e19925f8"
   integrity sha1-oYgTV2pBsAokqX5/gVkYwuGZJfg=
   dependencies:
     type-fest "^0.8.1"
 
 globals@^13.6.0:
-  version "13.8.0"
-  resolved "https://registry.nlark.com/globals/download/globals-13.8.0.tgz#3e20f504810ce87a8d72e55aecf8435b50f4c1b3"
-  integrity sha1-PiD1BIEM6HqNcuVa7PhDW1D0wbM=
+  version "13.9.0"
+  resolved "https://registry.nlark.com/globals/download/globals-13.9.0.tgz?cache=0&sync_timestamp=1622088036473&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fglobals%2Fdownload%2Fglobals-13.9.0.tgz#4bf2bf635b334a173fb1daf7c5e6b218ecdc06cb"
+  integrity sha1-S/K/Y1szShc/sdr3xeayGOzcBss=
   dependencies:
     type-fest "^0.20.2"
 
@@ -3278,12 +3278,12 @@ lint-staged@^10.5.4:
     stringify-object "^3.3.0"
 
 listr2@^3.2.2:
-  version "3.8.2"
-  resolved "https://registry.nlark.com/listr2/download/listr2-3.8.2.tgz?cache=0&sync_timestamp=1620057645772&other_urls=https%3A%2F%2Fregistry.nlark.com%2Flistr2%2Fdownload%2Flistr2-3.8.2.tgz#99b138ad1cfb08f1b0aacd422972e49b2d814b99"
-  integrity sha1-mbE4rRz7CPGwqs1CKXLkmy2BS5k=
+  version "3.8.4"
+  resolved "https://registry.nlark.com/listr2/download/listr2-3.8.4.tgz?cache=0&sync_timestamp=1621943639678&other_urls=https%3A%2F%2Fregistry.nlark.com%2Flistr2%2Fdownload%2Flistr2-3.8.4.tgz#58ef278a430509d072c568d96d87a4357813638b"
+  integrity sha1-WO8nikMFCdByxWjZbYekNXgTY4s=
   dependencies:
-    chalk "^4.1.1"
     cli-truncate "^2.1.0"
+    colorette "^1.2.2"
     figures "^3.2.0"
     indent-string "^4.0.0"
     log-update "^4.0.0"
@@ -3619,7 +3619,7 @@ mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.4:
 
 moment@^2.29.1:
   version "2.29.1"
-  resolved "https://registry.npm.taobao.org/moment/download/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  resolved "https://registry.npm.taobao.org/moment/download/moment-2.29.1.tgz?cache=0&sync_timestamp=1602337231601&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmoment%2Fdownload%2Fmoment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha1-sr52n6MZQL6e7qZGnAdeNQBvo9M=
 
 ms@2.0.0:
@@ -3890,9 +3890,9 @@ path-key@^3.0.0, path-key@^3.1.0:
   integrity sha1-WB9q3mWMu6ZaDTOA3ndTKVBU83U=
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.npm.taobao.org/path-parse/download/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-  integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
+  version "1.0.7"
+  resolved "https://registry.nlark.com/path-parse/download/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha1-+8EUtgykKzDZ2vWFjkvWi77bZzU=
 
 path-type@^3.0.0:
   version "3.0.0"
@@ -4035,7 +4035,7 @@ primeflex@^2.0.0:
 
 primeicons@^4.1.0:
   version "4.1.0"
-  resolved "https://registry.npm.taobao.org/primeicons/download/primeicons-4.1.0.tgz#19eaef8ef5594b0006358ae64e738d03e167c9bb"
+  resolved "https://registry.nlark.com/primeicons/download/primeicons-4.1.0.tgz#19eaef8ef5594b0006358ae64e738d03e167c9bb"
   integrity sha1-GervjvVZSwAGNYrmTnONA+Fnybs=
 
 primevue@3.3.5:
@@ -4460,9 +4460,9 @@ roarr@^2.15.3:
     sprintf-js "^1.1.2"
 
 rollup@^2.38.5:
-  version "2.49.0"
-  resolved "https://registry.nlark.com/rollup/download/rollup-2.49.0.tgz?cache=0&sync_timestamp=1621747122277&other_urls=https%3A%2F%2Fregistry.nlark.com%2Frollup%2Fdownload%2Frollup-2.49.0.tgz#f0e5bb2b770ddf1be8cc30d4cce3457574c8c871"
-  integrity sha1-8OW7K3cN3xvozDDUzONFdXTIyHE=
+  version "2.50.2"
+  resolved "https://registry.nlark.com/rollup/download/rollup-2.50.2.tgz#640c500c68c698f62efb01857e0ff06fcd18181f"
+  integrity sha1-ZAxQDGjGmPYu+wGFfg/wb80YGB8=
   optionalDependencies:
     fsevents "~2.3.1"
 
@@ -5075,9 +5075,9 @@ typescript-vscode-sh-plugin@^0.6.14:
   integrity sha1-qBAxtQL2NGom6knOCCQ4w+NTuzg=
 
 typescript@^4.2.4:
-  version "4.2.4"
-  resolved "https://registry.nlark.com/typescript/download/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
-  integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
+  version "4.3.2"
+  resolved "https://registry.nlark.com/typescript/download/typescript-4.3.2.tgz#399ab18aac45802d6f2498de5054fcbbe716a805"
+  integrity sha1-OZqxiqxFgC1vJJjeUFT8u+cWqAU=
 
 ua-parser-js@^0.7.21:
   version "0.7.28"
@@ -5420,9 +5420,9 @@ vfile@^4.0.0, vfile@^4.0.1:
     vfile-message "^2.0.0"
 
 vite@^2.2.4:
-  version "2.3.3"
-  resolved "https://registry.nlark.com/vite/download/vite-2.3.3.tgz#7e88a71abd03985c647789938d784cce0ee3b0fd"
-  integrity sha1-foinGr0DmFxkd4mTjXhMzg7jsP0=
+  version "2.3.4"
+  resolved "https://registry.nlark.com/vite/download/vite-2.3.4.tgz?cache=0&sync_timestamp=1621932817516&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvite%2Fdownload%2Fvite-2.3.4.tgz#370118e0334725b898ff754ea43d5db4c5e120e3"
+  integrity sha1-NwEY4DNHJbiY/3VOpD1dtMXhIOM=
   dependencies:
     esbuild "^0.11.23"
     postcss "^8.2.10"
@@ -5447,9 +5447,9 @@ vscode-css-languageservice@^5.1.1:
     vscode-uri "^3.0.2"
 
 vscode-emmet-helper@^2.6.2:
-  version "2.6.2"
-  resolved "https://registry.npm.taobao.org/vscode-emmet-helper/download/vscode-emmet-helper-2.6.2.tgz#777b471a7851ba0ca8e4151533be7f92511f39b0"
-  integrity sha1-d3tHGnhRugyo5BUVM75/klEfObA=
+  version "2.6.4"
+  resolved "https://registry.nlark.com/vscode-emmet-helper/download/vscode-emmet-helper-2.6.4.tgz#bea47f17649bba26b412f3d1fac18aaee43eba25"
+  integrity sha1-vqR/F2Sbuia0EvPR+sGKruQ+uiU=
   dependencies:
     emmet "^2.3.0"
     jsonc-parser "^2.3.0"
@@ -5535,9 +5535,9 @@ vscode-pug-languageservice@^0.25.4:
     vscode-languageserver "^7.1.0-next.4"
 
 vscode-typescript-languageservice@^0.25.12:
-  version "0.25.12"
-  resolved "https://registry.nlark.com/vscode-typescript-languageservice/download/vscode-typescript-languageservice-0.25.12.tgz#ac1a65bc6c1fcc686222e04c7a996458dac7720b"
-  integrity sha1-rBplvGwfzGhiIuBMeplkWNrHcgs=
+  version "0.25.13"
+  resolved "https://registry.nlark.com/vscode-typescript-languageservice/download/vscode-typescript-languageservice-0.25.13.tgz#fc90ea4eef27afc28522b0d266aa428b00818dc3"
+  integrity sha1-/JDqTu8nr8KFIrDSZqpCiwCBjcM=
   dependencies:
     "@volar/shared" "^0.25.4"
     typescript-vscode-sh-plugin "^0.6.14"
@@ -5603,14 +5603,14 @@ vue-router@^4.0.6:
 
 vue-tsc@^0.1.0:
   version "0.1.6"
-  resolved "https://registry.nlark.com/vue-tsc/download/vue-tsc-0.1.6.tgz#7e1bd4e6cc5085d51706f00062331765d3ad640c"
+  resolved "https://registry.nlark.com/vue-tsc/download/vue-tsc-0.1.6.tgz?cache=0&sync_timestamp=1621847805505&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-tsc%2Fdownload%2Fvue-tsc-0.1.6.tgz#7e1bd4e6cc5085d51706f00062331765d3ad640c"
   integrity sha1-fhvU5sxQhdUXBvAAYjMXZdOtZAw=
   dependencies:
     vscode-vue-languageservice "0.25.12"
 
 vue@^3.0.11:
   version "3.0.11"
-  resolved "https://registry.nlark.com/vue/download/vue-3.0.11.tgz#c82f9594cbf4dcc869241d4c8dd3e08d9a8f4b5f"
+  resolved "https://registry.nlark.com/vue/download/vue-3.0.11.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue%2Fdownload%2Fvue-3.0.11.tgz#c82f9594cbf4dcc869241d4c8dd3e08d9a8f4b5f"
   integrity sha1-yC+VlMv03MhpJB1MjdPgjZqPS18=
   dependencies:
     "@vue/compiler-dom" "3.0.11"
@@ -5626,9 +5626,11 @@ vuex-persistedstate@^4.0.0-beta.3:
     shvl "^2.0.2"
 
 vuex@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npm.taobao.org/vuex/download/vuex-4.0.0.tgz#ac877aa76a9c45368c979471e461b520d38e6cf5"
-  integrity sha1-rId6p2qcRTaMl5Rx5GG1INOObPU=
+  version "4.0.1"
+  resolved "https://registry.nlark.com/vuex/download/vuex-4.0.1.tgz#e83c541d6f31173969efabb2c5d1c465b682887e"
+  integrity sha1-6DxUHW8xFzlp76uyxdHEZbaCiH4=
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.11"
 
 webdriver@6.12.1:
   version "6.12.1"
@@ -5644,7 +5646,7 @@ webdriver@6.12.1:
 
 webdriverio@^6.9.1:
   version "6.12.1"
-  resolved "https://registry.nlark.com/webdriverio/download/webdriverio-6.12.1.tgz#5b6f1167373bd7a154419d8a930ef1ffda9d0537"
+  resolved "https://registry.nlark.com/webdriverio/download/webdriverio-6.12.1.tgz?cache=0&sync_timestamp=1621932591342&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fwebdriverio%2Fdownload%2Fwebdriverio-6.12.1.tgz#5b6f1167373bd7a154419d8a930ef1ffda9d0537"
   integrity sha1-W28RZzc716FUQZ2Kkw7x/9qdBTc=
   dependencies:
     "@types/puppeteer-core" "^5.4.0"
@@ -5757,9 +5759,9 @@ write-file-atomic@^3.0.0:
     typedarray-to-buffer "^3.1.5"
 
 ws@^7.2.3:
-  version "7.4.5"
-  resolved "https://registry.npm.taobao.org/ws/download/ws-7.4.5.tgz?cache=0&sync_timestamp=1618734170256&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fws%2Fdownload%2Fws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
-  integrity sha1-pITdhR6b62/bQgAn44hejOSJhsE=
+  version "7.4.6"
+  resolved "https://registry.nlark.com/ws/download/ws-7.4.6.tgz?cache=0&sync_timestamp=1621962881346&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fws%2Fdownload%2Fws-7.4.6.tgz#5654ca8ecdeee47c33a9a4bf6d28e2be2980377c"
+  integrity sha1-VlTKjs3u5HwzqaS/bSjivimAN3w=
 
 x-is-array@^0.1.0:
   version "0.1.0"
@@ -5773,12 +5775,12 @@ x-is-string@^0.1.0:
 
 xdg-basedir@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.npm.taobao.org/xdg-basedir/download/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
+  resolved "https://registry.nlark.com/xdg-basedir/download/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
   integrity sha1-SWsswQnsqNus/i3HK2A8F8WHCtQ=
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
-  resolved "https://registry.npm.taobao.org/xdg-basedir/download/xdg-basedir-4.0.0.tgz#4bc8d9984403696225ef83a1573cbbcb4e79db13"
+  resolved "https://registry.nlark.com/xdg-basedir/download/xdg-basedir-4.0.0.tgz#4bc8d9984403696225ef83a1573cbbcb4e79db13"
   integrity sha1-S8jZmEQDaWIl74OhVzy7y0552xM=
 
 xmlbuilder@>=11.0.1:

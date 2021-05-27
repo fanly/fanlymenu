@@ -3,7 +3,7 @@ import {join} from 'path';
 import TrayService from '../../services/TrayService';
 import ClockService from '../../services/ClockService';
 import { Lunar } from 'lunar-typescript';
-import {URL} from 'url';
+import { URL } from 'url';
 
 export default class App {
   trayService: TrayService;

@@ -97,6 +97,7 @@ export default defineComponent({
       const that = this;
       return {
         dayGridMonth: {
+          titleFormat: { year: 'numeric', month: '2-digit'},
           dayCellContent(item: any) {
             const date = new Date(item.date);
             const calendarViewService = new CalendarViewService();
