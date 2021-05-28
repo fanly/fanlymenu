@@ -43,7 +43,7 @@
 import { defineComponent} from 'vue';
 import Sidebar from 'primevue/sidebar';
 import InputSwitch from 'primevue/inputswitch';
-import InputMask from 'primevue/inputMask';
+import InputMask from 'primevue/inputmask';
 import Button from 'primevue/button';
 
 export default defineComponent({
