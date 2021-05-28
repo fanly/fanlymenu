@@ -6,6 +6,7 @@ const buildVersion = `${now.getFullYear() - 2000}.${now.getMonth() + 1}.${now.ge
  * @see https://www.electron.build/configuration/configuration
  */
 const config = {
+  appId: 'cn.coding01.fanlymenu',
   directories: {
     output: 'dist',
     buildResources: 'buildResources',
@@ -15,6 +16,9 @@ const config = {
   ],
   extraMetadata: {
     version: buildVersion,
+  },
+  mac: {
+    target: 'dmg',
   },
 };
 
