@@ -41,9 +41,9 @@
 
 <script lang="ts">
 import { defineComponent} from 'vue';
-import Sidebar from 'primevue/Sidebar';
+import Sidebar from 'primevue/sidebar';
 import InputSwitch from 'primevue/inputswitch';
-import InputMask from 'primevue/InputMask';
+import InputMask from 'primevue/inputMask';
 import Button from 'primevue/button';
 
 export default defineComponent({

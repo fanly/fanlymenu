@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent} from 'vue';
-import Sidebar from 'primevue/Sidebar';
+import Sidebar from 'primevue/sidebar';
 
 export default defineComponent({
   name: 'DateViewSub',
