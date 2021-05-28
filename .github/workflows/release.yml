@@ -83,7 +83,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ windows-latest ]
+        os: [ macos-latest ]
     #    To compile the application for different platforms, use:
     #    os: [ macos-latest, ubuntu-latest, windows-latest ]
 
@@ -122,7 +122,7 @@ jobs:
         uses: samuelmeuli/action-electron-builder@v1
         with:
           build_script_name: build
-          args: --config electron-builder.config.js --mac
+          args: --config electron-builder.config.jsc
 
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
