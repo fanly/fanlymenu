@@ -7,6 +7,11 @@
 5. 退出功能 ✅️
 6. 黄历功能 ❎️
 
+## 系列笔记
+
+> [Electron+Vue3 MAC 版日历开发记录(1)](https://juejin.cn/post/6968670953836380196)
+> [Electron+Vue3 MAC 版日历 开发记录(2)——功能清单](https://juejin.cn/post/6968972252389851172)
+
 ## 显示效果
 
 ![](https://image.coding01.cn/2021/05/19/16214357613642.jpg)

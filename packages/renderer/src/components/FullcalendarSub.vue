@@ -60,7 +60,6 @@ export default defineComponent({
         dateClick: this.dateClick,
         editable: false,
         height: 680,
-        // contentHeight: 600,
         aspectRatio: 1, // 单元格宽高的比例，宽是高的2倍
         views: this.dayCellNewContent(),
         locale: zhLocale,
