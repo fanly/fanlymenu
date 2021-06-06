@@ -60,7 +60,7 @@ export default defineComponent({
       changeShowFestivals: false,
       changeShowWeather: false,
       visibleFullDateView: false,
-      date: '',
+      date: new Date(),
     };
   },
   watch: {
@@ -94,7 +94,7 @@ export default defineComponent({
       weatherService.getWeathers(this.location).then((data) => (this.weather = data));
     },
     dateClick(date: string) {
-      this.date = date;
+      this.date = new Date(date);
       this.visibleFullDateView = true;
     },
   },

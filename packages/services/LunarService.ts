@@ -35,4 +35,31 @@ export default class LunarService {
     return this.lunar.getJieQi() ||
     `${this.lunar.getMonthInChinese()}月${this.lunar.getDayInChinese()}`;
   }
+
+  /**
+   * @returns 获取黄历页面需要得数据
+   */
+  getDateViewDate() {
+    const nongliString =  `农历${this.lunar.getMonthInChinese()}月${this.lunar.getDayInChinese()}`;
+
+    const ganzhi = [
+      `${this.lunar.getYearInGanZhi()}${this.lunar.getYearShengXiao()}年`,
+      `${this.lunar.getMonthInGanZhi()}月`,
+      `${this.lunar.getDayInGanZhi()}日`,
+    ];
+
+    const yangliString = this.solar.toFullString();
+
+    const yi = this.lunar.getDayYi();
+
+    const ji = this.lunar.getDayJi();
+
+    return {
+      nongliString: nongliString,
+      ganzhi: ganzhi,
+      yangliString: yangliString,
+      yi: yi,
+      ji: ji,
+    };
+  }
 }

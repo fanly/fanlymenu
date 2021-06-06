@@ -109,12 +109,6 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "~/styles/default.scss";
-
-h1 {
-  text-align: center;
-  color: var(--primary-color);
-}
-
 .weather {
   position: absolute;
   top: 5px;
