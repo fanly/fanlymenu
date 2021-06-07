@@ -101,7 +101,7 @@ export default defineComponent({
     },
     date(): void {
       const lunarService = new LunarService(this.date);
-    this.lunarData =  lunarService.getDateViewDate();
+      this.lunarData =  lunarService.getDateViewDate();
     },
   },
   methods: {

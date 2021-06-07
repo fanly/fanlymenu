@@ -16,7 +16,7 @@ export default class LunarService {
    * 包括：法定节日、农历等
    * @returns 显示在界面上所有和节日有关的
    */
-  inDayCellContent(changeShowFestivals: boolean): string {
+  showNongliData(changeShowFestivals: boolean): string {
 
     if (changeShowFestivals) {
       const solarFestivals = this.solar.getFestivals();

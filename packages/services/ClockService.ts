@@ -2,9 +2,7 @@
 
 import { app } from 'electron';
 const Moment = require('moment');
-// import * as Moment from 'moment';
-// import 'moment/locale/pt-br';
-// import ResetDateCache from "reset-date-cache";
+import LunarService from './LunarService';
 
 export default class ClockService {
   format: any;
@@ -12,16 +10,10 @@ export default class ClockService {
   intervalId: any;
   constructor() {
     Moment.locale(app.getLocale());
-
     // this.setFormat("MM/DD HH:mm:ss");
     // lll
     this.setFormat('MMMDo dddd HH:mm:ss');
     this.start();
-
-    // systemPreferences.subscribeNotification(
-    //   "NSSystemTimeZoneDidChangeDistributedNotification",
-    //   () => this.onTimeZoneChange(),
-    // );
   }
 
   start(): this {
@@ -48,14 +40,6 @@ export default class ClockService {
     return this;
   }
 
-  // onTimeZoneChange(): this {
-  //   setTimeout(() => {
-  //     ResetDateCache();
-  //   }, 1000);
-
-  //   return this;
-  // }
-
   getFormat(): any {
     return this.format;
   }
@@ -71,6 +55,8 @@ export default class ClockService {
   }
 
   toString(): string {
-    return Moment().format(this.getFormat());
+    const lunarService = new LunarService();
+    const dayTextInChinese = lunarService.showNongliData(true);
+    return dayTextInChinese + ' ' + Moment().format(this.getFormat());
   }
 }

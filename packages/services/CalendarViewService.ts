@@ -11,7 +11,7 @@ export default class CalendarViewService {
     changeShowWeather: boolean,
     weather: any) {
     const lunarService = new LunarService(date);
-    const dayTextInChinese = lunarService.inDayCellContent(changeShowFestivals);
+    const dayTextInChinese = lunarService.showNongliData(changeShowFestivals);
 
     if (!changeShowWeather) {
       return {

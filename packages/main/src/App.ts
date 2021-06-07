@@ -2,7 +2,6 @@ import { app, BrowserWindow, screen } from 'electron';
 import {join} from 'path';
 import TrayService from '../../services/TrayService';
 import ClockService from '../../services/ClockService';
-import { Lunar } from 'lunar-typescript';
 import { URL } from 'url';
 
 export default class App {
@@ -67,13 +66,8 @@ export default class App {
   }
 
   registerListeners(): this {
-    const lunar = Lunar.fromDate(new Date());
-    const dayTextInChinese =
-      lunar.getJieQi() ||
-      `${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`;
-
     this.clockService.onTick((clock: { toString: () => string; }) => {
-      this.trayService.setLabel(dayTextInChinese + ' ' + clock.toString());
+      this.trayService.setLabel(clock.toString());
     });
 
     this.trayService.onClick(() => {

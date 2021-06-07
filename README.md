@@ -19,7 +19,7 @@
 
 ## License 
 
-fanlymenu is freely distributable under the terms of the MIT license.
+fanlymenu is freely distributable under the terms of the [MIT license](https://github.com/moment/moment/blob/develop/LICENSE).
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu?ref=badge_large)
 
