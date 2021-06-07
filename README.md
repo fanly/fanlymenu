@@ -1,4 +1,6 @@
 # 持续更新的 MAC 版任务栏日历
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu?ref=badge_shield)
+
 ## 功能列表
 1. 显示农历 ✅️
 2. 显示节日 ✅️
@@ -20,3 +22,7 @@
 ## 关于我
 
 ![](https://komarev.com/ghpvc/?username=fanly&color=green)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu?ref=badge_large)
