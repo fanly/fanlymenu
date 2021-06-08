@@ -19,10 +19,14 @@
       v-model:changeShowWeather="changeShowWeather"
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:location="location"
+      @focusClick="focusClick"
     />
     <date-view-sub
       v-model:visibleFullDateView="visibleFullDateView"
       v-model:date="date"
+    />
+    <focus-view-sub
+      v-model:visibleFocusView="visibleFocusView"
     />
   </div>
 </template>
@@ -35,6 +39,7 @@ import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
+import FocusViewSub from '/@/components/FocusViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
 
 export default defineComponent({
@@ -44,6 +49,7 @@ export default defineComponent({
     WeatherSub,
     SettingSub,
     DateViewSub,
+    FocusViewSub,
   },
   setup() {
     const visibleFullSetting = ref(false);
@@ -60,6 +66,7 @@ export default defineComponent({
       changeShowFestivals: false,
       changeShowWeather: false,
       visibleFullDateView: false,
+      visibleFocusView: false,
       date: new Date(),
     };
   },
@@ -96,6 +103,9 @@ export default defineComponent({
     dateClick(date: string) {
       this.date = new Date(date);
       this.visibleFullDateView = true;
+    },
+    focusClick() {
+      this.visibleFocusView = true;
     },
   },
 });

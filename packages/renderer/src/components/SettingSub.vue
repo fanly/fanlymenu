@@ -30,6 +30,15 @@
     <div class="p-p-4">
       <Button
         type="button"
+        label="打开专注模式"
+        icon="pi pi-times"
+        class="p-d-block p-mx-auto p-button-success"
+        @click="focus"
+      />
+    </div>
+    <div class="p-p-4">
+      <Button
+        type="button"
         label="退出应用"
         icon="pi pi-times"
         class="p-d-block p-mx-auto p-button-danger"
@@ -61,6 +70,7 @@ export default defineComponent({
     location: Object,
   },
   emits: [
+    'focusClick',
     'update:visibleFullSetting',
     'update:changeShowFestivals',
     'update:changeShowWeather',
@@ -101,6 +111,11 @@ export default defineComponent({
     },
     quit(): void {
       window.electron.ipcRenderer.send('quit');
+    },
+    focus(): void {
+      this.$emit('focusClick');
+      this.$emit('update:visibleFullSetting', this.sidebarVisible = false);
+      window.electron.ipcRenderer.send('show-focus-window');
     },
   },
 });

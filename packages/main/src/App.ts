@@ -1,5 +1,5 @@
 import { app, BrowserWindow, screen } from 'electron';
-import {join} from 'path';
+import { join } from 'path';
 import TrayService from '../../services/TrayService';
 import ClockService from '../../services/ClockService';
 import { URL } from 'url';
@@ -12,7 +12,7 @@ export default class App {
   env: ImportMetaEnv
 
   constructor() {
-    app.dock.hide();
+    // app.dock.hide();
     this.env = import.meta.env;
     this.trayService = new TrayService();
     this.clockService = new ClockService();
@@ -36,16 +36,7 @@ export default class App {
         enableRemoteModule: this.env.MODE === 'test', // Spectron tests can't work with enableRemoteModule: false
       },
     });
-
     window.on('blur', () => this.onBlur());
-
-    // window.on('ready-to-show', () => {
-    //   window?.show();
-
-    //   if (this.env.MODE === 'development') {
-    //     this.window?.webContents.openDevTools();
-    //   }
-    // });
 
     /**
      * URL for main window.
@@ -103,6 +94,11 @@ export default class App {
 
   hide(): this {
     this.window.hide();
+    return this;
+  }
+
+  setFullScreen(flag: boolean): this {
+    this.window.setFullScreen(flag);
     return this;
   }
 

@@ -15,7 +15,10 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } },
 ]);
 
-app.on('ready', () => new App());
+let mainApp:any = null;
+app.on('ready', () => {
+  mainApp = new App();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -26,6 +29,23 @@ app.on('window-all-closed', () => {
 ipcMain.on('quit', () => {
   app.quit();
 });
+
+// 打开专注模式界面
+ipcMain.on('show-focus-window', () => {
+  if (mainApp == null) {
+    mainApp = new App();
+  }
+  mainApp.setFullScreen(true);
+});
+
+// 关闭专注模式界面
+ipcMain.on('hide-focus-window', () => {
+  if (mainApp == null) {
+    mainApp = new App();
+  }
+  mainApp.setFullScreen(false).show();
+});
+
 
 if (env.MODE === 'development') {
   app.whenReady()
