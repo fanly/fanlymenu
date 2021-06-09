@@ -19,10 +19,6 @@
 
 ![](https://image.coding01.cn/2021/05/19/16214357613642.jpg)
 
-## License 
-
-fanlymenu is freely distributable under the terms of the [MIT license](https://github.com/moment/moment/blob/develop/LICENSE).
-
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu?ref=badge_large)
 
 ## 关于我
@@ -30,5 +26,8 @@ fanlymenu is freely distributable under the terms of the [MIT license](https://g
 ![](https://komarev.com/ghpvc/?username=fanly&color=green)
 
 
-## License
+## License 
+
+fanlymenu is freely distributable under the terms of the [MIT license](https://github.com/fanly/fanlymenu/blob/main/LICENSE).
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffanly%2Ffanlymenu?ref=badge_large)
