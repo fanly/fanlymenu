@@ -10,6 +10,7 @@ export interface State {
     longitude: number, // 经度
     latitude: number,  // 纬度
   },
+  focusTime: number, // 专注时间
 }
 
 // define injection key
@@ -27,6 +28,7 @@ export const store = createStore<State>({
       longitude: 114.52,
       latitude: 38.02,
     },
+    focusTime: 40,
   },
   mutations: {
     changeShowFestivals(state) {
@@ -41,6 +43,9 @@ export const store = createStore<State>({
         latitude: location.latitude,
       };
     },
+    changeFocusTime(state, focusTime) {
+      state.focusTime = focusTime;
+    },
   },
   actions: {
     changeShowFestivals({ commit }) {
@@ -52,6 +57,9 @@ export const store = createStore<State>({
     changeLocation({ commit }) {
       commit('changeLocation');
     },
+    // changeFocusTime({ commit }) {
+    //   commit('changeFocusTime');
+    // },
   },
   plugins: [dataState],
 });

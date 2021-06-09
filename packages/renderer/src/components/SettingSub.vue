@@ -28,10 +28,16 @@
       />
     </div>
     <div class="p-p-4">
+      <Knob
+        v-model="focus_time"
+        :step="5"
+        :min="5"
+        :max="120"
+      />
       <Button
         type="button"
-        label="打开专注模式"
-        icon="pi pi-times"
+        :label="focusLabel"
+        icon="pi pi-play"
         class="p-d-block p-mx-auto p-button-success"
         @click="focus"
       />
@@ -54,6 +60,8 @@ import Sidebar from 'primevue/sidebar';
 import InputSwitch from 'primevue/inputswitch';
 import InputMask from 'primevue/inputmask';
 import Button from 'primevue/button';
+import Knob from 'primevue/knob';
+import { useStore } from '/@/store';
 
 export default defineComponent({
   name: 'SettingSub',
@@ -62,6 +70,7 @@ export default defineComponent({
     InputSwitch,
     InputMask,
     Button,
+    Knob,
   },
   props: {
     visibleFullSetting: Boolean,
@@ -76,13 +85,26 @@ export default defineComponent({
     'update:changeShowWeather',
     'update:location',
   ],
+  setup() {
+    const store = useStore();
+    return {
+      store,
+    };
+  },
   data() {
     return {
       sidebarVisible: this.visibleFullSetting,
       inputSwitchFestivalsModel: this.changeShowFestivals,
       inputSwitchWeatherModel: this.changeShowWeather,
       locationStr: '',
+      focus_time: 40,
     };
+  },
+  computed: {
+    // 计算属性的 getter
+    focusLabel(): string {
+      return '开始专注' + this.focus_time + '分钟';
+    },
   },
   watch: {
     visibleFullSetting(): void {
@@ -99,7 +121,7 @@ export default defineComponent({
     },
   },
   mounted() {
-
+    this.focus_time = this.store.state.focusTime;
   },
   methods: {
     changeLocalLocation(): void {
@@ -113,6 +135,8 @@ export default defineComponent({
       window.electron.ipcRenderer.send('quit');
     },
     focus(): void {
+      console.log(this.focus_time);
+      this.store.commit('changeFocusTime', this.focus_time);
       this.$emit('focusClick');
       this.$emit('update:visibleFullSetting', this.sidebarVisible = false);
       window.electron.ipcRenderer.send('show-focus-window');

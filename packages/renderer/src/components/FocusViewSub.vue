@@ -12,16 +12,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, provide } from 'vue';
+import { defineComponent, ref, provide, computed } from 'vue';
 import Sidebar from 'primevue/sidebar';
 import Vue3CountdownClock from 'vue3-clock-countdown';
 import Moment from 'moment';
+import { useStore } from '/@/store';
 
 export default defineComponent({
   name: 'FocusViewSub',
   components: {
     Sidebar,
     Vue3CountdownClock,
+  },
+  provide() {
+    return {
+      deadline: computed(() => Moment().add(this.store.state.focusTime, 'minute').format()),
+    };
   },
   props: {
     visibleFocusView: Boolean,
@@ -30,9 +36,6 @@ export default defineComponent({
     'update:visibleFocusView',
   ],
   setup () {
-    const deadLine = ref(Moment().add(40, 'minute').format());
-    provide('deadline', deadLine);
-
     const Title = ref('进入倒计时');
     provide('title', Title);
 
@@ -103,6 +106,12 @@ export default defineComponent({
 
     const titleEndTime = ref('End Time!');
     provide('titleEndTime', titleEndTime);
+
+    const store = useStore();
+    provide('store', store);
+    return {
+      store,
+    };
   },
   data() {
     return {
