@@ -27,7 +27,10 @@
         @complete="changeLocalLocation"
       />
     </div>
-    <div class="p-p-4">
+    <div
+      class="p-p-4"
+      style="text-align:center;"
+    >
       <Knob
         v-model="focus_time"
         :step="5"
@@ -135,7 +138,6 @@ export default defineComponent({
       window.electron.ipcRenderer.send('quit');
     },
     focus(): void {
-      console.log(this.focus_time);
       this.store.commit('changeFocusTime', this.focus_time);
       this.$emit('focusClick');
       this.$emit('update:visibleFullSetting', this.sidebarVisible = false);

@@ -57,9 +57,6 @@ export const store = createStore<State>({
     changeLocation({ commit }) {
       commit('changeLocation');
     },
-    // changeFocusTime({ commit }) {
-    //   commit('changeFocusTime');
-    // },
   },
   plugins: [dataState],
 });
