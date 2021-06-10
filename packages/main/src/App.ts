@@ -23,8 +23,8 @@ export default class App {
 
   createWindow(): BrowserWindow {
     const window = new BrowserWindow({
-      width: 600,
-      height: 700,
+      width: Number(this.env.VITE_APP_WIDTH),
+      height: Number(this.env.VITE_APP_HEIGHT),
       resizable: false,
       alwaysOnTop: true,
       show: false,

@@ -12,7 +12,7 @@ export default class WeatherService {
     http.__addFilter(/weatherdata/);
 
     const res = await http({
-      url: 'https://www.api.com/weather',
+      url: import.meta.env.VITE_WEATHER_API,
       method: 'get',
       params: {
         param: JSON.stringify({
