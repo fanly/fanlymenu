@@ -40,7 +40,7 @@ export default class LunarService {
    * @returns 获取黄历页面需要得数据
    */
   getDateViewDate() {
-    const nongliString =  `农历${this.lunar.getMonthInChinese()}月${this.lunar.getDayInChinese()}`;
+    const nongliString = `农历${this.lunar.getMonthInChinese()}月${this.lunar.getDayInChinese()}`;
 
     const ganzhi = [
       `${this.lunar.getYearInGanZhi()}${this.lunar.getYearShengXiao()}年`,

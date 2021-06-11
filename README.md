@@ -29,6 +29,10 @@
 > [Electron+Vue3 MAC 版日历开发记录(8)——专注模式](https://juejin.cn/post/6971358611012337695)
 
 > [Electron+Vue3 MAC 版日历开发记录(9)——Vuex 使用](https://juejin.cn/post/6971791486593531941)
+
+> [Electron+Vue3 MAC 版日历开发记录(10)——env 使用](https://juejin.cn/post/6972177046667526174)
+
+> [Electron+Vue3 MAC 版日历开发记录(11)——Notion事件获取](https://juejin.cn/post/6972551210993713188/)
 ## 显示效果
 
 ![](https://image.coding01.cn/2021/05/19/16214357613642.jpg)
