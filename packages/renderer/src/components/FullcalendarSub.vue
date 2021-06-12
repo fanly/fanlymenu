@@ -48,7 +48,7 @@ export default defineComponent({
         customButtons: {
           settingButton: {
             text: '',
-            icon: PrimeIcons.COG,
+            icon: PrimeIcons.BARS,
             click: this.settingClick,
           },
         },
@@ -86,8 +86,8 @@ export default defineComponent({
       // 这种成本可能更高
       // calendar.render();
     },
-    settingClick() {
-      this.$emit('settingClick');
+    settingClick(event: any) {
+      this.$emit('settingClick', event);
     },
     dateClick(target: any) {
       this.$emit('dateClick', target.date);

@@ -5,7 +5,6 @@
     position="full"
     @click="$emit('update:visibleFullSetting', sidebarVisible)"
   >
-    <h1>设置</h1>
     <h2>显示节假日</h2>
     <InputSwitch
       v-model="inputSwitchFestivalsModel"
@@ -43,15 +42,6 @@
         icon="pi pi-play"
         class="p-d-block p-mx-auto p-button-success"
         @click="focus"
-      />
-    </div>
-    <div class="p-p-4">
-      <Button
-        type="button"
-        label="退出应用"
-        icon="pi pi-times"
-        class="p-d-block p-mx-auto p-button-danger"
-        @click="quit"
       />
     </div>
   </Sidebar>
@@ -133,9 +123,6 @@ export default defineComponent({
         'longitude': loc[0],
         'latitude': loc[1],
       });
-    },
-    quit(): void {
-      window.electron.ipcRenderer.send('quit');
     },
     focus(): void {
       this.store.commit('changeFocusTime', this.focus_time);

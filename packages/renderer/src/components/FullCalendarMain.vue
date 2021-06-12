@@ -5,7 +5,7 @@
       v-model:changeShowWeather="changeShowWeather"
       v-model:weather="weather"
       v-model:location="location"
-      @settingClick="visibleFullSetting = true"
+      @settingClick="settingClick"
       @dateClick="dateClick"
     />
     <weather-sub
@@ -28,6 +28,15 @@
     <focus-view-sub
       v-model:visibleFocusView="visibleFocusView"
     />
+    <event-create-dialog
+      v-model:visibleFullDialog="visibleFullDialog"
+    />
+    <Menu
+      id="overlay_tmenu"
+      ref="menu"
+      :model="items"
+      :popup="true"
+    />
   </div>
 </template>
 
@@ -35,12 +44,14 @@
 import { defineComponent, ref } from 'vue';
 import { useStore } from '/@/store';
 import 'primeicons/primeicons.css';
+import Menu from 'primevue/menu';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
 import FocusViewSub from '/@/components/FocusViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
+import EventCreateDialog from '/@/components/EventCreateDialog.vue';
 
 export default defineComponent({
   name: 'FullCalendarMain',
@@ -50,6 +61,8 @@ export default defineComponent({
     SettingSub,
     DateViewSub,
     FocusViewSub,
+    Menu,
+    EventCreateDialog,
   },
   setup() {
     const visibleFullSetting = ref(false);
@@ -68,6 +81,33 @@ export default defineComponent({
       visibleFullDateView: false,
       visibleFocusView: false,
       date: new Date(),
+      visibleFullDialog: false,
+      items: [
+        {
+          label:'操作',
+          icon:'pi pi-fw pi-pencil',
+          items:[
+            {
+              label:'创建事件',
+              icon:'pi pi-fw pi-plus',
+              command: this.goCreateEventView,
+            },
+            {
+              label:'设置',
+              icon:'pi pi-fw pi-cog',
+              command: this.goSettingView,
+            },
+            {
+              separator:true,
+            },
+            {
+              label:'退出应用',
+              icon:'pi pi-fw pi-power-off',
+              command: this.quit,
+            },
+          ],
+        },
+      ],
     };
   },
   watch: {
@@ -91,18 +131,31 @@ export default defineComponent({
     this.setShowData();
   },
   methods: {
-    setShowData() {
+    setShowData(): void {
       this.changeShowFestivals = this.store.state.showFestivals;
       this.changeShowWeather = this.store.state.showWeather;
       this.location = this.store.state.location;
     },
-    getWeather() {
+    getWeather(): void {
       const weatherService = new WeatherService();
       weatherService.getWeathers(this.location).then((data) => (this.weather = data));
     },
-    dateClick(date: string) {
+    dateClick(date: string): void {
       this.date = new Date(date);
       this.visibleFullDateView = true;
+    },
+    settingClick(event: any): void {
+      const menu = this.$refs['menu'] as any;
+      menu.toggle(event);
+    },
+    quit(): void {
+      window.electron.ipcRenderer.send('quit');
+    },
+    goCreateEventView(): void {
+      this.visibleFullDialog = true;
+    },
+    goSettingView(): void {
+      this.visibleFullSetting = true;
     },
     focusClick() {
       this.visibleFocusView = true;
