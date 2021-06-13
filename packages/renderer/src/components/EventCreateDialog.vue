@@ -4,9 +4,6 @@
     :modal="true"
     @click="$emit('update:visibleFullDialog', eventDialogVisible)"
   >
-    <template #header>
-      <h4>创建事件</h4>
-    </template>
     <div class="p-fluid">
       <span class="p-float-label">
         <InputText
@@ -62,9 +59,10 @@ export default defineComponent({
   },
   props: {
     visibleFullDialog: Boolean,
+    event: Object,
   },
   emits: [
-    'focusClick',
+    'addEventClick',
     'update:visibleFullDialog',
   ],
   setup() {
@@ -78,12 +76,21 @@ export default defineComponent({
       eventDialogVisible: this.visibleFullDialog,
       locationStr: '',
       eventText: '',
-      dates: [],
+      dates: [new Date()],
     };
   },
   watch: {
     visibleFullDialog(): void {
       this.eventDialogVisible = this.visibleFullDialog;
+    },
+    event(): void {
+      if (this.event != null) {
+        this.eventText = this.event.title;
+        this.dates = [this.event.start as Date, this.event.end as Date];
+      } else {
+        this.eventText = '';
+        this.dates = [];
+      }
     },
   },
   mounted() {
@@ -93,11 +100,14 @@ export default defineComponent({
       const start: Date = this.dates[0];
       const end: Date = this.dates[1] == null ? this.dates[0] : this.dates[1];
 
-      this.eventService.postEvent(this.eventText, start, end)
-        .then(() => {
-          this.dates = [];
-          this.eventText = '';
-        });
+      this.$emit('addEventClick',{
+        id: this.event?.id,
+        title: this.eventText,
+        start: start,
+        end: end,
+      });
+      this.dates = [];
+      this.eventText = '';
       this.$emit('update:visibleFullDialog', false);
     },
   },

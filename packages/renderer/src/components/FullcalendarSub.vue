@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 import '@fullcalendar/core/vdom';
 import '@fullcalendar/core';
 import {PrimeIcons} from 'primevue/api';
@@ -15,7 +15,6 @@ import Fullcalendar from 'primevue/fullcalendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
-import EventService from '../../../services/EventService';
 import CalendarViewService from '../../../services/CalendarViewService';
 import 'primeicons/primeicons.css';
 
@@ -25,21 +24,12 @@ export default defineComponent({
     Fullcalendar,
   },
   props: {
+    events: Array,
     changeShowFestivals: Boolean,
     changeShowWeather: Boolean,
     weather: {},
   },
   setup() {
-    onMounted(() => {
-      eventService.value.getEvents().then((data) => (events.value = data));
-    });
-
-    const events: any = ref([]);
-    const eventService = ref(new EventService());
-    return {
-      events,
-      eventService,
-    };
   },
   data() {
     return {
@@ -58,6 +48,7 @@ export default defineComponent({
           right: 'settingButton',
         },
         dateClick: this.dateClick,
+        eventClick: this.eventClick,
         editable: false,
         height: 680,
         aspectRatio: 1, // 单元格宽高的比例，宽是高的2倍
@@ -90,7 +81,12 @@ export default defineComponent({
       this.$emit('menuClick', event);
     },
     dateClick(target: any) {
+      console.log(target);
       this.$emit('dateClick', target.date);
+    },
+    eventClick(target: any) {
+      console.log(target);
+      this.$emit('eventClick', target.event);
     },
     dayCellNewContent() {
       const that = this;

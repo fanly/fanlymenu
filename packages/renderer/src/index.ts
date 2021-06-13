@@ -3,6 +3,7 @@ import App from '/@/App.vue';
 import router from '/@/router';
 import { store, key } from '/@/store';
 import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
 import 'primevue/resources/themes/saga-green/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
@@ -16,6 +17,7 @@ app
       firstDayOfMonth: 1,
     },
   })
+  .use(ToastService)
   .use(router)
   .use(store, key);
 

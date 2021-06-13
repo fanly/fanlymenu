@@ -1,12 +1,15 @@
 <template>
   <div>
+    <Toast />
     <fullcalendar-sub
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:changeShowWeather="changeShowWeather"
+      v-model:events="events"
       v-model:weather="weather"
       v-model:location="location"
       @menuClick="menuClick"
       @dateClick="dateClick"
+      @eventClick="eventClick"
     />
     <weather-sub
       v-if="changeShowWeather"
@@ -30,6 +33,8 @@
     />
     <event-create-dialog
       v-model:visibleFullDialog="visibleFullDialog"
+      v-model:event="event"
+      @addEventClick="addEventClick"
     />
     <Menu
       id="overlay_tmenu"
@@ -44,6 +49,7 @@
 import { defineComponent, ref } from 'vue';
 import { useStore } from '/@/store';
 import 'primeicons/primeicons.css';
+import Toast from 'primevue/toast';
 import Menu from 'primevue/menu';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
@@ -52,10 +58,12 @@ import DateViewSub from '/@/components/DateViewSub.vue';
 import FocusViewSub from '/@/components/FocusViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
 import EventCreateDialog from '/@/components/EventCreateDialog.vue';
+import EventService from '../../../services/EventService';
 
 export default defineComponent({
   name: 'FullCalendarMain',
   components: {
+    Toast,
     FullcalendarSub,
     WeatherSub,
     SettingSub,
@@ -65,9 +73,14 @@ export default defineComponent({
     EventCreateDialog,
   },
   setup() {
+    const eventService = ref(new EventService());
+    const events:any = ref([]);
     const visibleFullSetting = ref(false);
     const store = useStore();
+
     return {
+      eventService,
+      events,
       visibleFullSetting,
       store,
     };
@@ -82,7 +95,7 @@ export default defineComponent({
       visibleFocusView: false,
       date: new Date(),
       visibleFullDialog: false,
-      menu_width: Number(import.meta.env.VITE_APP_WIDTH) / 2,
+      event: undefined,
       items: [
         {
           label:'操作',
@@ -129,9 +142,15 @@ export default defineComponent({
     },
   },
   mounted() {
+    this.updateEvents();
     this.setShowData();
   },
   methods: {
+    updateEvents(): any {
+      this.eventService.getEvents().then((data) => {
+        this.events = data;
+      });
+    },
     setShowData(): void {
       this.changeShowFestivals = this.store.state.showFestivals;
       this.changeShowWeather = this.store.state.showWeather;
@@ -145,6 +164,10 @@ export default defineComponent({
       this.date = new Date(date);
       this.visibleFullDateView = true;
     },
+    eventClick(event: any): void {
+      this.event = event;
+      this.visibleFullDialog = true;
+    },
     menuClick(event: any): void {
       const menu = this.$refs['menu'] as any;
       menu.toggle(event);
@@ -153,6 +176,7 @@ export default defineComponent({
       window.electron.ipcRenderer.send('quit');
     },
     goCreateEventView(): void {
+      this.event = undefined;
       this.visibleFullDialog = true;
     },
     goSettingView(): void {
@@ -160,6 +184,21 @@ export default defineComponent({
     },
     focusClick() {
       this.visibleFocusView = true;
+    },
+    addEventClick(data: any) {
+      if (data.id) {
+        this.eventService.patchEvent(data.id, data.title, data.start, data.end)
+        .then(() => {
+          this.$toast.add({severity:'success', summary: 'Success Message', detail:'event submitted', life: 3000});
+          this.updateEvents();
+        });
+      } else {
+        this.eventService.postEvent(data.title, data.start, data.end)
+        .then(() => {
+          this.$toast.add({severity:'success', summary: 'Success Message', detail:'event submitted', life: 3000});
+          this.updateEvents();
+        });
+      }
     },
   },
 });
