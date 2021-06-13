@@ -49,7 +49,7 @@ export default defineComponent({
           settingButton: {
             text: '',
             icon: PrimeIcons.BARS,
-            click: this.settingClick,
+            click: this.menuClick,
           },
         },
         headerToolbar: {
@@ -86,8 +86,8 @@ export default defineComponent({
       // 这种成本可能更高
       // calendar.render();
     },
-    settingClick(event: any) {
-      this.$emit('settingClick', event);
+    menuClick(event: any) {
+      this.$emit('menuClick', event);
     },
     dateClick(target: any) {
       this.$emit('dateClick', target.date);

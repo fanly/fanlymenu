@@ -5,7 +5,7 @@
       v-model:changeShowWeather="changeShowWeather"
       v-model:weather="weather"
       v-model:location="location"
-      @settingClick="settingClick"
+      @menuClick="menuClick"
       @dateClick="dateClick"
     />
     <weather-sub
@@ -82,6 +82,7 @@ export default defineComponent({
       visibleFocusView: false,
       date: new Date(),
       visibleFullDialog: false,
+      menu_width: Number(import.meta.env.VITE_APP_WIDTH) / 2,
       items: [
         {
           label:'操作',
@@ -144,7 +145,7 @@ export default defineComponent({
       this.date = new Date(date);
       this.visibleFullDateView = true;
     },
-    settingClick(event: any): void {
+    menuClick(event: any): void {
       const menu = this.$refs['menu'] as any;
       menu.toggle(event);
     },

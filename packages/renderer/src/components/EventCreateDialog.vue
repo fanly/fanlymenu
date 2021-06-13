@@ -5,17 +5,17 @@
     @click="$emit('update:visibleFullDialog', eventDialogVisible)"
   >
     <template #header>
-      <h3>创建事件</h3>
+      <h4>创建事件</h4>
     </template>
     <div class="p-fluid">
-      <div class="p-field">
-        <label for="eventInput">事件内容</label>
+      <span class="p-float-label">
         <InputText
           id="eventInput"
           v-model="eventText"
           type="text"
         />
-      </div>
+        <label for="eventInput">事件内容</label>
+      </span>
     </div>
     <div class="p-fluid p-formgrid p-grid">
       <Calendar
@@ -31,7 +31,7 @@
       <Button
         label="取消"
         icon="pi pi-times"
-        class="p-button-text"
+        class="p-button-danger"
         @click="$emit('update:visibleFullDialog', false)"
       />
       <Button
@@ -107,4 +107,8 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "~/styles/default.scss";
+::v-deep(.p-float-label) {
+  display: block;
+  margin-bottom: .5rem;
+}
 </style>
