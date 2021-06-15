@@ -6,3 +6,4 @@ declare module '*.vue' {
 }
 
 declare module 'vue3-clock-countdown'
+declare module '@fullcalendar/vue3'

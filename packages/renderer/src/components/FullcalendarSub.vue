@@ -1,5 +1,5 @@
 <template>
-  <Fullcalendar
+  <full-calendar
     ref="fullcalendar"
     :events="events"
     :options="calendarOptions"
@@ -8,20 +8,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import '@fullcalendar/core/vdom';
-import '@fullcalendar/core';
-import {PrimeIcons} from 'primevue/api';
-import Fullcalendar from 'primevue/fullcalendar';
+import '@fullcalendar/core/vdom'; // solve problem with Vite
+import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
+import {PrimeIcons} from 'primevue/api';
 import CalendarViewService from '../../../services/CalendarViewService';
 import 'primeicons/primeicons.css';
 
 export default defineComponent({
   name: 'FullcalendarSub',
   components: {
-    Fullcalendar,
+    FullCalendar,
   },
   props: {
     events: Array,
@@ -71,7 +70,7 @@ export default defineComponent({
   methods: {
     updateView() {
       let calendarArray = this.$refs['fullcalendar'] as any;
-      let calendar = calendarArray['calendar'];
+      let calendar = calendarArray['$options']['calendar'];
       const viewContent = this.dayCellNewContent();
       calendar.changeView('dayGridMonth', viewContent['dayGridMonth']);
       // 这种成本可能更高
