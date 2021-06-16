@@ -6,14 +6,16 @@
     @click="$emit('update:visibleFullSetting', sidebarVisible)"
   >
     <h2>显示节假日</h2>
-    <InputSwitch
-      v-model="inputSwitchFestivalsModel"
-      @change="$emit('update:changeShowFestivals', inputSwitchFestivalsModel)"
+    <n-switch
+      :default-value="inputSwitchFestivalsModel"
+      size="large"
+      @click="updateFestivalsModel"
     />
     <h2>显示天气预报</h2>
-    <InputSwitch
-      v-model="inputSwitchWeatherModel"
-      @change="$emit('update:changeShowWeather', inputSwitchWeatherModel)"
+    <n-switch
+      :default-value="inputSwitchWeatherModel"
+      size="large"
+      @click="updateWeatherModel"
     />
     <div
       v-show="inputSwitchWeatherModel"
@@ -36,13 +38,18 @@
         :min="5"
         :max="120"
       />
-      <Button
-        type="button"
-        :label="focusLabel"
-        icon="pi pi-play"
-        class="p-d-block p-mx-auto p-button-success"
+      <n-button
+        type="primary"
+        size="large"
         @click="focus"
-      />
+      >
+        <template #icon>
+          <n-icon>
+            <caret-right-icon />
+          </n-icon>
+        </template>
+        {{ focusLabel }}
+      </n-button>
     </div>
   </Sidebar>
 </template>
@@ -50,9 +57,9 @@
 <script lang="ts">
 import { defineComponent} from 'vue';
 import Sidebar from 'primevue/sidebar';
-import InputSwitch from 'primevue/inputswitch';
 import InputMask from 'primevue/inputmask';
-import Button from 'primevue/button';
+import { NSwitch, NButton, NIcon } from 'naive-ui';
+import { CaretRight as CaretRightIcon } from '@vicons/fa';
 import Knob from 'primevue/knob';
 import { useStore } from '/@/store';
 
@@ -60,9 +67,11 @@ export default defineComponent({
   name: 'SettingSub',
   components: {
     Sidebar,
-    InputSwitch,
+    NSwitch,
     InputMask,
-    Button,
+    NButton,
+    NIcon,
+    CaretRightIcon,
     Knob,
   },
   props: {
@@ -103,12 +112,6 @@ export default defineComponent({
     visibleFullSetting(): void {
       this.sidebarVisible = this.visibleFullSetting;
     },
-    changeShowFestivals(): void {
-      this.inputSwitchFestivalsModel = this.changeShowFestivals;
-    },
-    changeShowWeather(): void {
-      this.inputSwitchWeatherModel = this.changeShowWeather;
-    },
     location(): void {
       this.locationStr = this.location?.longitude + ',' + this.location?.latitude;
     },
@@ -117,6 +120,14 @@ export default defineComponent({
     this.focus_time = this.store.state.focusTime;
   },
   methods: {
+    updateFestivalsModel(): void {
+      this.inputSwitchFestivalsModel = !this.inputSwitchFestivalsModel;
+      this.$emit('update:changeShowFestivals', this.inputSwitchFestivalsModel);
+    },
+    updateWeatherModel(): void {
+      this.inputSwitchWeatherModel = !this.inputSwitchWeatherModel;
+      this.$emit('update:changeShowWeather', this.inputSwitchWeatherModel);
+    },
     changeLocalLocation(): void {
       const loc = this.locationStr.split(',', 2);
       this.$emit('update:location', {
