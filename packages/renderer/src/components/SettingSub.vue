@@ -1,39 +1,44 @@
 <template>
-  <Sidebar
-    v-model:visible="sidebarVisible"
-    :base-z-index="1000"
-    position="full"
-    @click="$emit('update:visibleFullSetting', sidebarVisible)"
-  >
-    <h2>显示节假日</h2>
+  <n-space vertical>
+    <h4>显示节假日</h4>
     <n-switch
-      :default-value="inputSwitchFestivalsModel"
+      v-model:value="inputSwitchFestivalsModel"
       size="large"
-      @click="updateFestivalsModel"
+      @update-value="updateFestivalsModel"
     />
-    <h2>显示天气预报</h2>
+    <h4>显示天气预报</h4>
     <n-switch
-      :default-value="inputSwitchWeatherModel"
+      v-model:value="inputSwitchWeatherModel"
       size="large"
-      @click="updateWeatherModel"
+      @update-value="updateWeatherModel"
     />
-    <div
-      v-show="inputSwitchWeatherModel"
-      class="p-field"
+    <n-space
+      v-if="inputSwitchWeatherModel"
+      inline
     >
-      <label for="location">经纬度：</label>
-      <InputMask
-        v-model="locationStr"
-        mask="999.99,99.99"
-        @complete="changeLocalLocation"
+      <n-input-number
+        v-model:value="longitude"
+        :min="-180"
+        :max="180"
+        :show-button="false"
+        placeholder="经度"
+        @update:value="changeLocalLocation"
       />
-    </div>
-    <div
-      class="p-p-4"
-      style="text-align:center;"
-    >
-      <Knob
-        v-model="focus_time"
+      <n-input-number
+        v-model:value="latitude"
+        :min="-90"
+        :max="90"
+        :show-button="false"
+        placeholder="纬度"
+        @update:value="changeLocalLocation"
+      />
+    </n-space>
+    <n-divider dashed>
+      专注设置
+    </n-divider>
+    <n-space vertical>
+      <n-slider
+        v-model:value="focus_time"
         :step="5"
         :min="5"
         :max="120"
@@ -50,35 +55,37 @@
         </template>
         {{ focusLabel }}
       </n-button>
-    </div>
-  </Sidebar>
+    </n-space>
+  </n-space>
 </template>
 
 <script lang="ts">
 import { defineComponent} from 'vue';
-import Sidebar from 'primevue/sidebar';
-import InputMask from 'primevue/inputmask';
-import { NSwitch, NButton, NIcon } from 'naive-ui';
-import { CaretRight as CaretRightIcon } from '@vicons/fa';
-import Knob from 'primevue/knob';
 import { useStore } from '/@/store';
+import { NSpace, NSwitch, NInputNumber, NButton, NIcon, NSlider, NDivider } from 'naive-ui';
+import { CaretRight as CaretRightIcon } from '@vicons/fa';
 
 export default defineComponent({
   name: 'SettingSub',
   components: {
-    Sidebar,
+    NSpace,
     NSwitch,
-    InputMask,
+    NInputNumber,
     NButton,
     NIcon,
     CaretRightIcon,
-    Knob,
+    NSlider,
+    NDivider,
   },
   props: {
-    visibleFullSetting: Boolean,
     changeShowFestivals: Boolean,
     changeShowWeather: Boolean,
-    location: Object,
+    location: {
+      type: Object,
+      default: function() {
+        return {};
+      },
+    },
   },
   emits: [
     'focusClick',
@@ -95,10 +102,10 @@ export default defineComponent({
   },
   data() {
     return {
-      sidebarVisible: this.visibleFullSetting,
       inputSwitchFestivalsModel: this.changeShowFestivals,
       inputSwitchWeatherModel: this.changeShowWeather,
-      locationStr: '',
+      longitude: this.location?.longitude,
+      latitude: this.location?.latitude,
       focus_time: 40,
     };
   },
@@ -108,63 +115,27 @@ export default defineComponent({
       return '开始专注' + this.focus_time + '分钟';
     },
   },
-  watch: {
-    visibleFullSetting(): void {
-      this.sidebarVisible = this.visibleFullSetting;
-    },
-    location(): void {
-      this.locationStr = this.location?.longitude + ',' + this.location?.latitude;
-    },
-  },
   mounted() {
     this.focus_time = this.store.state.focusTime;
   },
   methods: {
-    updateFestivalsModel(): void {
-      this.inputSwitchFestivalsModel = !this.inputSwitchFestivalsModel;
-      this.$emit('update:changeShowFestivals', this.inputSwitchFestivalsModel);
+    updateFestivalsModel(value: boolean): void {
+      this.$emit('update:changeShowFestivals', value);
     },
-    updateWeatherModel(): void {
-      this.inputSwitchWeatherModel = !this.inputSwitchWeatherModel;
-      this.$emit('update:changeShowWeather', this.inputSwitchWeatherModel);
+    updateWeatherModel(value: boolean): void {
+      this.$emit('update:changeShowWeather', value);
     },
     changeLocalLocation(): void {
-      const loc = this.locationStr.split(',', 2);
       this.$emit('update:location', {
-        'longitude': loc[0],
-        'latitude': loc[1],
+        'longitude': this.longitude,
+        'latitude': this.latitude,
       });
     },
     focus(): void {
       this.store.commit('changeFocusTime', this.focus_time);
       this.$emit('focusClick');
-      this.$emit('update:visibleFullSetting', this.sidebarVisible = false);
       window.electron.ipcRenderer.send('show-focus-window');
     },
   },
 });
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "~/styles/default.scss";
-.weather {
-  position: absolute;
-  top: 5px;
-  left: 150px;
-  z-index: 1000;
-}
-
-.weatherTemp {
-  font-size: 0.8rem;
-  background-color:#ffffff;
-  color: var(--primary-color)
-}
-@media screen and (max-width: $lg) {
-  ::v-deep(.fc-header-toolbar) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-
-</style>

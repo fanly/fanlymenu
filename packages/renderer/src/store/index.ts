@@ -3,13 +3,15 @@ import type { Store } from 'vuex';
 import { createStore, useStore as baseUseStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
+export interface FLocation {
+  longitude: number, // 经度
+  latitude: number,  // 纬度
+}
+
 export interface State {
   showFestivals: boolean,
   showWeather: boolean,
-  location: {
-    longitude: number, // 经度
-    latitude: number,  // 纬度
-  },
+  location: FLocation,
   focusTime: number, // 专注时间
 }
 
@@ -27,7 +29,7 @@ export const store = createStore<State>({
     location: {
       longitude: 114.52,
       latitude: 38.02,
-    },
+    } as FLocation,
     focusTime: 40,
   },
   mutations: {
@@ -41,7 +43,7 @@ export const store = createStore<State>({
       state.location = {
         longitude: location.longitude,
         latitude: location.latitude,
-      };
+      } as FLocation;
     },
     changeFocusTime(state, focusTime) {
       state.focusTime = focusTime;
@@ -64,3 +66,5 @@ export const store = createStore<State>({
 export function useStore () {
   return baseUseStore(key);
 }
+
+export { };

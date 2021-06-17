@@ -17,13 +17,20 @@
       v-model:weather="weather"
       v-model:location="location"
     />
-    <setting-sub
-      v-model:visibleFullSetting="visibleFullSetting"
-      v-model:changeShowWeather="changeShowWeather"
-      v-model:changeShowFestivals="changeShowFestivals"
-      v-model:location="location"
-      @focusClick="focusClick"
-    />
+    <n-drawer
+      v-model:show="visibleFullSetting"
+      :width="drawerWidth"
+      placement="left"
+    >
+      <n-drawer-content title="设置">
+        <setting-sub
+          v-model:changeShowWeather="changeShowWeather"
+          v-model:changeShowFestivals="changeShowFestivals"
+          v-model:location="location"
+          @focusClick="focusClick"
+        />
+      </n-drawer-content>
+    </n-drawer>
     <date-view-sub
       v-model:visibleFullDateView="visibleFullDateView"
       v-model:date="date"
@@ -47,12 +54,14 @@
 
 <script lang='ts'>
 import { defineComponent, ref } from 'vue';
+import type { FLocation } from '/@/store';
 import { useStore } from '/@/store';
 import 'primeicons/primeicons.css';
 import Toast from 'primevue/toast';
 import Menu from 'primevue/menu';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
+import { NDrawer, NDrawerContent } from 'naive-ui';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
 import FocusViewSub from '/@/components/FocusViewSub.vue';
@@ -66,6 +75,8 @@ export default defineComponent({
     Toast,
     FullcalendarSub,
     WeatherSub,
+    NDrawer,
+    NDrawerContent,
     SettingSub,
     DateViewSub,
     FocusViewSub,
@@ -88,7 +99,7 @@ export default defineComponent({
   data() {
     return {
       weather: {},
-      location: {},
+      location: {} as FLocation,
       changeShowFestivals: false,
       changeShowWeather: false,
       visibleFullDateView: false,
@@ -96,6 +107,7 @@ export default defineComponent({
       date: new Date(),
       visibleFullDialog: false,
       event: undefined,
+      drawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 2.0,
       items: [
         {
           label:'操作',
@@ -183,6 +195,7 @@ export default defineComponent({
       this.visibleFullSetting = true;
     },
     focusClick() {
+      this.visibleFullSetting = false;
       this.visibleFocusView = true;
     },
     addEventClick(data: any) {
