@@ -80,12 +80,7 @@ export default defineComponent({
   props: {
     changeShowFestivals: Boolean,
     changeShowWeather: Boolean,
-    location: {
-      type: Object,
-      default: function() {
-        return {};
-      },
-    },
+    location: Object,
   },
   emits: [
     'focusClick',
