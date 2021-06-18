@@ -1,19 +1,26 @@
 <template>
-  <Sidebar
-    v-model:visible="sidebarVisible"
-    class="p-grid nested-grid"
-    :base-z-index="1000"
-    position="full"
-    @click="hideFocus"
+  <n-affix
+    :trigger-top="24"
+    style="margin-left: 24px;"
+    position="absolute"
   >
-    <h1>专注模式</h1>
-    <Vue3CountdownClock />
-  </Sidebar>
+    <n-button
+      text
+      style="font-size: 24px;"
+      @click="hideFocus"
+    >
+      <n-icon>
+        <times-circle-regular-icon />
+      </n-icon>
+    </n-button>
+  </n-affix>
+  <Vue3CountdownClock />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, provide, computed } from 'vue';
-import Sidebar from 'primevue/sidebar';
+import { NAffix, NButton, NIcon } from 'naive-ui';
+import { TimesCircleRegular as TimesCircleRegularIcon } from '@vicons/fa';
 import Vue3CountdownClock from 'vue3-clock-countdown';
 import Moment from 'moment';
 import { useStore } from '/@/store';
@@ -21,20 +28,17 @@ import { useStore } from '/@/store';
 export default defineComponent({
   name: 'FocusViewSub',
   components: {
-    Sidebar,
     Vue3CountdownClock,
+    NAffix,
+    NButton,
+    NIcon,
+    TimesCircleRegularIcon,
   },
   provide() {
     return {
       deadline: computed(() => Moment().add(this.store.state.focusTime, 'minute').format()),
     };
   },
-  props: {
-    visibleFocusView: Boolean,
-  },
-  emits: [
-    'update:visibleFocusView',
-  ],
   setup () {
     const Title = ref('进入倒计时');
     provide('title', Title);
@@ -113,19 +117,9 @@ export default defineComponent({
       store,
     };
   },
-  data() {
-    return {
-      sidebarVisible: false,
-    };
-  },
-  watch: {
-    visibleFocusView(): void {
-      this.sidebarVisible = this.visibleFocusView;
-    },
-  },
   methods: {
     hideFocus() {
-      this.$emit('update:visibleFocusView', this.sidebarVisible);
+      this.$router.back();
       window.electron.ipcRenderer.send('hide-focus-window');
     },
   },
@@ -135,12 +129,4 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "~/styles/default.scss";
-
-@media screen and (max-width: $lg) {
-  ::v-deep(.fc-header-toolbar) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-
 </style>

@@ -19,7 +19,7 @@
     />
     <n-drawer
       v-model:show="visibleFullSetting"
-      :width="drawerWidth"
+      :width="settingDrawerWidth"
       placement="left"
     >
       <n-drawer-content title="设置">
@@ -31,13 +31,17 @@
         />
       </n-drawer-content>
     </n-drawer>
-    <date-view-sub
-      v-model:visibleFullDateView="visibleFullDateView"
-      v-model:date="date"
-    />
-    <focus-view-sub
-      v-model:visibleFocusView="visibleFocusView"
-    />
+    <n-drawer
+      v-model:show="visibleFullDateView"
+      :width="hlDrawerWidth"
+      placement="left"
+    >
+      <n-drawer-content title="黄历">
+        <date-view-sub
+          v-model:date="date"
+        />
+      </n-drawer-content>
+    </n-drawer>
     <event-create-dialog
       v-model:visibleFullDialog="visibleFullDialog"
       v-model:event="event"
@@ -64,7 +68,6 @@ import WeatherSub from '/@/components/WeatherSub.vue';
 import { NDrawer, NDrawerContent } from 'naive-ui';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
-import FocusViewSub from '/@/components/FocusViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
 import EventCreateDialog from '/@/components/EventCreateDialog.vue';
 import EventService from '../../../services/EventService';
@@ -79,7 +82,6 @@ export default defineComponent({
     NDrawerContent,
     SettingSub,
     DateViewSub,
-    FocusViewSub,
     Menu,
     EventCreateDialog,
   },
@@ -103,11 +105,11 @@ export default defineComponent({
       changeShowFestivals: false,
       changeShowWeather: false,
       visibleFullDateView: false,
-      visibleFocusView: false,
       date: new Date(),
       visibleFullDialog: false,
       event: undefined,
-      drawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 2.0,
+      settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 2.0,
+      hlDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
       items: [
         {
           label:'操作',
@@ -196,7 +198,7 @@ export default defineComponent({
     },
     focusClick() {
       this.visibleFullSetting = false;
-      this.visibleFocusView = true;
+      this.$router.push({ path: '/focus' });
     },
     addEventClick(data: any) {
       if (data.id) {
