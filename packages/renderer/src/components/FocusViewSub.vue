@@ -36,11 +36,11 @@ export default defineComponent({
   },
   provide() {
     return {
-      deadline: computed(() => Moment().add(this.store.state.focusTime, 'minute').format()),
+      deadline: computed(() => Moment().add(this.store.state.focusTime, 'second').format()),
     };
   },
   setup () {
-    const Title = ref('进入倒计时');
+    const Title = ref('专注还剩时间');
     provide('title', Title);
 
     const timerStyle = ref({

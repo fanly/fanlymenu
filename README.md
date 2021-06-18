@@ -8,7 +8,7 @@
 5. 退出功能 ✅️
 6. 黄历功能 ✅️
 7. 专注功能 ✅️
-8. 事件功能 ❎️
+8. 事件功能 ❎
 
 ## 系列笔记
 
@@ -33,9 +33,21 @@
 > [Electron+Vue3 MAC 版日历开发记录(10)——env 使用](https://juejin.cn/post/6972177046667526174)
 
 > [Electron+Vue3 MAC 版日历开发记录(11)——Notion事件获取](https://juejin.cn/post/6972551210993713188/)
+
+> [Electron+Vue3 MAC 版日历开发记录(12)——Notion事件创建](https://juejin.cn/post/6972929508185735181)
+
+> [Electron+Vue3 MAC 版日历开发记录(13)——事件功能重构](https://juejin.cn/post/6973289820906848270)
+
+> [Electron+Vue3 MAC 版日历开发记录(14)——Mac打包](https://juejin.cn/post/6973598301157326879)
+
+> [Electron+Vue3 MAC 版日历开发记录(15)——使用 Naive UI重构开始](https://juejin.cn/post/6974024780366708743)
+
+> [Electron+Vue3 MAC 版日历开发记录(16)——全面使用Naive UI 重构 Setting 页面](https://juejin.cn/post/6974413192420130852)
+
+> [Electron+Vue3 MAC 版日历 开发记录(17)——使用 Naive UI重构黄历页面](https://juejin.cn/post/6974784409434062878)
 ## 显示效果
 
-![](https://image.coding01.cn/2021/05/19/16214357613642.jpg)
+![](https://image.coding01.cn/2021/06/18/16239968186195.jpg)
 
 ## 关于我
 
