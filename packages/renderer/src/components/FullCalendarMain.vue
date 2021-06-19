@@ -198,7 +198,7 @@ export default defineComponent({
     },
     focusClick() {
       this.visibleFullSetting = false;
-      this.$router.push({ path: '/focus' });
+      this.$router.replace({ path: '/focus' });
     },
     addEventClick(data: any) {
       if (data.id) {
