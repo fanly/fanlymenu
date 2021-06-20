@@ -1,76 +1,82 @@
 <template>
-  <div>
-    <Toast />
-    <fullcalendar-sub
-      v-model:changeShowFestivals="changeShowFestivals"
-      v-model:changeShowWeather="changeShowWeather"
-      v-model:events="events"
-      v-model:weather="weather"
-      v-model:location="location"
-      @menuClick="menuClick"
-      @dateClick="dateClick"
-      @eventClick="eventClick"
-    />
-    <weather-sub
-      v-if="changeShowWeather"
-      v-model:changeShowWeather="changeShowWeather"
-      v-model:weather="weather"
-      v-model:location="location"
-    />
-    <n-drawer
-      v-model:show="visibleFullSetting"
-      :width="settingDrawerWidth"
-      placement="left"
+  <fullcalendar-sub
+    v-model:changeShowFestivals="changeShowFestivals"
+    v-model:changeShowWeather="changeShowWeather"
+    v-model:events="events"
+    v-model:weather="weather"
+    v-model:location="location"
+    @dateClick="dateClick"
+    @eventClick="eventClick"
+  />
+  <weather-sub
+    v-if="changeShowWeather"
+    v-model:changeShowWeather="changeShowWeather"
+    v-model:weather="weather"
+    v-model:location="location"
+  />
+  <n-dropdown
+    trigger="hover"
+    placement="bottom-start"
+    :options="options"
+    @select="dropdownClick"
+  >
+    <n-button
+      text
+      type="success"
+      :keyboard="false"
+      class="dropdown"
     >
-      <n-drawer-content title="设置">
-        <setting-sub
-          v-model:changeShowWeather="changeShowWeather"
-          v-model:changeShowFestivals="changeShowFestivals"
-          v-model:location="location"
-          @focusClick="focusClick"
-        />
-      </n-drawer-content>
-    </n-drawer>
-    <n-drawer
-      v-model:show="visibleFullDateView"
-      :width="hlDrawerWidth"
-      placement="left"
-    >
-      <n-drawer-content title="黄历">
-        <date-view-sub
-          v-model:date="date"
-        />
-      </n-drawer-content>
-    </n-drawer>
-    <n-drawer
-      v-model:show="visibleECSub"
-      :width="ecDrawerWidth"
-      placement="left"
-    >
-      <event-create-sub
-        v-model:event="event"
-        @addEventClick="addEventClick"
+      <n-icon>
+        <list-icon />
+      </n-icon>
+    </n-button>
+  </n-dropdown>
+  <n-drawer
+    v-model:show="visibleFullSetting"
+    :width="settingDrawerWidth"
+    placement="left"
+  >
+    <n-drawer-content title="设置">
+      <setting-sub
+        v-model:changeShowWeather="changeShowWeather"
+        v-model:changeShowFestivals="changeShowFestivals"
+        v-model:location="location"
+        @focusClick="focusClick"
       />
-    </n-drawer>
-    <Menu
-      id="overlay_tmenu"
-      ref="menu"
-      :model="items"
-      :popup="true"
+    </n-drawer-content>
+  </n-drawer>
+  <n-drawer
+    v-model:show="visibleFullDateView"
+    :width="hlDrawerWidth"
+    placement="left"
+  >
+    <n-drawer-content title="黄历">
+      <date-view-sub
+        v-model:date="date"
+      />
+    </n-drawer-content>
+  </n-drawer>
+  <n-drawer
+    v-model:show="visibleECSub"
+    :width="ecDrawerWidth"
+    placement="left"
+  >
+    <event-create-sub
+      v-model:event="event"
+      @addEventClick="addEventClick"
     />
-  </div>
+  </n-drawer>
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, h } from 'vue';
 import type { FLocation } from '/@/store';
 import { useStore } from '/@/store';
-import 'primeicons/primeicons.css';
-import Toast from 'primevue/toast';
-import Menu from 'primevue/menu';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
-import { NDrawer, NDrawerContent } from 'naive-ui';
+import { NDropdown, NDrawer, NDrawerContent, NButton, NIcon } from 'naive-ui';
+import { List as ListIcon, PowerOff as PowerOffIcon } from '@vicons/fa';
+import { Add12Filled as Add12FilledIcon, LauncherSettings24Filled as LauncherSettings24FilledIcon } from '@vicons/fluent';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
@@ -80,22 +86,23 @@ import EventService from '../../../services/EventService';
 export default defineComponent({
   name: 'FullCalendarMain',
   components: {
-    Toast,
+    NDropdown,
     FullcalendarSub,
     WeatherSub,
     NDrawer,
     NDrawerContent,
     SettingSub,
     DateViewSub,
-    Menu,
     EventCreateSub,
+    NButton,
+    NIcon,
+    ListIcon,
   },
   setup() {
     const eventService = ref(new EventService());
     const events:any = ref([]);
     const visibleFullSetting = ref(false);
     const store = useStore();
-
     return {
       eventService,
       events,
@@ -116,30 +123,40 @@ export default defineComponent({
       settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 2.0,
       hlDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
       ecDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 10.0 * 9,
-      items: [
+      options: [
         {
-          label:'操作',
-          icon:'pi pi-fw pi-pencil',
-          items:[
-            {
-              label:'创建事件',
-              icon:'pi pi-fw pi-plus',
-              command: this.goCreateEventView,
-            },
-            {
-              label:'设置',
-              icon:'pi pi-fw pi-cog',
-              command: this.goSettingView,
-            },
-            {
-              separator:true,
-            },
-            {
-              label:'退出应用',
-              icon:'pi pi-fw pi-power-off',
-              command: this.quit,
-            },
-          ],
+          label: '创建事件',
+          key: 'goCreateEventView',
+          icon() {
+            return h(NIcon, null, {
+              default: () => h(Add12FilledIcon),
+            });
+          },
+          on: this.goCreateEventView,
+        },
+        {
+          label: '设置',
+          key: 'goSettingView',
+          icon() {
+            return h(NIcon, null, {
+              default: () => h(LauncherSettings24FilledIcon),
+            });
+          },
+          on: this.goSettingView,
+        },
+        {
+          type: 'divider',
+          key: 'd1',
+        },
+        {
+          label: '退出应用',
+          key: 'quit',
+          icon() {
+            return h(NIcon, null, {
+              default: () => h(PowerOffIcon),
+            });
+          },
+          on: this.quit,
         },
       ],
     };
@@ -188,9 +205,11 @@ export default defineComponent({
       this.event = event;
       this.visibleECSub = true;
     },
-    menuClick(event: any): void {
-      const menu = this.$refs['menu'] as any;
-      menu.toggle(event);
+    dropdownClick(key: any): void {
+      const result = this.options.find((item: { key: string; }) => item.key == key);
+      if (result !== undefined && result.on !== undefined) {
+        result.on();
+      }
     },
     quit(): void {
       window.electron.ipcRenderer.send('quit');
@@ -211,13 +230,11 @@ export default defineComponent({
       if (data.id) {
         this.eventService.patchEvent(data.id, data.title, data.start, data.end)
         .then(() => {
-          this.$toast.add({severity:'success', summary: 'Success Message', detail:'event submitted', life: 3000});
           this.updateEvents();
         });
       } else {
         this.eventService.postEvent(data.title, data.start, data.end)
         .then(() => {
-          this.$toast.add({severity:'success', summary: 'Success Message', detail:'event submitted', life: 3000});
           this.updateEvents();
         });
       }
@@ -228,4 +245,11 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "~/styles/default.scss";
+
+.dropdown {
+  position: fixed;
+  top: 3px;
+  right: 16px;
+  font-size: 24px;
+}
 </style>

@@ -13,9 +13,7 @@ import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
-import {PrimeIcons} from 'primevue/api';
 import CalendarViewService from '../../../services/CalendarViewService';
-import 'primeicons/primeicons.css';
 
 export default defineComponent({
   name: 'FullcalendarSub',
@@ -34,17 +32,10 @@ export default defineComponent({
     return {
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
-        customButtons: {
-          settingButton: {
-            text: '',
-            icon: PrimeIcons.BARS,
-            click: this.menuClick,
-          },
-        },
         headerToolbar: {
           left: 'prev,next',
           center: 'title',
-          right: 'settingButton',
+          right: '',
         },
         dateClick: this.dateClick,
         eventClick: this.eventClick,
@@ -76,9 +67,6 @@ export default defineComponent({
       // 这种成本可能更高
       // calendar.render();
     },
-    menuClick(event: any) {
-      this.$emit('menuClick', event);
-    },
     dateClick(target: any) {
       console.log(target);
       this.$emit('dateClick', target.date);
@@ -107,13 +95,6 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "~/styles/default.scss";
-
-@media screen and (max-width: $lg) {
-  ::v-deep(.fc-header-toolbar) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
 
 ::v-deep(.fc-daygrid-day-top) {
   display: flex;
