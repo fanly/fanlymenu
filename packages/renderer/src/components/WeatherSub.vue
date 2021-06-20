@@ -1,29 +1,25 @@
 <template>
-  <AvatarGroup class="weather">
-    <Avatar
-      :image="weatherIcon"
-      size="large"
-      shape="circle"
+  <n-badge
+    :value="temp"
+    class="weather"
+  >
+    <n-image
+      width="40"
+      :src="weatherIcon"
     />
-    <Avatar
-      :label="temp"
-      shape="circle"
-      class="weatherTemp"
-    />
-  </AvatarGroup>
+  </n-badge>
 </template>
 
 <script lang="ts">
 import { defineComponent} from 'vue';
-import AvatarGroup from 'primevue/avatargroup';
-import Avatar from 'primevue/avatar';
+import { NBadge, NImage } from 'naive-ui';
 import weathericons from '~/images/weathericons/100.png';
 
 export default defineComponent({
   name: 'WeatherSub',
   components: {
-    AvatarGroup,
-    Avatar,
+    NBadge,
+    NImage,
   },
   props: {
     weather: Object,
@@ -56,8 +52,8 @@ export default defineComponent({
 
 .weather {
   position: absolute;
-  top: 5px;
-  left: 150px;
+  top: 15px;
+  left: 600px;
   z-index: 1000;
 }
 
@@ -66,11 +62,4 @@ export default defineComponent({
   background-color:#ffffff;
   color: var(--primary-color)
 }
-@media screen and (max-width: $lg) {
-  ::v-deep(.fc-header-toolbar) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-
 </style>
