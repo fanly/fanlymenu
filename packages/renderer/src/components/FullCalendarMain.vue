@@ -42,11 +42,16 @@
         />
       </n-drawer-content>
     </n-drawer>
-    <event-create-dialog
-      v-model:visibleFullDialog="visibleFullDialog"
-      v-model:event="event"
-      @addEventClick="addEventClick"
-    />
+    <n-drawer
+      v-model:show="visibleECSub"
+      :width="ecDrawerWidth"
+      placement="left"
+    >
+      <event-create-sub
+        v-model:event="event"
+        @addEventClick="addEventClick"
+      />
+    </n-drawer>
     <Menu
       id="overlay_tmenu"
       ref="menu"
@@ -69,7 +74,7 @@ import { NDrawer, NDrawerContent } from 'naive-ui';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
-import EventCreateDialog from '/@/components/EventCreateDialog.vue';
+import EventCreateSub from '/@/components/EventCreateSub.vue';
 import EventService from '../../../services/EventService';
 
 export default defineComponent({
@@ -83,7 +88,7 @@ export default defineComponent({
     SettingSub,
     DateViewSub,
     Menu,
-    EventCreateDialog,
+    EventCreateSub,
   },
   setup() {
     const eventService = ref(new EventService());
@@ -106,10 +111,11 @@ export default defineComponent({
       changeShowWeather: false,
       visibleFullDateView: false,
       date: new Date(),
-      visibleFullDialog: false,
+      visibleECSub: false,
       event: undefined,
       settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 2.0,
       hlDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
+      ecDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 10.0 * 9,
       items: [
         {
           label:'操作',
@@ -180,7 +186,7 @@ export default defineComponent({
     },
     eventClick(event: any): void {
       this.event = event;
-      this.visibleFullDialog = true;
+      this.visibleECSub = true;
     },
     menuClick(event: any): void {
       const menu = this.$refs['menu'] as any;
@@ -191,7 +197,7 @@ export default defineComponent({
     },
     goCreateEventView(): void {
       this.event = undefined;
-      this.visibleFullDialog = true;
+      this.visibleECSub = true;
     },
     goSettingView(): void {
       this.visibleFullSetting = true;
@@ -201,6 +207,7 @@ export default defineComponent({
       this.$router.replace({ path: '/focus' });
     },
     addEventClick(data: any) {
+      this.visibleECSub = false;
       if (data.id) {
         this.eventService.patchEvent(data.id, data.title, data.start, data.end)
         .then(() => {
