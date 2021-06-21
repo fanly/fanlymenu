@@ -36,25 +36,21 @@
     :width="settingDrawerWidth"
     placement="left"
   >
-    <n-drawer-content title="设置">
-      <setting-sub
-        v-model:changeShowWeather="changeShowWeather"
-        v-model:changeShowFestivals="changeShowFestivals"
-        v-model:location="location"
-        @focusClick="focusClick"
-      />
-    </n-drawer-content>
+    <setting-sub
+      v-model:changeShowWeather="changeShowWeather"
+      v-model:changeShowFestivals="changeShowFestivals"
+      v-model:location="location"
+      @focusClick="focusClick"
+    />
   </n-drawer>
   <n-drawer
     v-model:show="visibleFullDateView"
     :width="hlDrawerWidth"
     placement="left"
   >
-    <n-drawer-content title="黄历">
-      <date-view-sub
-        v-model:date="date"
-      />
-    </n-drawer-content>
+    <date-view-sub
+      v-model:date="date"
+    />
   </n-drawer>
   <n-drawer
     v-model:show="visibleECSub"
@@ -74,7 +70,7 @@ import type { FLocation } from '/@/store';
 import { useStore } from '/@/store';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
-import { NDropdown, NDrawer, NDrawerContent, NButton, NIcon } from 'naive-ui';
+import { NDropdown, NDrawer, NButton, NIcon } from 'naive-ui';
 import { List as ListIcon, PowerOff as PowerOffIcon } from '@vicons/fa';
 import { Add12Filled as Add12FilledIcon, LauncherSettings24Filled as LauncherSettings24FilledIcon } from '@vicons/fluent';
 import SettingSub from '/@/components/SettingSub.vue';
@@ -90,7 +86,6 @@ export default defineComponent({
     FullcalendarSub,
     WeatherSub,
     NDrawer,
-    NDrawerContent,
     SettingSub,
     DateViewSub,
     EventCreateSub,
@@ -185,6 +180,7 @@ export default defineComponent({
   methods: {
     updateEvents(): any {
       this.eventService.getEvents().then((data) => {
+        console.log(data);
         this.events = data;
       });
     },

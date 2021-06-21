@@ -1,15 +1,19 @@
 <template>
   <full-calendar
     ref="fullcalendar"
-    :events="events"
     :options="calendarOptions"
-  />
+  >
+    <template #eventContent="arg">
+      <i>{{ arg.event.title }}</i>
+    </template>
+  </full-calendar>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import '@fullcalendar/core/vdom'; // solve problem with Vite
 import FullCalendar from '@fullcalendar/vue3';
+import type { CalendarOptions, DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
@@ -21,10 +25,13 @@ export default defineComponent({
     FullCalendar,
   },
   props: {
-    events: Array,
     changeShowFestivals: Boolean,
     changeShowWeather: Boolean,
-    weather: {},
+    weather: Object,
+    events: {
+      type: Array,
+      default: [] as EventInput[],
+    },
   },
   setup() {
   },
@@ -37,14 +44,16 @@ export default defineComponent({
           center: 'title',
           right: '',
         },
-        dateClick: this.dateClick,
+        selectable: true,
+        select: this.dateClick,
         eventClick: this.eventClick,
+        eventChange: this.updateView,
         editable: false,
-        height: 680,
-        aspectRatio: 1, // 单元格宽高的比例，宽是高的2倍
+        // height: Number(import.meta.env.VITE_APP_HEIGHT) - 10,
+        aspectRatio: 1.31, // 单元格宽高的比例，宽是高的2倍
         views: this.dayCellNewContent(),
         locale: zhLocale,
-      },
+      } as CalendarOptions,
     };
   },
   watch: {
@@ -57,23 +66,31 @@ export default defineComponent({
     weather(): void {
       this.updateView();
     },
+    events(): void {
+      const calendarArray = this.$refs['fullcalendar'] as any;
+      const calendarApi = calendarArray.getApi();
+      // this.events?.forEach((event: any) => {
+      //   return calendarApi.addEvent(event);
+      // })
+      // const eventsTemp: EventInput[] = this.events;
+      calendarApi.addEventSource(this.events);
+    },
   },
   methods: {
     updateView() {
-      let calendarArray = this.$refs['fullcalendar'] as any;
-      let calendar = calendarArray['$options']['calendar'];
+      const calendarArray = this.$refs['fullcalendar'] as any;
+      const calendarApi = calendarArray.getApi();
+      console.log(calendarApi);
       const viewContent = this.dayCellNewContent();
-      calendar.changeView('dayGridMonth', viewContent['dayGridMonth']);
+      calendarApi.changeView('dayGridMonth', viewContent['dayGridMonth']);
       // 这种成本可能更高
       // calendar.render();
     },
-    dateClick(target: any) {
-      console.log(target);
-      this.$emit('dateClick', target.date);
+    dateClick(selectInfo: DateSelectArg) {
+      this.$emit('dateClick', selectInfo.start);
     },
-    eventClick(target: any) {
-      console.log(target);
-      this.$emit('eventClick', target.event);
+    eventClick(clickInfo: EventClickArg) {
+      this.$emit('eventClick', clickInfo.event);
     },
     dayCellNewContent() {
       const that = this;

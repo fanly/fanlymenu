@@ -1,86 +1,92 @@
 <template>
-  <n-layout
-    has-sider
-    :style="layoutStyle"
+  <n-drawer-content
+    title="黄历"
+    closable
   >
-    <n-layout-sider
-      bordered
-      :width="150"
+    <n-layout
+      has-sider
+      :style="layoutStyle"
     >
-      <n-grid
-        x-gap="6"
-        :cols="2"
-        style="height: 100%;"
-      >
-        <n-gi>
-          <div class="nongliString">
-            {{ lunarData.nongliString }}
-          </div>
-        </n-gi>
-        <n-gi style="padding: 40px 0;">
-          <div
-            v-for="item in lunarData.ganzhi"
-            :key="item"
-            class="onecn"
-          >
-            {{ item }}
-          </div>
-        </n-gi>
-      </n-grid>
-    </n-layout-sider>
-    <n-layout :style="layoutStyle">
-      <n-layout-header bordered>
-        <div>
-          <n-tag
-            type="success"
-          >
-            宜
-          </n-tag>
-          <n-tag
-            v-for="item in lunarData.yi"
-            :key="item"
-            type="success"
-          >
-            {{ item }}
-          </n-tag>
-        </div>
-      </n-layout-header>
-      <n-layout-content content-style="padding: 24px; ">
-        {{ lunarData.yangliString }}
-      </n-layout-content>
-      <n-layout-footer
+      <n-layout-sider
         bordered
-        position="absolute"
+        :width="150"
       >
-        <div>
-          <n-tag
-            type="error"
-            round
-          >
-            忌
-          </n-tag>
-          <n-tag
-            v-for="item in lunarData.ji"
-            :key="item"
-            type="error"
-            round
-          >
-            {{ item }}
-          </n-tag>
-        </div>
-      </n-layout-footer>
+        <n-grid
+          x-gap="6"
+          :cols="2"
+          style="height: 100%;"
+        >
+          <n-gi>
+            <div class="nongliString">
+              {{ lunarData.nongliString }}
+            </div>
+          </n-gi>
+          <n-gi style="padding: 40px 0;">
+            <div
+              v-for="item in lunarData.ganzhi"
+              :key="item"
+              class="onecn"
+            >
+              {{ item }}
+            </div>
+          </n-gi>
+        </n-grid>
+      </n-layout-sider>
+      <n-layout :style="layoutStyle">
+        <n-layout-header bordered>
+          <div>
+            <n-tag
+              type="success"
+            >
+              宜
+            </n-tag>
+            <n-tag
+              v-for="item in lunarData.yi"
+              :key="item"
+              type="success"
+            >
+              {{ item }}
+            </n-tag>
+          </div>
+        </n-layout-header>
+        <n-layout-content content-style="padding: 24px; ">
+          {{ lunarData.yangliString }}
+        </n-layout-content>
+        <n-layout-footer
+          bordered
+          position="absolute"
+        >
+          <div>
+            <n-tag
+              type="error"
+              round
+            >
+              忌
+            </n-tag>
+            <n-tag
+              v-for="item in lunarData.ji"
+              :key="item"
+              type="error"
+              round
+            >
+              {{ item }}
+            </n-tag>
+          </div>
+        </n-layout-footer>
+      </n-layout>
     </n-layout>
-  </n-layout>
+  </n-drawer-content>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { NGrid, NGi, NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NLayoutFooter, NTag } from 'naive-ui';
+import { NDrawerContent, NGrid, NGi, NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NLayoutFooter, NTag } from 'naive-ui';
 import LunarService from '../../../services/LunarService';
 
 export default defineComponent({
   name: 'DateViewSub',
   components: {
+    NDrawerContent,
     NGrid,
     NGi,
     NLayout,

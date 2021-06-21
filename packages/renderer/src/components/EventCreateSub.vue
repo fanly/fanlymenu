@@ -29,7 +29,8 @@
 
 <script lang="ts">
 import { ref, defineComponent} from 'vue';
-import {NSpace, NInput, NDatePicker, NButton, NDrawerContent } from 'naive-ui';
+import { NSpace, NInput, NDatePicker, NButton, NDrawerContent } from 'naive-ui';
+import { EventApi } from '@fullcalendar/vue3';
 import EventService from '../../../services/EventService';
 
 export default defineComponent({
@@ -42,7 +43,10 @@ export default defineComponent({
     NDrawerContent,
   },
   props: {
-    event: Object,
+    event: {
+      type: EventApi,
+      default: null,
+    },
   },
   emits: [
     'addEventClick',
@@ -60,18 +64,15 @@ export default defineComponent({
       dates: [Number(Date.now()), Number(Date.now())] as [number, number],
     };
   },
-  watch: {
-    event(): void {
-      if (this.event != null) {
-        this.eventText = this.event.title;
-        this.dates = [this.event.start, this.event.end];
-      } else {
-        this.eventText = '';
-        this.dates = [Number(Date.now()), Number(Date.now())];
-      }
-    },
-  },
   mounted() {
+    console.log(this.event);
+    if (this.event != null) {
+      this.eventText = this.event.title;
+      this.dates = [Number(this.event.start), Number(this.event.end || this.event.start)];
+    } else {
+      this.eventText = '';
+      this.dates = [Number(Date.now()), Number(Date.now())];
+    }
   },
   methods: {
     add(): void {
