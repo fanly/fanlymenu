@@ -8,11 +8,12 @@ export default class ClockService {
   format: any;
   onTickHandler: any;
   intervalId: any;
+  params: any;
   constructor() {
     Moment.locale(app.getLocale());
-    // this.setFormat("MM/DD HH:mm:ss");
-    // lll
-    this.setFormat('MMMDo dddd HH:mm:ss');
+    this.params = {};
+    // lll MMMDo dddd HH:mm:ss
+    this.setFormat('MMMDo HH:mm');
     this.start();
   }
 
@@ -54,9 +55,43 @@ export default class ClockService {
     return this;
   }
 
+  /* {
+    trayFestivalsModel: true,
+    trayWeatherModel: false,
+    trayWeekModel: true,
+    traySecondsModel: true
+  }*/
+  setParams(params: any) {
+    this.params = params;
+
+    // MMMDo dddd HH:mm:ss
+    let default_format = 'MMMDo ';
+
+    if (this.params.trayWeekModel) {
+      default_format = default_format.concat('dddd ');
+    }
+
+    default_format = default_format.concat('HH:mm');
+
+    if (this.params.traySecondsModel) {
+      default_format = default_format.concat(':ss');
+    }
+
+    return this.setFormat(default_format);
+  }
+
+  getParams(): any {
+    return this.params;
+  }
+
   toString(): string {
-    const lunarService = new LunarService();
-    const dayTextInChinese = lunarService.showNongliData(true);
-    return dayTextInChinese + ' ' + Moment().format(this.getFormat());
+    let showString = '';
+    if (this.params.trayFestivalsModel) {
+      const lunarService = new LunarService();
+      const dayTextInChinese = lunarService.showNongliData(true);
+      showString = showString.concat(...[dayTextInChinese, ' ']);
+    }
+
+    return showString.concat(Moment().format(this.getFormat()));
   }
 }

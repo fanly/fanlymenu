@@ -102,6 +102,11 @@ export default class App {
     return this;
   }
 
+  setClockParams(params: any): this {
+    this.clockService.setParams(params);
+    return this;
+  }
+
   setPosition(x: number, y: number, centerToX = true): this {
     this.window.setPosition(
       centerToX ? Math.round(x - this.window.getSize()[0] / 2) : x,

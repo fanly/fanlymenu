@@ -30,6 +30,13 @@ ipcMain.on('quit', () => {
   app.quit();
 });
 
+ipcMain.on('updateTraySetting', (_, params) => {
+  if (mainApp == null) {
+    mainApp = new App();
+  }
+  mainApp.setClockParams(params);
+});
+
 // 打开专注模式界面
 ipcMain.on('show-focus-window', () => {
   if (mainApp == null) {
