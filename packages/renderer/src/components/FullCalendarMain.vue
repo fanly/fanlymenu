@@ -32,32 +32,23 @@
     </n-button>
   </n-dropdown>
   <n-drawer
-    v-model:show="visibleFullSetting"
+    v-model:show="showDrawer"
     :width="settingDrawerWidth"
     placement="left"
   >
     <setting-sub
+      v-if="visibleFullSetting"
       v-model:changeShowWeather="changeShowWeather"
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:location="location"
       @focusClick="focusClick"
     />
-  </n-drawer>
-  <n-drawer
-    v-model:show="visibleFullDateView"
-    :width="hlDrawerWidth"
-    placement="left"
-  >
     <date-view-sub
+      v-if="visibleFullDateView"
       v-model:date="date"
     />
-  </n-drawer>
-  <n-drawer
-    v-model:show="visibleECSub"
-    :width="ecDrawerWidth"
-    placement="left"
-  >
     <event-create-sub
+      v-if="visibleECSub"
       v-model:event="event"
       @addEventClick="addEventClick"
     />
@@ -115,9 +106,7 @@ export default defineComponent({
       date: new Date(),
       visibleECSub: false,
       event: undefined,
-      settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 2.0,
-      hlDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
-      ecDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 10.0 * 9,
+      settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
       options: [
         {
           label: '创建事件',
@@ -156,6 +145,18 @@ export default defineComponent({
       ],
     };
   },
+  computed: {
+    showDrawer: {
+      get(): boolean {
+        return this.visibleFullSetting || this.visibleFullDateView || this.visibleECSub;
+      },
+      set(newValue: boolean) {
+        this.visibleFullSetting = newValue;
+        this.visibleFullDateView = newValue;
+        this.visibleECSub = newValue;
+      },
+    },
+  },
   watch: {
     changeShowFestivals(newval) {
       this.store.commit('changeShowFestivals', newval);
@@ -180,7 +181,6 @@ export default defineComponent({
   methods: {
     updateEvents(): any {
       this.eventService.getEvents().then((data) => {
-        console.log(data);
         this.events = data;
       });
     },
