@@ -48,6 +48,41 @@
         </n-space>
       </n-tab-pane>
       <n-tab-pane
+        name="eventSetting"
+        tab="事件设置"
+      >
+        <n-form>
+          <n-form-item-row label="NOTION_API_KEY">
+            <n-input
+              v-model:value="notion_api_key"
+            />
+          </n-form-item-row>
+          <n-form-item-row label="NOTION_DATABASE_ID">
+            <n-input
+              v-model:value="notion_database_id"
+              :minlength="32"
+              :maxlength="32"
+            />
+          </n-form-item-row>
+        </n-form>
+        <n-button
+          type="primary"
+          block
+          @click="updateNotion"
+        >
+          更新
+        </n-button>
+        <n-divider dashed />
+        <n-button
+          type="info"
+          :disabled="createNotionDisabled"
+          block
+          @click="$emit('goCreateEventView')"
+        >
+          创建新事件
+        </n-button>
+      </n-tab-pane>
+      <n-tab-pane
         name="menuSetting"
         tab="菜单栏设置"
       >
@@ -108,9 +143,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent} from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useStore } from '/@/store';
-import { NDrawerContent, NTabs, NTabPane, NSpace, NSwitch, NInputNumber, NButton, NIcon, NSlider } from 'naive-ui';
+import { NDrawerContent, NTabs, NTabPane, NSpace, NSwitch, NForm, NFormItemRow, NInput, NInputNumber, NButton, NDivider, NIcon, NSlider } from 'naive-ui';
 import { CaretRight as CaretRightIcon } from '@vicons/fa';
 
 export default defineComponent({
@@ -121,8 +156,12 @@ export default defineComponent({
     NTabPane,
     NSpace,
     NSwitch,
+    NForm,
+    NFormItemRow,
+    NInput,
     NInputNumber,
     NButton,
+    NDivider,
     NIcon,
     CaretRightIcon,
     NSlider,
@@ -134,6 +173,8 @@ export default defineComponent({
   },
   emits: [
     'focusClick',
+    'updateNotionClick',
+    'goCreateEventView',
     'update:visibleFullSetting',
     'update:changeShowFestivals',
     'update:changeShowWeather',
@@ -141,8 +182,12 @@ export default defineComponent({
   ],
   setup() {
     const store = useStore();
+    const notion_api_key = ref(store.state.notion.api_key);
+    const notion_database_id = ref(store.state.notion.database_id);
     return {
       store,
+      notion_api_key,
+      notion_database_id,
     };
   },
   data() {
@@ -162,6 +207,9 @@ export default defineComponent({
     // 计算属性的 getter
     focusLabel(): string {
       return '开始专注' + this.focus_time + '分钟';
+    },
+    createNotionDisabled(): boolean {
+      return this.notion_database_id == '' || this.notion_api_key == '';
     },
   },
   mounted() {
@@ -186,6 +234,16 @@ export default defineComponent({
         trayWeatherModel: this.trayWeatherModel,
         trayWeekModel: this.trayWeekModel,
         traySecondsModel: this.traySecondsModel,
+      });
+    },
+    updateNotion(): void {
+      this.store.commit('changeNotion', {
+        api_key: this.notion_api_key,
+        database_id: this.notion_database_id,
+      });
+      this.$emit('updateNotionClick', {
+        api_key: this.notion_api_key,
+        database_id: this.notion_database_id,
       });
     },
     focus(): void {

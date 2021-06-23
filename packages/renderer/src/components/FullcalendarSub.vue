@@ -69,10 +69,6 @@ export default defineComponent({
     events(): void {
       const calendarArray = this.$refs['fullcalendar'] as any;
       const calendarApi = calendarArray.getApi();
-      // this.events?.forEach((event: any) => {
-      //   return calendarApi.addEvent(event);
-      // })
-      // const eventsTemp: EventInput[] = this.events;
       calendarApi.addEventSource(this.events);
     },
   },

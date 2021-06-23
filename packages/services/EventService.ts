@@ -2,12 +2,11 @@
 import axios from 'axios';
 import wrapper from 'axios-cache-plugin';
 export default class EventService {
-  headers: any;
-  constructor() {
-    this.headers = {
-      'Notion-Version': import.meta.env.VITE_NOtion_VERSION,
-      'Authorization': 'Bearer '+ import.meta.env.VITE_NOTION_KEY,
-    };
+  notion_api_key: string;
+  notion_database_id: string;
+  constructor(notion_api_key: string, notion_database_id: string) {
+    this.notion_api_key = notion_api_key;
+    this.notion_database_id = notion_database_id;
   }
 
   /**
@@ -24,26 +23,10 @@ export default class EventService {
       const res = await http({
         url: import.meta.env.VITE_NOTION_PAGE_API,
         method: 'post',
-        headers: this.headers,
+        headers: this.getHeaders(),
         data: {
-          'parent': { 'type': 'database_id', 'database_id': import.meta.env.VITE_NOTION_DATABASE_ID },
-          'properties': {
-            'title': {
-              'type': 'rich_text',
-              'rich_text': [{
-                'type': 'text',
-                'text': { 'content': title },
-              }],
-            },
-            'start': {
-              'type': 'date',
-              'date': { 'start': start },
-            },
-            'end': {
-              'type': 'date',
-              'date': { 'start': end },
-            },
-          },
+          'parent': { 'type': 'database_id', 'database_id': this.notion_database_id },
+          'properties': this.getParams(title, start, end),
         },
       });
 
@@ -65,25 +48,9 @@ export default class EventService {
       const res = await http({
         url: import.meta.env.VITE_NOTION_PAGE_API + '/' + id,
         method: 'patch',
-        headers: this.headers,
+        headers: this.getHeaders(),
         data: {
-          'properties': {
-            'title': {
-              'type': 'rich_text',
-              'rich_text': [{
-                'type': 'text',
-                'text': { 'content': title },
-              }],
-            },
-            'start': {
-              'type': 'date',
-              'date': { 'start': start },
-            },
-            'end': {
-              'type': 'date',
-              'date': { 'start': end },
-            },
-          },
+          'properties': this.getParams(title, start, end),
         },
       });
 
@@ -96,9 +63,9 @@ export default class EventService {
       ttl: 60000, //ms
     });
     const res = await http({
-      url: import.meta.env.VITE_NOTION_DATABASE_API + import.meta.env.VITE_NOTION_DATABASE_ID + '/query',
+      url: import.meta.env.VITE_NOTION_DATABASE_API + this.notion_database_id + '/query',
       method: 'post',
-      headers: this.headers,
+      headers: this.getHeaders(),
     });
 
     return this.list2Events(res.data.results);
@@ -115,5 +82,53 @@ export default class EventService {
     });
 
     return events;
+  }
+
+  // 增加 set
+  setApiKey(notion_api_key: string): this {
+    if (notion_api_key === '') {
+      return this;
+    }
+    this.notion_api_key = notion_api_key;
+    return this;
+  }
+
+  setDatabaseId(notion_database_id: string): this {
+    if (notion_database_id === '') {
+      return this;
+    }
+    this.notion_database_id = notion_database_id;
+    return this;
+  }
+
+  getHeaders(): any {
+    return {
+      'Notion-Version': import.meta.env.VITE_NOtion_VERSION,
+      'Authorization': 'Bearer '+ this.notion_api_key,
+    };
+  }
+
+  getParams(
+    title: string,
+    start: Date,
+    end: Date,
+  ): any {
+    return {
+      'title': {
+        'type': 'rich_text',
+        'rich_text': [{
+          'type': 'text',
+          'text': { 'content': title },
+        }],
+      },
+      'start': {
+        'type': 'date',
+        'date': { 'start': start },
+      },
+      'end': {
+        'type': 'date',
+        'date': { 'start': end },
+      },
+    };
   }
 }

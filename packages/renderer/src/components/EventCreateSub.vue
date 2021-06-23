@@ -28,10 +28,9 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 import { NSpace, NInput, NDatePicker, NButton, NDrawerContent } from 'naive-ui';
 import { EventApi } from '@fullcalendar/vue3';
-import EventService from '../../../services/EventService';
 
 export default defineComponent({
   name: 'EventCreateSub',
@@ -51,12 +50,6 @@ export default defineComponent({
   emits: [
     'addEventClick',
   ],
-  setup() {
-    const eventService = ref(new EventService());
-    return {
-      eventService,
-    };
-  },
   data() {
     return {
       locationStr: '',
@@ -65,7 +58,6 @@ export default defineComponent({
     };
   },
   mounted() {
-    console.log(this.event);
     if (this.event != null) {
       this.eventText = this.event.title;
       this.dates = [Number(this.event.start), Number(this.event.end || this.event.start)];

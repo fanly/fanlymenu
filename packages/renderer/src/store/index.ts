@@ -8,10 +8,16 @@ export interface FLocation {
   latitude: number,  // 纬度
 }
 
+export interface FNotion {
+  api_key: string, // api key
+  database_id: string,  // 数据库 id
+}
+
 export interface State {
   showFestivals: boolean,
   showWeather: boolean,
   location: FLocation,
+  notion: FNotion,
   focusTime: number, // 专注时间
 }
 
@@ -30,6 +36,10 @@ export const store = createStore<State>({
       longitude: 114.52,
       latitude: 38.02,
     } as FLocation,
+    notion: {
+      api_key: 'secret_OeWua2be357DrrN0y47obPNbzY4KWk6NEoGHoEDd8BA',
+      database_id: '577b3228cd15411782430fefbb87d601',
+    } as FNotion,
     focusTime: 40,
   },
   mutations: {
@@ -45,6 +55,12 @@ export const store = createStore<State>({
         latitude: location.latitude,
       } as FLocation;
     },
+    changeNotion(state, notion) {
+      state.notion = {
+        api_key: notion.api_key,
+        database_id: notion.database_id,
+      } as FNotion;
+    },
     changeFocusTime(state, focusTime) {
       state.focusTime = focusTime;
     },
@@ -58,6 +74,9 @@ export const store = createStore<State>({
     },
     changeLocation({ commit }) {
       commit('changeLocation');
+    },
+    changeNotion({ commit }) {
+      commit('changeNotion');
     },
   },
   plugins: [dataState],

@@ -42,6 +42,8 @@
       v-model:changeShowFestivals="changeShowFestivals"
       v-model:location="location"
       @focusClick="focusClick"
+      @updateNotionClick="updateEvents"
+      @goCreateEventView="goCreateEventView"
     />
     <date-view-sub
       v-if="visibleFullDateView"
@@ -63,7 +65,7 @@ import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
 import { NDropdown, NDrawer, NButton, NIcon } from 'naive-ui';
 import { List as ListIcon, PowerOff as PowerOffIcon } from '@vicons/fa';
-import { Add12Filled as Add12FilledIcon, LauncherSettings24Filled as LauncherSettings24FilledIcon } from '@vicons/fluent';
+import { LauncherSettings24Filled as LauncherSettings24FilledIcon } from '@vicons/fluent';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
@@ -85,10 +87,13 @@ export default defineComponent({
     ListIcon,
   },
   setup() {
-    const eventService = ref(new EventService());
     const events:any = ref([]);
     const visibleFullSetting = ref(false);
     const store = useStore();
+    const eventService = ref(new EventService(
+      store.state.notion.api_key,
+      store.state.notion.database_id,
+    ));
     return {
       eventService,
       events,
@@ -108,16 +113,6 @@ export default defineComponent({
       event: undefined,
       settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
       options: [
-        {
-          label: '创建事件',
-          key: 'goCreateEventView',
-          icon() {
-            return h(NIcon, null, {
-              default: () => h(Add12FilledIcon),
-            });
-          },
-          on: this.goCreateEventView,
-        },
         {
           label: '设置',
           key: 'goSettingView',
@@ -179,8 +174,14 @@ export default defineComponent({
     this.setShowData();
   },
   methods: {
-    updateEvents(): any {
-      this.eventService.getEvents().then((data) => {
+    updateEvents(
+      notion_api_key = '',
+      notion_database_id = '',
+    ): any {
+      this.eventService
+      .setApiKey(notion_api_key)
+      .setDatabaseId(notion_database_id)
+      .getEvents().then((data) => {
         this.events = data;
       });
     },
@@ -211,14 +212,16 @@ export default defineComponent({
       window.electron.ipcRenderer.send('quit');
     },
     goCreateEventView(): void {
+      this.showDrawer = false;
       this.event = undefined;
       this.visibleECSub = true;
     },
     goSettingView(): void {
+      this.showDrawer = false;
       this.visibleFullSetting = true;
     },
     focusClick() {
-      this.visibleFullSetting = false;
+      this.showDrawer = false;
       this.$router.replace({ path: '/focus' });
     },
     addEventClick(data: any) {
