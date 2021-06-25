@@ -5,13 +5,33 @@
   >
     <n-tabs
       default-value="normalSetting"
-      size="large"
+      size="medium"
+      style="--tab-gap: 18px;"
     >
       <n-tab-pane
         name="normalSetting"
         tab="通用设置"
+        display-directive="show"
       >
         <n-space vertical>
+          <n-radio-group
+            v-model:value="themeValue"
+            name="themeGroup"
+            @update-value="updateTheme"
+          >
+            <n-radio-button
+              key="lightTheme"
+              value="lightTheme"
+            >
+              浅色主题
+            </n-radio-button>
+            <n-radio-button
+              key="darkTheme"
+              value="darkTheme"
+            >
+              深色主题
+            </n-radio-button>
+          </n-radio-group>
           <h4>获取节假日</h4>
           <n-switch
             v-model:value="inputSwitchFestivalsModel"
@@ -50,6 +70,7 @@
       <n-tab-pane
         name="eventSetting"
         tab="事件设置"
+        display-directive="show"
       >
         <n-form>
           <n-form-item-row label="NOTION_API_KEY">
@@ -85,37 +106,50 @@
       <n-tab-pane
         name="menuSetting"
         tab="菜单栏设置"
+        display-directive="show"
       >
-        <n-space vertical>
-          <h4>显示节假日(农历)</h4>
-          <n-switch
-            v-model:value="trayFestivalsModel"
-            size="large"
-            @update-value="updateTraySetting"
-          />
-          <h4>显示天气预报</h4>
-          <n-switch
-            v-model:value="trayWeatherModel"
-            size="large"
-            @update-value="updateTraySetting"
-          />
-          <h4>显示星期</h4>
-          <n-switch
-            v-model:value="trayWeekModel"
-            size="large"
-            @update-value="updateTraySetting"
-          />
-          <h4>显示秒钟</h4>
-          <n-switch
-            v-model:value="traySecondsModel"
-            size="large"
-            @update-value="updateTraySetting"
-          />
-        </n-space>
+        <n-grid
+          :x-gap="12"
+          :cols="2"
+        >
+          <n-grid-item>
+            <h4>显示节假日(农历)</h4>
+            <n-switch
+              v-model:value="trayFestivalsModel"
+              size="large"
+              @update-value="updateTraySetting"
+            />
+          </n-grid-item>
+          <n-grid-item>
+            <h4>显示天气预报</h4>
+            <n-switch
+              v-model:value="trayWeatherModel"
+              size="large"
+              @update-value="updateTraySetting"
+            />
+          </n-grid-item>
+          <n-grid-item>
+            <h4>显示星期</h4>
+            <n-switch
+              v-model:value="trayWeekModel"
+              size="large"
+              @update-value="updateTraySetting"
+            />
+          </n-grid-item>
+          <n-grid-item>
+            <h4>显示秒钟</h4>
+            <n-switch
+              v-model:value="traySecondsModel"
+              size="large"
+              @update-value="updateTraySetting"
+            />
+          </n-grid-item>
+        </n-grid>
       </n-tab-pane>
       <n-tab-pane
         name="focusSetting"
         tab="专注设置"
+        display-directive="show"
       >
         <n-space vertical>
           <n-slider
@@ -145,7 +179,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useStore } from '/@/store';
-import { NDrawerContent, NTabs, NTabPane, NSpace, NSwitch, NForm, NFormItemRow, NInput, NInputNumber, NButton, NDivider, NIcon, NSlider } from 'naive-ui';
+import { NDrawerContent, NTabs, NTabPane, NSpace, NRadioGroup, NRadioButton, NSwitch, NForm, NFormItemRow, NInput, NInputNumber, NButton, NDivider, NIcon, NSlider, NGrid, NGridItem } from 'naive-ui';
 import { CaretRight as CaretRightIcon } from '@vicons/fa';
 
 export default defineComponent({
@@ -155,6 +189,8 @@ export default defineComponent({
     NTabs,
     NTabPane,
     NSpace,
+    NRadioGroup,
+    NRadioButton,
     NSwitch,
     NForm,
     NFormItemRow,
@@ -165,6 +201,8 @@ export default defineComponent({
     NIcon,
     CaretRightIcon,
     NSlider,
+    NGrid,
+    NGridItem,
   },
   props: {
     changeShowFestivals: Boolean,
@@ -182,10 +220,12 @@ export default defineComponent({
   ],
   setup() {
     const store = useStore();
+    const themeValue = ref(store.state.themeValue);
     const notion_api_key = ref(store.state.notion.api_key);
     const notion_database_id = ref(store.state.notion.database_id);
     return {
       store,
+      themeValue,
       notion_api_key,
       notion_database_id,
     };
@@ -216,6 +256,9 @@ export default defineComponent({
     this.focus_time = this.store.state.focusTime;
   },
   methods: {
+    updateTheme(value: any): void {
+      this.store.commit('changeThemeValue', value);
+    },
     updateFestivalsModel(value: boolean): void {
       this.$emit('update:changeShowFestivals', value);
     },

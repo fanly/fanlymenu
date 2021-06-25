@@ -14,6 +14,7 @@ export interface FNotion {
 }
 
 export interface State {
+  themeValue: string,
   showFestivals: boolean,
   showWeather: boolean,
   location: FLocation,
@@ -30,6 +31,7 @@ const dataState = createPersistedState({
 
 export const store = createStore<State>({
   state: {
+    themeValue: 'lightTheme',
     showFestivals: false,
     showWeather: false,
     location: {
@@ -37,12 +39,15 @@ export const store = createStore<State>({
       latitude: 38.02,
     } as FLocation,
     notion: {
-      api_key: 'secret_OeWua2be357DrrN0y47obPNbzY4KWk6NEoGHoEDd8BA',
-      database_id: '577b3228cd15411782430fefbb87d601',
+      api_key: '',
+      database_id: '',
     } as FNotion,
     focusTime: 40,
   },
   mutations: {
+    changeThemeValue(state, themeValue) {
+      state.themeValue = themeValue;
+    },
     changeShowFestivals(state) {
       state.showFestivals = !state.showFestivals;
     },
@@ -66,6 +71,9 @@ export const store = createStore<State>({
     },
   },
   actions: {
+    changeThemeValue({ commit }) {
+      commit('changeThemeValue');
+    },
     changeShowFestivals({ commit }) {
       commit('changeShowFestivals');
     },

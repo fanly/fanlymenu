@@ -12,6 +12,7 @@
       <n-date-picker
         v-model:value="dates"
         type="daterange"
+        size="small"
         :actions="['confirm']"
         clearable
       />
