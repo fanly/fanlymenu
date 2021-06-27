@@ -90,7 +90,7 @@ export const store = createStore<State>({
   plugins: [dataState],
 });
 
-export function useStore () {
+export function useStore (): Store<State> {
   return baseUseStore(key);
 }
 

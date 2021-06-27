@@ -1,16 +1,25 @@
 <template>
-  <full-calendar
-    ref="fullcalendar"
-    :options="calendarOptions"
-  >
-    <template #eventContent="arg">
-      <i>{{ arg.event.title }}</i>
-    </template>
-  </full-calendar>
+  <n-config-provider :theme="themeValue">
+    <n-card>
+      <n-el
+        style="color: var(--primary-color); transition: .3s var(--cubic-bezier-ease-in-out);"
+      >
+        <full-calendar
+          ref="fullcalendar"
+          :options="calendarOptions"
+          style="color: var(--primary-color); transition: .3s var(--cubic-bezier-ease-in-out);"
+        >
+          <template #eventContent="arg">
+            <i>{{ arg.event.title }}</i>
+          </template>
+        </full-calendar>
+      </n-el>
+    </n-card>
+  </n-config-provider>
 </template>
-
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { darkTheme, NCard, NElement as NEl, useThemeVars, NConfigProvider } from 'naive-ui';
 import '@fullcalendar/core/vdom'; // solve problem with Vite
 import FullCalendar from '@fullcalendar/vue3';
 import type { CalendarOptions, DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/vue3';
@@ -18,10 +27,14 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
 import CalendarViewService from '../../../services/CalendarViewService';
+import { useStore } from '/@/store';
 
 export default defineComponent({
   name: 'FullcalendarSub',
   components: {
+    NCard,
+    NEl,
+    NConfigProvider,
     FullCalendar,
   },
   props: {
@@ -33,7 +46,18 @@ export default defineComponent({
       default: [] as EventInput[],
     },
   },
+  emits: [
+    'dateClick',
+    'eventClick',
+  ],
   setup() {
+    const store = useStore();
+    const themeVars = ref(useThemeVars());
+    return {
+      darkTheme,
+      store,
+      themeVars,
+    };
   },
   data() {
     return {
@@ -46,24 +70,34 @@ export default defineComponent({
         },
         selectable: true,
         select: this.dateClick,
+        initialEvents: this.events,
         eventClick: this.eventClick,
         eventChange: this.updateView,
         editable: false,
-        // height: Number(import.meta.env.VITE_APP_HEIGHT) - 10,
-        aspectRatio: 1.31, // 单元格宽高的比例，宽是高的2倍
+        height: Number(import.meta.env.VITE_APP_HEIGHT),
+        fixedWeekCount: true,
         views: this.dayCellNewContent(),
         locale: zhLocale,
       } as CalendarOptions,
     };
   },
+  computed: {
+    themeValue(): any {
+      this.updateColors();
+      return this.store.state.themeValue == 'darkTheme' ? darkTheme : null;
+    },
+  },
   watch: {
     changeShowFestivals(): void {
+      console.log('changeShowFestivals');
       this.updateView();
     },
     changeShowWeather(): void {
+      console.log('changeShowWeather');
       this.updateView();
     },
     weather(): void {
+      console.log('weather');
       this.updateView();
     },
     events(): void {
@@ -73,14 +107,17 @@ export default defineComponent({
     },
   },
   methods: {
+    updateColors() {
+      this.calendarOptions.eventColor = this.themeVars.primaryColor;
+    },
     updateView() {
       const calendarArray = this.$refs['fullcalendar'] as any;
+      console.log(calendarArray);
       const calendarApi = calendarArray.getApi();
-      console.log(calendarApi);
       const viewContent = this.dayCellNewContent();
       calendarApi.changeView('dayGridMonth', viewContent['dayGridMonth']);
       // 这种成本可能更高
-      // calendar.render();
+      // this.calendarApi.render();
     },
     dateClick(selectInfo: DateSelectArg) {
       this.$emit('dateClick', selectInfo.start);
@@ -92,7 +129,7 @@ export default defineComponent({
       const that = this;
       return {
         dayGridMonth: {
-          titleFormat: { year: 'numeric', month: '2-digit'},
+          titleFormat: { year: 'numeric', month: '2-digit' },
           dayCellContent(item: any) {
             const date = new Date(item.date);
             const calendarViewService = new CalendarViewService();
@@ -109,6 +146,9 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "~/styles/default.scss";
 
+::v-deep(.fc-header-toolbar) {
+  margin-bottom: 0 !important;
+}
 ::v-deep(.fc-daygrid-day-top) {
   display: flex;
   text-align: center;

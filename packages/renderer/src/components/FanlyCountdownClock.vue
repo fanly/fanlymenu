@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject} from 'vue';
+import { defineComponent, inject } from 'vue';
 import { NButton, NIcon, NGrid, NGi, NCard } from 'naive-ui';
 import { TimesCircleRegular as TimesCircleRegularIcon } from '@vicons/fa';
 
