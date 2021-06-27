@@ -2,12 +2,11 @@
   <n-config-provider :theme="themeValue">
     <n-card>
       <n-el
-        style="color: var(--primary-color); transition: .3s var(--cubic-bezier-ease-in-out);"
+        style="color: var(--text-color-base); transition: .3s var(--cubic-bezier-ease-in-out);"
       >
         <full-calendar
           ref="fullcalendar"
           :options="calendarOptions"
-          style="color: var(--primary-color); transition: .3s var(--cubic-bezier-ease-in-out);"
         >
           <template #eventContent="arg">
             <i>{{ arg.event.title }}</i>
@@ -145,9 +144,14 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "~/styles/default.scss";
-
 ::v-deep(.fc-header-toolbar) {
   margin-bottom: 0 !important;
+}
+
+::v-deep(.fc .fc-button-primary) {
+  color: var(--base-color);
+  background-color: var(--primary-color, #2C3E50);
+  border-color: var(--border-color, #2C3E50);
 }
 ::v-deep(.fc-daygrid-day-top) {
   display: flex;
