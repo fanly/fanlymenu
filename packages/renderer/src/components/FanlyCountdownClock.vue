@@ -75,7 +75,6 @@ export default defineComponent({
       type: Number,
       default: 1000,
     },
-    height: Number,
   },
   emits: [
     'finish',
@@ -83,9 +82,11 @@ export default defineComponent({
   setup() {
     const deadline: string = inject('deadline') as string;
     const title = inject('title', '');
+    const height = inject('height', 600);
     return {
       deadline,
       title,
+      height,
     };
   },
   data() {
@@ -94,7 +95,7 @@ export default defineComponent({
     };
   },
   computed: {
-    style(): any {
+    style(): unknown {
       return {
         height: this.height + 'px',
       };

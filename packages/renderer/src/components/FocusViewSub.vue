@@ -1,12 +1,16 @@
 <template>
-  <FanlyCountdownClock
-    v-model:height="clockHeight"
-    @finish="hideFocus"
-  />
+  <n-config-provider
+    :theme="themeValue"
+  >
+    <FanlyCountdownClock
+      @finish="hideFocus"
+    />
+  </n-config-provider>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, provide, computed } from 'vue';
+import { NConfigProvider, darkTheme } from 'naive-ui';
 import FanlyCountdownClock from '/@/components/FanlyCountdownClock.vue';
 import Moment from 'moment';
 import { useStore } from '/@/store';
@@ -14,6 +18,7 @@ import { useStore } from '/@/store';
 export default defineComponent({
   name: 'FocusViewSub',
   components: {
+    NConfigProvider,
     FanlyCountdownClock,
   },
   provide() {
@@ -24,13 +29,18 @@ export default defineComponent({
   setup () {
     const Title = ref('专注还剩时间');
     provide('title', Title);
-    const clockHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    provide('height', window.screen.height);
     const store = useStore();
     provide('store', store);
     return {
-      clockHeight,
       store,
+      darkTheme,
     };
+  },
+  computed: {
+    themeValue(): any {
+      return this.store.state.themeValue == 'darkTheme' ? darkTheme : null;
+    },
   },
   methods: {
     hideFocus() {
