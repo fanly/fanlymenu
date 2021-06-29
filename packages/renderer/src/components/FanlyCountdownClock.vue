@@ -80,7 +80,7 @@ export default defineComponent({
     'finish',
   ],
   setup() {
-    const deadline: string = inject('deadline') as string;
+    const deadline = inject('deadline');
     const title = inject('title', '');
     const height = inject('height', 600);
     return {
@@ -91,7 +91,7 @@ export default defineComponent({
   },
   data() {
     return {
-      currentTime: Date.parse(this.deadline as any) - Date.parse(new Date() as any),
+      currentTime: Date.parse(String(this.deadline)) - (new Date()).valueOf(),
     };
   },
   computed: {
@@ -135,7 +135,7 @@ export default defineComponent({
       return value.toString();
     },
     countdown () {
-      this.currentTime = Date.parse(this.deadline) - Date.parse(new Date() as any);
+      this.currentTime = Date.parse(String(this.deadline)) - (new Date().valueOf());
       if (this.currentTime > 0) {
           setTimeout(this.countdown, this.speed);
       } else {
