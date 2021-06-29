@@ -17,11 +17,22 @@
   </n-config-provider>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref, inject } from 'vue';
+import type { GlobalTheme } from 'naive-ui';
 import { darkTheme, NCard, NElement as NEl, useThemeVars, NConfigProvider } from 'naive-ui';
 import '@fullcalendar/core/vdom'; // solve problem with Vite
 import FullCalendar from '@fullcalendar/vue3';
-import type { CalendarOptions, DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/vue3';
+import type {
+  CalendarApi,
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventInput,
+  EventSourceInput,
+  DateRangeInput,
+  DateInput,
+  DayCellContentArg,
+} from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
@@ -39,7 +50,6 @@ export default defineComponent({
   props: {
     changeShowFestivals: Boolean,
     changeShowWeather: Boolean,
-    weather: Object,
     events: {
       type: Array,
       default: [] as EventInput[],
@@ -50,12 +60,21 @@ export default defineComponent({
     'eventClick',
   ],
   setup() {
+    const weather = inject('weather');
     const store = useStore();
     const themeVars = ref(useThemeVars());
+    const fullcalendar = ref(null);
+    let fullcalendarApi = ref<InstanceType<typeof CalendarApi>>();
+    onMounted(() => {
+      fullcalendarApi = Object.getOwnPropertyDescriptor(fullcalendar.value, 'getApi')?.value();
+    });
     return {
+      weather,
       darkTheme,
       store,
       themeVars,
+      fullcalendar,
+      fullcalendarApi,
     };
   },
   data() {
@@ -81,28 +100,26 @@ export default defineComponent({
     };
   },
   computed: {
-    themeValue(): any {
+    themeValue(): GlobalTheme | null {
       this.updateColors();
       return this.store.state.themeValue == 'darkTheme' ? darkTheme : null;
     },
   },
   watch: {
     changeShowFestivals(): void {
-      console.log('changeShowFestivals');
       this.updateView();
     },
     changeShowWeather(): void {
-      console.log('changeShowWeather');
       this.updateView();
     },
     weather(): void {
-      console.log('weather');
       this.updateView();
     },
     events(): void {
-      const calendarArray = this.$refs['fullcalendar'] as any;
-      const calendarApi = calendarArray.getApi();
-      calendarApi.addEventSource(this.events);
+      if (this.fullcalendarApi == null) {
+        this.fullcalendarApi = Object.getOwnPropertyDescriptor(this.fullcalendar, 'getApi')?.value();
+      }
+      this.fullcalendarApi?.addEventSource(this.events as EventSourceInput);
     },
   },
   methods: {
@@ -110,13 +127,11 @@ export default defineComponent({
       this.calendarOptions.eventColor = this.themeVars.primaryColor;
     },
     updateView() {
-      const calendarArray = this.$refs['fullcalendar'] as any;
-      console.log(calendarArray);
-      const calendarApi = calendarArray.getApi();
+      if (this.fullcalendarApi == null) {
+        this.fullcalendarApi = Object.getOwnPropertyDescriptor(this.fullcalendar, 'getApi')?.value();
+      }
       const viewContent = this.dayCellNewContent();
-      calendarApi.changeView('dayGridMonth', viewContent['dayGridMonth']);
-      // 这种成本可能更高
-      // this.calendarApi.render();
+      this.fullcalendarApi?.changeView('dayGridMonth', viewContent['dayGridMonth'] as DateRangeInput | DateInput);
     },
     dateClick(selectInfo: DateSelectArg) {
       this.$emit('dateClick', selectInfo.start);
@@ -129,7 +144,7 @@ export default defineComponent({
       return {
         dayGridMonth: {
           titleFormat: { year: 'numeric', month: '2-digit' },
-          dayCellContent(item: any) {
+          dayCellContent(item: DayCellContentArg) {
             const date = new Date(item.date);
             const calendarViewService = new CalendarViewService();
             return calendarViewService.showView(item.dayNumberText, date, that.changeShowFestivals, that.changeShowWeather, that.weather);

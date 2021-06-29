@@ -3,7 +3,7 @@ import type { Store } from 'vuex';
 import { createStore, useStore as baseUseStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-export interface FLocation {
+export declare interface FLocation {
   longitude: number, // 经度
   latitude: number,  // 纬度
 }
@@ -39,8 +39,8 @@ export const store = createStore<State>({
       latitude: 38.02,
     } as FLocation,
     notion: {
-      api_key: '',
-      database_id: '',
+      api_key: 'secret_OeWua2be357DrrN0y47obPNbzY4KWk6NEoGHoEDd8BA',
+      database_id: '577b3228cd15411782430fefbb87d601',
     } as FNotion,
     focusTime: 40,
   },

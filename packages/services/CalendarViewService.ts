@@ -9,7 +9,7 @@ export default class CalendarViewService {
     date: Date,
     changeShowFestivals: boolean,
     changeShowWeather: boolean,
-    weather: any) {
+    weather: any): any {
     const lunarService = new LunarService(date);
     const dayTextInChinese = lunarService.showNongliData(changeShowFestivals);
 

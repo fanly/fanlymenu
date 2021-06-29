@@ -177,7 +177,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import type { ComputedRef } from 'vue';
+import { defineComponent, ref, inject } from 'vue';
+import type { FLocation } from '/@/store';
 import { useStore } from '/@/store';
 import { NDrawerContent, NTabs, NTabPane, NSpace, NRadioGroup, NRadioButton, NSwitch, NForm, NFormItemRow, NInput, NInputNumber, NButton, NDivider, NIcon, NSlider, NGrid, NGridItem } from 'naive-ui';
 import { CaretRight as CaretRightIcon } from '@vicons/fa';
@@ -205,9 +207,14 @@ export default defineComponent({
     NGridItem,
   },
   props: {
-    changeShowFestivals: Boolean,
-    changeShowWeather: Boolean,
-    location: Object,
+    changeShowFestivals: {
+      type: Boolean,
+      default: false,
+    },
+    changeShowWeather: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: [
     'focusClick',
@@ -216,30 +223,36 @@ export default defineComponent({
     'update:visibleFullSetting',
     'update:changeShowFestivals',
     'update:changeShowWeather',
-    'update:location',
+    'updateLocation',
   ],
-  setup() {
+  setup(props) {
     const store = useStore();
     const themeValue = ref(store.state.themeValue);
     const notion_api_key = ref(store.state.notion.api_key);
     const notion_database_id = ref(store.state.notion.database_id);
+    const inputSwitchFestivalsModel = ref(props.changeShowFestivals);
+    const inputSwitchWeatherModel = ref(props.changeShowWeather);
+    const flocation: ComputedRef<FLocation> | undefined = inject('flocation');
+    const longitude = flocation?.value.longitude;
+    const latitude = flocation?.value.latitude;
+
     return {
       store,
       themeValue,
       notion_api_key,
       notion_database_id,
+      inputSwitchFestivalsModel,
+      inputSwitchWeatherModel,
+      longitude,
+      latitude,
     };
   },
   data() {
     return {
-      inputSwitchFestivalsModel: this.changeShowFestivals,
-      inputSwitchWeatherModel: this.changeShowWeather,
       trayFestivalsModel: false,
       trayWeatherModel: false,
       trayWeekModel: false,
       traySecondsModel: false,
-      longitude: this.location?.longitude,
-      latitude: this.location?.latitude,
       focus_time: 40,
     };
   },
@@ -256,7 +269,7 @@ export default defineComponent({
     this.focus_time = this.store.state.focusTime;
   },
   methods: {
-    updateTheme(value: any): void {
+    updateTheme(value: string | number): void {
       this.store.commit('changeThemeValue', value);
     },
     updateFestivalsModel(value: boolean): void {
@@ -266,7 +279,7 @@ export default defineComponent({
       this.$emit('update:changeShowWeather', value);
     },
     changeLocalLocation(): void {
-      this.$emit('update:location', {
+      this.$emit('updateLocation', {
         'longitude': this.longitude,
         'latitude': this.latitude,
       });

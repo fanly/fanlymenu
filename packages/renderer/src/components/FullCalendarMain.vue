@@ -3,7 +3,6 @@
     v-model:changeShowFestivals="changeShowFestivals"
     v-model:changeShowWeather="changeShowWeather"
     v-model:events="events"
-    v-model:weather="weather"
     v-model:location="location"
     @dateClick="dateClick"
     @eventClick="eventClick"
@@ -11,7 +10,6 @@
   <weather-sub
     v-if="changeShowWeather"
     v-model:changeShowWeather="changeShowWeather"
-    v-model:weather="weather"
     v-model:location="location"
   />
   <n-dropdown
@@ -40,7 +38,7 @@
       v-if="visibleFullSetting"
       v-model:changeShowWeather="changeShowWeather"
       v-model:changeShowFestivals="changeShowFestivals"
-      v-model:location="location"
+      @updateLocation="updateLocation"
       @focusClick="focusClick"
       @updateNotionClick="updateEvents"
       @goCreateEventView="goCreateEventView"
@@ -58,8 +56,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, h } from 'vue';
-import type { FLocation } from '/@/store';
+import { defineComponent, ref, h, provide, computed } from 'vue';
 import { useStore } from '/@/store';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
@@ -86,8 +83,15 @@ export default defineComponent({
     NIcon,
     ListIcon,
   },
+  provide() {
+    return {
+      flocation: computed(() => this.store.state.location),
+    };
+  },
   setup() {
-    const events:any = ref([]);
+    const weather = ref({});
+    provide('weather', weather);
+    const events: any = ref([]);
     const visibleFullSetting = ref(false);
     const store = useStore();
     const eventService = ref(new EventService(
@@ -95,6 +99,7 @@ export default defineComponent({
       store.state.notion.database_id,
     ));
     return {
+      weather,
       eventService,
       events,
       visibleFullSetting,
@@ -103,8 +108,7 @@ export default defineComponent({
   },
   data() {
     return {
-      weather: {},
-      location: {} as FLocation,
+      location: {},
       changeShowFestivals: false,
       changeShowWeather: false,
       visibleFullDateView: false,
@@ -159,13 +163,7 @@ export default defineComponent({
     changeShowWeather(newval) {
       this.store.commit('changeShowWeather', newval);
       if (this.changeShowWeather) {
-        this.getWeather();
-      }
-    },
-    location(newval) {
-      this.store.commit('changeLocation', newval);
-      if (this.changeShowWeather) {
-        this.getWeather();
+        this.getWeather(this.store.state.location);
       }
     },
   },
@@ -174,10 +172,16 @@ export default defineComponent({
     this.setShowData();
   },
   methods: {
+    updateLocation(newval: any): void {
+      this.store.commit('changeLocation', newval);
+      if (this.changeShowWeather) {
+        this.getWeather(newval);
+      }
+    },
     updateEvents(
       notion_api_key = '',
       notion_database_id = '',
-    ): any {
+    ): void {
       this.eventService
       .setApiKey(notion_api_key)
       .setDatabaseId(notion_database_id)
@@ -188,11 +192,10 @@ export default defineComponent({
     setShowData(): void {
       this.changeShowFestivals = this.store.state.showFestivals;
       this.changeShowWeather = this.store.state.showWeather;
-      this.location = this.store.state.location;
     },
-    getWeather(): void {
+    getWeather(location: any): void {
       const weatherService = new WeatherService();
-      weatherService.getWeathers(this.location).then((data) => (this.weather = data));
+      weatherService.getWeathers(location).then((data) => (this.weather = data));
     },
     dateClick(date: string): void {
       this.date = new Date(date);

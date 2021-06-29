@@ -15,7 +15,7 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } },
 ]);
 
-let mainApp:any = null;
+let mainApp: App;
 app.on('ready', () => {
   mainApp = new App();
 });
@@ -53,6 +53,10 @@ ipcMain.on('hide-focus-window', () => {
   mainApp.setFullScreen(false).show();
 });
 
+// 未来某一天使用
+// ipcMain.handleOnce('screen', () => {
+//   return screen.getPrimaryDisplay().size;
+// });
 
 if (env.MODE === 'development') {
   app.whenReady()

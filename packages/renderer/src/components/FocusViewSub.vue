@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, provide, computed } from 'vue';
+import type { GlobalTheme } from 'naive-ui';
 import { NConfigProvider, darkTheme } from 'naive-ui';
 import FanlyCountdownClock from '/@/components/FanlyCountdownClock.vue';
 import Moment from 'moment';
@@ -38,7 +39,7 @@ export default defineComponent({
     };
   },
   computed: {
-    themeValue(): any {
+    themeValue(): GlobalTheme | null {
       return this.store.state.themeValue == 'darkTheme' ? darkTheme : null;
     },
   },

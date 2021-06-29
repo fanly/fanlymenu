@@ -98,7 +98,6 @@ export default defineComponent({
   },
   props: {
     date: Date,
-    weather: Object,
   },
   setup(props) {
     const lunarService = ref(new LunarService(props.date));

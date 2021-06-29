@@ -1,6 +1,7 @@
 import { app, BrowserWindow, screen } from 'electron';
 import { join } from 'path';
 import TrayService from '../../services/TrayService';
+import type { ClockSettingParams } from '../../services/ClockService';
 import ClockService from '../../services/ClockService';
 import { URL } from 'url';
 
@@ -102,7 +103,7 @@ export default class App {
     return this;
   }
 
-  setClockParams(params: any): this {
+  setClockParams(params: ClockSettingParams): this {
     this.clockService.setParams(params);
     return this;
   }

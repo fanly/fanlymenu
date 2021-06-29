@@ -8,10 +8,10 @@ export default class ClockService {
   format: any;
   onTickHandler: any;
   intervalId: any;
-  params: any;
+  params: ClockSettingParams;
   constructor() {
     Moment.locale(app.getLocale());
-    this.params = {};
+    this.params = {} as ClockSettingParams;
     // lll MMMDo dddd HH:mm:ss
     this.setFormat('MMMDo HH:mm');
     this.start();
@@ -61,7 +61,7 @@ export default class ClockService {
     trayWeekModel: true,
     traySecondsModel: true
   }*/
-  setParams(params: any) {
+  setParams(params: ClockSettingParams): this {
     this.params = params;
 
     // MMMDo dddd HH:mm:ss
@@ -80,7 +80,7 @@ export default class ClockService {
     return this.setFormat(default_format);
   }
 
-  getParams(): any {
+  getParams(): ClockSettingParams {
     return this.params;
   }
 
@@ -94,4 +94,12 @@ export default class ClockService {
 
     return showString.concat(Moment().format(this.getFormat()));
   }
+}
+
+
+export declare interface ClockSettingParams {
+  trayFestivalsModel: boolean,
+  trayWeatherModel: boolean,
+  trayWeekModel: boolean,
+  traySecondsModel: boolean
 }

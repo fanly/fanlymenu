@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent} from 'vue';
+import { defineComponent, inject } from 'vue';
 import { NBadge, NImage } from 'naive-ui';
 import weathericons from '~/images/weathericons/100.png';
 
@@ -21,27 +21,31 @@ export default defineComponent({
     NBadge,
     NImage,
   },
-  props: {
-    weather: Object,
-  },
-  data() {
+  setup() {
+    const weather = inject('weather', {
+      weatherNow: {
+        icon: '100',
+        temp: '30',
+      },
+    });
     return {
-      weatherIcon: '',
-      temp: '',
+      weather,
     };
   },
-  watch: {
-    changeShowWeather(): void {
-    },
-    weather(): void {
-      if (this.weather && this.weather.weatherNow) {
-        this.weatherIcon = weathericons + '/../' + this.weather.weatherNow.icon +'.png';
-        this.temp = this.weather.weatherNow.temp + '°C';
+  computed: {
+    weatherIcon(): string {
+      if (this.weather.weatherNow) {
+        return weathericons + '/../' + this.weather.weatherNow.icon +'.png';
       }
-    },
-  },
-  methods: {
 
+      return '';
+    },
+    temp(): string {
+      if (this.weather.weatherNow) {
+        return this.weather.weatherNow.temp + '°C';
+      }
+      return '';
+    },
   },
 });
 </script>
