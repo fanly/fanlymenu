@@ -1,6 +1,6 @@
 <template>
   <n-config-provider :theme="themeValue">
-    <n-card>
+    <n-card style="--padding-top: 0; --padding-bottom: 0; --padding-left: 0; --padding-right: 0;">
       <n-el
         style="color: var(--text-color-base); transition: .3s var(--cubic-bezier-ease-in-out);"
       >
@@ -92,8 +92,9 @@ export default defineComponent({
         eventClick: this.eventClick,
         eventChange: this.updateView,
         editable: false,
-        height: Number(import.meta.env.VITE_APP_HEIGHT),
-        fixedWeekCount: true,
+        height: Number(import.meta.env.VITE_APP_HEIGHT) - 4,
+        // aspectRatio: 1.4,
+        fixedWeekCount: false,
         views: this.dayCellNewContent(),
         locale: zhLocale,
       } as CalendarOptions,

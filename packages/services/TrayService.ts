@@ -20,13 +20,12 @@ export default class TrayService {
     return this.label;
   }
 
-  setLabel(label: string): this {
+  setLabel(label: string): void {
     if (this.tray.isDestroyed()) {
-      return this;
+      return;
     }
 
     this.tray.setTitle((this.label = label));
-    return this;
   }
 
   onClick(fn: (() => void) | null): void {

@@ -5,9 +5,10 @@ const Moment = require('moment');
 import LunarService from './LunarService';
 
 export default class ClockService {
-  format: any;
-  onTickHandler: any;
-  intervalId: any;
+  format = 'MMMDo HH:mm';
+  // onTickHandler: ((toString: (arg0: ClockService) => string) => void) | null = null;
+  onTickHandler: ((arg0: ClockService) => void) | null = null;
+  intervalId: NodeJS.Timeout | null = null;
   params: ClockSettingParams;
   constructor() {
     Moment.locale(app.getLocale());
@@ -22,30 +23,35 @@ export default class ClockService {
       this.onTickHandler = () => {};
     }
 
-    this.intervalId = setInterval(() => this.onTickHandler(this), 1000);
+    this.intervalId = setInterval(() => {
+      if (this.onTickHandler) {
+        this.onTickHandler(this);
+      }
+    }, 1000);
 
     return this;
   }
 
   stop(): this {
     if (this.intervalId) {
-      this.intervalId = clearInterval(this.intervalId);
+      clearInterval(this.intervalId);
+      this.intervalId = null;
     }
 
     return this;
   }
 
-  onTick(callback: any): this {
+  onTick(callback: ((arg0: ClockService) => void) | null): this {
     this.onTickHandler = callback;
 
     return this;
   }
 
-  getFormat(): any {
+  getFormat(): string {
     return this.format;
   }
 
-  setFormat(format: any): this {
+  setFormat(format: string): this {
     if (typeof format !== 'string') {
       return this;
     }

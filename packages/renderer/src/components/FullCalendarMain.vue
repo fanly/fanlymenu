@@ -250,8 +250,8 @@ export default defineComponent({
 
 .dropdown {
   position: fixed;
-  top: 32px;
-  right: 32px;
+  top: 7.5px;
+  right: 10px;
   font-size: 24px;
 }
 </style>
