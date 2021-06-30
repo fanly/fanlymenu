@@ -1,6 +1,7 @@
 'use strict';
 import axios from 'axios';
 import wrapper from 'axios-cache-plugin';
+import type { EventInput } from '@fullcalendar/vue3';
 export default class EventService {
   notion_api_key: string;
   notion_database_id: string;
@@ -57,7 +58,7 @@ export default class EventService {
       return res;
   }
 
-  async getEvents() {
+  async getEvents(): Promise<EventInput[]> {
     const http = wrapper(axios, {
       maxCacheSize: 15,
       ttl: 60000, //ms
@@ -71,14 +72,14 @@ export default class EventService {
     return this.list2Events(res.data.results);
   }
 
-  list2Events(results: []) {
+  list2Events(results: []): EventInput[] {
     const events = results.map((element: any) => {
       return {
         'id': element.id,
         'title': element.properties?.title?.rich_text[0].plain_text,
         'start': element.properties?.start?.date.start,
         'end': element.properties?.end?.date.start,
-      };
+      } as EventInput;
     });
 
     return events;
@@ -101,7 +102,10 @@ export default class EventService {
     return this;
   }
 
-  getHeaders(): any {
+  getHeaders(): {
+    'Notion-Version': string,
+    'Authorization': string,
+  } {
     return {
       'Notion-Version': import.meta.env.VITE_NOtion_VERSION,
       'Authorization': 'Bearer '+ this.notion_api_key,

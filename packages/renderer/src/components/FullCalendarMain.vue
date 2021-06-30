@@ -68,6 +68,7 @@ import DateViewSub from '/@/components/DateViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
 import EventCreateSub from '/@/components/EventCreateSub.vue';
 import EventService from '../../../services/EventService';
+import type { EventInput } from '@fullcalendar/vue3';
 
 export default defineComponent({
   name: 'FullCalendarMain',
@@ -91,7 +92,6 @@ export default defineComponent({
   setup() {
     const weather = ref({});
     provide('weather', weather);
-    const events: any = ref([]);
     const visibleFullSetting = ref(false);
     const store = useStore();
     const eventService = ref(new EventService(
@@ -101,7 +101,6 @@ export default defineComponent({
     return {
       weather,
       eventService,
-      events,
       visibleFullSetting,
       store,
     };
@@ -114,6 +113,7 @@ export default defineComponent({
       visibleFullDateView: false,
       date: new Date(),
       visibleECSub: false,
+      events: [] as EventInput[],
       event: undefined,
       settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
       options: [
