@@ -146,7 +146,7 @@
   dependencies:
     tslib "^2.1.0"
 
-"@fullcalendar/core@^5.7.2", "@fullcalendar/core@~5.8.0":
+"@fullcalendar/core@^5.8.0", "@fullcalendar/core@~5.8.0":
   version "5.8.0"
   resolved "https://registry.nlark.com/@fullcalendar/core/download/@fullcalendar/core-5.8.0.tgz#86f034fc4a49c6a44886380aff01c6fcd7204966"
   integrity sha1-hvA0/EpJxqRIhjgK/wHG/NcgSWY=
@@ -155,7 +155,7 @@
     preact "^10.0.5"
     tslib "^2.1.0"
 
-"@fullcalendar/daygrid@^5.7.2", "@fullcalendar/daygrid@~5.8.0":
+"@fullcalendar/daygrid@^5.8.0", "@fullcalendar/daygrid@~5.8.0":
   version "5.8.0"
   resolved "https://registry.nlark.com/@fullcalendar/daygrid/download/@fullcalendar/daygrid-5.8.0.tgz#6a5991886ed3323366f72e7614ac8907cbd8d998"
   integrity sha1-almRiG7TMjNm9y52FKyJB8vY2Zg=
@@ -163,7 +163,7 @@
     "@fullcalendar/common" "~5.8.0"
     tslib "^2.1.0"
 
-"@fullcalendar/interaction@^5.7.2":
+"@fullcalendar/interaction@^5.8.0":
   version "5.8.0"
   resolved "https://registry.nlark.com/@fullcalendar/interaction/download/@fullcalendar/interaction-5.8.0.tgz#1661682f4df7b076b36fedf2fc9b33a03f04bf07"
   integrity sha1-FmFoL033sHazb+3y/JszoD8Evwc=
@@ -171,7 +171,7 @@
     "@fullcalendar/common" "~5.8.0"
     tslib "^2.1.0"
 
-"@fullcalendar/timegrid@^5.7.2":
+"@fullcalendar/timegrid@^5.8.0":
   version "5.8.0"
   resolved "https://registry.nlark.com/@fullcalendar/timegrid/download/@fullcalendar/timegrid-5.8.0.tgz#4f1f8e1aee52f3b493701b3c9e3b59510be53c24"
   integrity sha1-Tx+OGu5S87STcBs8njtZUQvlPCQ=
@@ -180,7 +180,7 @@
     "@fullcalendar/daygrid" "~5.8.0"
     tslib "^2.1.0"
 
-"@fullcalendar/vue3@^5.7.2":
+"@fullcalendar/vue3@^5.8.0":
   version "5.8.0"
   resolved "https://registry.nlark.com/@fullcalendar/vue3/download/@fullcalendar/vue3-5.8.0.tgz#35cd3c909bb75145f5b7a7529fcf890e0a4b2db0"
   integrity sha1-Nc08kJu3UUX1t6dSn8+JDgpLLbA=
@@ -1108,7 +1108,7 @@ atob@^2.1.2:
 
 axios-cache-plugin@^0.1.0:
   version "0.1.0"
-  resolved "https://registry.npm.taobao.org/axios-cache-plugin/download/axios-cache-plugin-0.1.0.tgz#e84f4902029f2e0323bbae739d6a1d0ba5551e89"
+  resolved "https://registry.nlark.com/axios-cache-plugin/download/axios-cache-plugin-0.1.0.tgz#e84f4902029f2e0323bbae739d6a1d0ba5551e89"
   integrity sha1-6E9JAgKfLgMju65znWodC6VVHok=
 
 axios@^0.21.1:
@@ -1623,9 +1623,9 @@ constantinople@^4.0.1:
     "@babel/types" "^7.6.1"
 
 core-js@^3.6.5:
-  version "3.15.1"
-  resolved "https://registry.nlark.com/core-js/download/core-js-3.15.1.tgz?cache=0&sync_timestamp=1624386795737&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcore-js%2Fdownload%2Fcore-js-3.15.1.tgz#6c08ab88abdf56545045ccf5fd81f47f407e7f1a"
-  integrity sha1-bAiriKvfVlRQRcz1/YH0f0B+fxo=
+  version "3.15.2"
+  resolved "https://registry.nlark.com/core-js/download/core-js-3.15.2.tgz?cache=0&sync_timestamp=1624966012065&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcore-js%2Fdownload%2Fcore-js-3.15.2.tgz#740660d2ff55ef34ce664d7e2455119c5bdd3d61"
+  integrity sha1-dAZg0v9V7zTOZk1+JFURnFvdPWE=
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -2275,7 +2275,7 @@ eslint@^7.25.0:
 
 espree@^6.2.1:
   version "6.2.1"
-  resolved "https://registry.nlark.com/espree/download/espree-6.2.1.tgz?cache=0&sync_timestamp=1624560068766&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fespree%2Fdownload%2Fespree-6.2.1.tgz#77fc72e1fd744a2052c20f38a5b575832e82734a"
+  resolved "https://registry.nlark.com/espree/download/espree-6.2.1.tgz?cache=0&sync_timestamp=1625021052689&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fespree%2Fdownload%2Fespree-6.2.1.tgz#77fc72e1fd744a2052c20f38a5b575832e82734a"
   integrity sha1-d/xy4f10SiBSwg84pbV1gy6Cc0o=
   dependencies:
     acorn "^7.1.1"
@@ -2284,7 +2284,7 @@ espree@^6.2.1:
 
 espree@^7.3.0, espree@^7.3.1:
   version "7.3.1"
-  resolved "https://registry.nlark.com/espree/download/espree-7.3.1.tgz?cache=0&sync_timestamp=1624560068766&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fespree%2Fdownload%2Fespree-7.3.1.tgz#f2df330b752c6f55019f8bd89b7660039c1bbbb6"
+  resolved "https://registry.nlark.com/espree/download/espree-7.3.1.tgz?cache=0&sync_timestamp=1625021052689&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fespree%2Fdownload%2Fespree-7.3.1.tgz#f2df330b752c6f55019f8bd89b7660039c1bbbb6"
   integrity sha1-8t8zC3Usb1UBn4vYm3ZgA5wbu7Y=
   dependencies:
     acorn "^7.4.0"
@@ -3829,9 +3829,9 @@ ms@^2.1.1:
   integrity sha1-V0yBOM4dK1hh8LRFedut1gxmFbI=
 
 naive-ui@^2.14.0:
-  version "2.14.0"
-  resolved "https://registry.nlark.com/naive-ui/download/naive-ui-2.14.0.tgz#59daa990d718ea589f4f590f4cef2d2a50b50ba6"
-  integrity sha1-WdqpkNcY6lifT1kPTO8tKlC1C6Y=
+  version "2.15.0"
+  resolved "https://registry.nlark.com/naive-ui/download/naive-ui-2.15.0.tgz#c97855779f7252ec717c55b4cf7ed6f7af3abae6"
+  integrity sha1-yXhVd59yUuxxfFW0z37W9686uuY=
   dependencies:
     "@css-render/plugin-bem" "^0.15.4"
     "@css-render/vue3-ssr" "^0.15.4"
@@ -3892,9 +3892,9 @@ normalize-url@^4.1.0:
   integrity sha1-DdkM8SiO4dExO4cIHJpZMu5IUYo=
 
 normalize-url@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.nlark.com/normalize-url/download/normalize-url-6.0.1.tgz#a4f27f58cf8c7b287b440b8a8201f42d0b00d256"
-  integrity sha1-pPJ/WM+Meyh7RAuKggH0LQsA0lY=
+  version "6.1.0"
+  resolved "https://registry.nlark.com/normalize-url/download/normalize-url-6.1.0.tgz#40d0885b535deffe3f3147bec877d05fe4c5668a"
+  integrity sha1-QNCIW1Nd7/4/MUe+yHfQX+TFZoo=
 
 npm-conf@^1.1.3:
   version "1.1.3"
@@ -4683,9 +4683,9 @@ roarr@^2.15.3:
     sprintf-js "^1.1.2"
 
 rollup@^2.38.5:
-  version "2.52.3"
-  resolved "https://registry.nlark.com/rollup/download/rollup-2.52.3.tgz#062fc3c85f67736d6758749310cfee64836c4e2a"
-  integrity sha1-Bi/DyF9nc21nWHSTEM/uZINsTio=
+  version "2.52.4"
+  resolved "https://registry.nlark.com/rollup/download/rollup-2.52.4.tgz#0150247d54fb2f21be4915b898f8764389fea292"
+  integrity sha1-AVAkfVT7LyG+SRW4mPh2Q4n+opI=
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -6024,9 +6024,9 @@ write-file-atomic@^3.0.0:
     typedarray-to-buffer "^3.1.5"
 
 ws@^7.2.3:
-  version "7.5.0"
-  resolved "https://registry.nlark.com/ws/download/ws-7.5.0.tgz#0033bafea031fb9df041b2026fc72a571ca44691"
-  integrity sha1-ADO6/qAx+53wQbICb8cqVxykRpE=
+  version "7.5.1"
+  resolved "https://registry.nlark.com/ws/download/ws-7.5.1.tgz?cache=0&sync_timestamp=1624943994930&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fws%2Fdownload%2Fws-7.5.1.tgz#44fc000d87edb1d9c53e51fbc69a0ac1f6871d66"
+  integrity sha1-RPwADYftsdnFPlH7xpoKwfaHHWY=
 
 x-is-array@^0.1.0:
   version "0.1.0"

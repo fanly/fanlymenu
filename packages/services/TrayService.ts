@@ -3,7 +3,7 @@ import { Tray, nativeImage} from 'electron';
 export default class TrayService {
   tray: Tray;
   label: string;
-  clickHandler: any;
+  clickHandler: (() => void) | null = null;
 
   constructor() {
     this.label = '';
@@ -29,7 +29,7 @@ export default class TrayService {
     return this;
   }
 
-  onClick(fn: any): void {
+  onClick(fn: (() => void) | null): void {
     this.clickHandler = fn;
   }
 }
