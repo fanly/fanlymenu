@@ -2,11 +2,7 @@ import type { InjectionKey } from 'vue';
 import type { Store } from 'vuex';
 import { createStore, useStore as baseUseStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-
-export declare interface FLocation {
-  longitude: number, // 经度
-  latitude: number,  // 纬度
-}
+import type { FLocation } from '../../types/custom';
 
 export interface FNotion {
   api_key: string, // api key

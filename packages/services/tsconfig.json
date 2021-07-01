@@ -13,6 +13,7 @@
   "include": [
     "*.ts",
     "../../types/**/*.d.ts",
-    "../preload/types/electron-api.d.ts"
+    "../preload/types/electron-api.d.ts",
+    "../renderer/types/custom.d.ts",
   ]
 }

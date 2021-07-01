@@ -69,6 +69,7 @@ import WeatherService from '../../../services/WeatherService';
 import EventCreateSub from '/@/components/EventCreateSub.vue';
 import EventService from '../../../services/EventService';
 import type { EventInput } from '@fullcalendar/vue3';
+import type { FLocation } from 'types/custom';
 
 export default defineComponent({
   name: 'FullCalendarMain',
@@ -172,7 +173,7 @@ export default defineComponent({
     this.setShowData();
   },
   methods: {
-    updateLocation(newval: any): void {
+    updateLocation(newval: FLocation): void {
       this.store.commit('changeLocation', newval);
       if (this.changeShowWeather) {
         this.getWeather(newval);
@@ -206,6 +207,7 @@ export default defineComponent({
       this.visibleECSub = true;
     },
     dropdownClick(key: any): void {
+      console.log(key);
       const result = this.options.find((item: { key: string; }) => item.key == key);
       if (result !== undefined && result.on !== undefined) {
         result.on();

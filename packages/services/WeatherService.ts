@@ -1,9 +1,10 @@
 'use strict';
 import axios from 'axios';
 import wrapper from 'axios-cache-plugin';
+import type { FLocation } from '../renderer/types/custom';
 export default class WeatherService {
 
-  async getWeathers(location: any) {
+  async getWeathers(location: FLocation): Promise<any> {
     const locationStr = location.longitude + ',' + location.latitude;
     const http = wrapper(axios, {
       maxCacheSize: 15,

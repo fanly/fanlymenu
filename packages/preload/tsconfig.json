@@ -14,5 +14,5 @@
   ],
   "include": [
     "../../types/**/*.d.ts"
-  ]
+, "../renderer/types/custom.d.ts"  ]
 }

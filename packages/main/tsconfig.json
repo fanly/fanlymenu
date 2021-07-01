@@ -12,6 +12,7 @@
     "src/index.ts"
   ],
   "include": [
-    "../../types/**/*.d.ts"
+    "../../types/**/*.d.ts",
+    "../renderer/types/custom.d.ts",
   ]
 }

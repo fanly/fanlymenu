@@ -179,10 +179,11 @@
 <script lang="ts">
 import type { ComputedRef } from 'vue';
 import { defineComponent, ref, inject } from 'vue';
-import type { FLocation } from '/@/store';
+// import type { FLocation } from '/^/';
 import { useStore } from '/@/store';
 import { NDrawerContent, NTabs, NTabPane, NSpace, NRadioGroup, NRadioButton, NSwitch, NForm, NFormItemRow, NInput, NInputNumber, NButton, NDivider, NIcon, NSlider, NGrid, NGridItem } from 'naive-ui';
 import { CaretRight as CaretRightIcon } from '@vicons/fa';
+import type { FLocation } from 'types/custom';
 
 export default defineComponent({
   name: 'SettingSub',

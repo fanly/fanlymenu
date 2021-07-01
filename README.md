@@ -47,7 +47,7 @@
 > [Electron+Vue3 MAC 版日历 开发记录(17)——使用 Naive UI重构黄历页面](https://juejin.cn/post/6974784409434062878)
 ## 显示效果
 
-![](https://image.coding01.cn/2021/06/18/16239968186195.jpg)
+![](https://image.coding01.cn/2021/07/01/16251184100753.jpg)
 
 ## 关于我
 
