@@ -13,11 +13,7 @@ export default class EventService {
   /**
    * 提交title和start、end 到 Notion API
    */
-  async postEvent(
-    title: string,
-    start: Date,
-    end: Date,
-    ) {
+  async postEvent(event: EventInput): Promise<any> {
       const http = wrapper(axios, {
         maxCacheSize: 15,
       });
@@ -27,7 +23,7 @@ export default class EventService {
         headers: this.getHeaders(),
         data: {
           'parent': { 'type': 'database_id', 'database_id': this.notion_database_id },
-          'properties': this.getParams(title, start, end),
+          'properties': this.getParams(event),
         },
       });
 
@@ -37,12 +33,7 @@ export default class EventService {
   /**
    * 更新 title 或者 start、end 到 Notion API
    */
-  async patchEvent(
-    id: string,
-    title: string,
-    start: Date,
-    end: Date,
-    ) {
+  async patchEvent(event: EventInput): Promise<any> {
       const http = wrapper(axios, {
         maxCacheSize: 15,
       });
@@ -51,7 +42,7 @@ export default class EventService {
         method: 'patch',
         headers: this.getHeaders(),
         data: {
-          'properties': this.getParams(title, start, end),
+          'properties': this.getParams(event),
         },
       });
 
@@ -112,26 +103,22 @@ export default class EventService {
     };
   }
 
-  getParams(
-    title: string,
-    start: Date,
-    end: Date,
-  ): any {
+  getParams(event: EventInput): any {
     return {
       'title': {
         'type': 'rich_text',
         'rich_text': [{
           'type': 'text',
-          'text': { 'content': title },
+          'text': { 'content': event.title },
         }],
       },
       'start': {
         'type': 'date',
-        'date': { 'start': start },
+        'date': { 'start': event.start },
       },
       'end': {
         'type': 'date',
-        'date': { 'start': end },
+        'date': { 'start': event.end },
       },
     };
   }

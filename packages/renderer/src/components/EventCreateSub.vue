@@ -32,6 +32,7 @@
 import { defineComponent } from 'vue';
 import { NSpace, NInput, NDatePicker, NButton, NDrawerContent } from 'naive-ui';
 import { EventApi } from '@fullcalendar/vue3';
+import type { EventInput } from '@fullcalendar/vue3';
 
 export default defineComponent({
   name: 'EventCreateSub',
@@ -69,7 +70,6 @@ export default defineComponent({
   },
   methods: {
     add(): void {
-      console.log(this.dates);
       const start: Date = new Date(this.dates[0]);
       const end: Date = this.dates[1] == null ? start : new Date(this.dates[1]);
       this.$emit('addEventClick',{
@@ -77,7 +77,7 @@ export default defineComponent({
         title: this.eventText,
         start: start,
         end: end,
-      });
+      } as EventInput);
       this.dates = [Number(Date.now()), Number(Date.now())];
       this.eventText = '';
     },

@@ -206,7 +206,7 @@ export default defineComponent({
       this.event = event;
       this.visibleECSub = true;
     },
-    dropdownClick(key: any): void {
+    dropdownClick(key: string): void {
       console.log(key);
       const result = this.options.find((item: { key: string; }) => item.key == key);
       if (result !== undefined && result.on !== undefined) {
@@ -229,15 +229,15 @@ export default defineComponent({
       this.showDrawer = false;
       this.$router.replace({ path: '/focus' });
     },
-    addEventClick(data: any) {
+    addEventClick(data: EventInput) {
       this.visibleECSub = false;
       if (data.id) {
-        this.eventService.patchEvent(data.id, data.title, data.start, data.end)
+        this.eventService.patchEvent(data.id, data?.title, data.start, data.end)
         .then(() => {
           this.updateEvents();
         });
       } else {
-        this.eventService.postEvent(data.title, data.start, data.end)
+        this.eventService.postEvent(data?.title, data.start, data.end)
         .then(() => {
           this.updateEvents();
         });
