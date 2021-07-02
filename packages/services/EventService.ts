@@ -2,7 +2,7 @@
 import axios from 'axios';
 import wrapper from 'axios-cache-plugin';
 import type { EventInput } from '@fullcalendar/vue3';
-import type { Page } from '../renderer/types/custom';
+import type { InputPropertyValueMap, Page } from '../renderer/types/custom';
 export default class EventService {
   notion_api_key: string;
   notion_database_id: string;
@@ -14,7 +14,7 @@ export default class EventService {
   /**
    * 提交title和start、end 到 Notion API
    */
-  async postEvent(event: EventInput): Promise<any> {
+  async postEvent(event: EventInput): Promise<Page> {
       const http = wrapper(axios, {
         maxCacheSize: 15,
       });
@@ -34,7 +34,7 @@ export default class EventService {
   /**
    * 更新 title 或者 start、end 到 Notion API
    */
-  async patchEvent(event: EventInput): Promise<any> {
+  async patchEvent(event: EventInput): Promise<Page> {
       const http = wrapper(axios, {
         maxCacheSize: 15,
       });
@@ -103,22 +103,23 @@ export default class EventService {
     };
   }
 
-  getParams(event: EventInput): any {
+  getParams(event: EventInput): InputPropertyValueMap {
+    console.log(event);
     return {
       'title': {
         'type': 'rich_text',
         'rich_text': [{
           'type': 'text',
-          'text': { 'content': event.title },
+          'text': { 'content': event.title || '' },
         }],
       },
       'start': {
         'type': 'date',
-        'date': { 'start': event.start },
+        'date': { 'start': (event.start as Date).toISOString() },
       },
       'end': {
         'type': 'date',
-        'date': { 'start': event.end },
+        'date': { 'start': (event.end as Date).toISOString() },
       },
     };
   }

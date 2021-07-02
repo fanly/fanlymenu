@@ -120,6 +120,7 @@ export default defineComponent({
       if (this.fullcalendarApi == null) {
         this.fullcalendarApi = Object.getOwnPropertyDescriptor(this.fullcalendar, 'getApi')?.value();
       }
+      this.fullcalendarApi?.removeAllEventSources();
       this.fullcalendarApi?.addEventSource(this.events as EventSourceInput);
     },
   },

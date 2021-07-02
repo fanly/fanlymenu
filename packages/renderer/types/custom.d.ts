@@ -5,4 +5,4 @@ export declare interface FLocation {
 }
 
 // notion api 相关
-export type { Page } from './api-endpoints';
+export type { Page, InputPropertyValueMap } from './api-endpoints';
