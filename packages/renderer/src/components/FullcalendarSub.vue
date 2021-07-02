@@ -38,6 +38,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import zhLocale from '@fullcalendar/core/locales/zh-cn';
 import CalendarViewService from '../../../services/CalendarViewService';
 import { useStore } from '/@/store';
+import type { WeatherValueMap } from 'types/custom';
 
 export default defineComponent({
   name: 'FullcalendarSub',
@@ -60,7 +61,7 @@ export default defineComponent({
     'eventClick',
   ],
   setup() {
-    const weather = inject('weather');
+    const weather = inject('weather', {} as WeatherValueMap);
     const store = useStore();
     const themeVars = ref(useThemeVars());
     const fullcalendar = ref(null);
@@ -149,7 +150,7 @@ export default defineComponent({
           dayCellContent(item: DayCellContentArg) {
             const date = new Date(item.date);
             const calendarViewService = new CalendarViewService();
-            return calendarViewService.showView(item.dayNumberText, date, that.changeShowFestivals, that.changeShowWeather, that.weather);
+            return calendarViewService.showView(item.dayNumberText, date, that.changeShowFestivals, that.changeShowWeather, that.weather as WeatherValueMap);
           },
         },
       };

@@ -1,6 +1,7 @@
 import * as Moment from 'moment';
 import LunarService from './LunarService';
 import weathericons from '~/images/weathericons/100.png';
+import type { WeatherDaily, WeatherValueMap } from '../renderer/types/custom';
 
 export default class CalendarViewService {
   // 综合显示
@@ -9,7 +10,7 @@ export default class CalendarViewService {
     date: Date,
     changeShowFestivals: boolean,
     changeShowWeather: boolean,
-    weather: any): any {
+    weather: WeatherValueMap): { 'html': string } {
     const lunarService = new LunarService(date);
     const dayTextInChinese = lunarService.showNongliData(changeShowFestivals);
 
@@ -39,8 +40,7 @@ export default class CalendarViewService {
   }
 
   // 先显示当天的天气情况
-  showWeather(date: Date, weather: any) {
-
+  showWeather(date: Date, weather: WeatherValueMap): WeatherDaily | undefined {
     if (weather == null || weather.weatherDailies == null) {
       return undefined;
     }

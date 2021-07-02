@@ -69,7 +69,7 @@ import WeatherService from '../../../services/WeatherService';
 import EventCreateSub from '/@/components/EventCreateSub.vue';
 import EventService from '../../../services/EventService';
 import type { EventInput } from '@fullcalendar/vue3';
-import type { FLocation } from 'types/custom';
+import type { FLocation, WeatherValueMap } from 'types/custom';
 
 export default defineComponent({
   name: 'FullCalendarMain',
@@ -91,7 +91,7 @@ export default defineComponent({
     };
   },
   setup() {
-    const weather = ref({});
+    const weather = ref({} as WeatherValueMap);
     provide('weather', weather);
     const visibleFullSetting = ref(false);
     const store = useStore();
@@ -194,12 +194,12 @@ export default defineComponent({
       this.changeShowFestivals = this.store.state.showFestivals;
       this.changeShowWeather = this.store.state.showWeather;
     },
-    getWeather(location: any): void {
+    getWeather(location: FLocation): void {
       const weatherService = new WeatherService();
       weatherService.getWeathers(location).then((data) => (this.weather = data));
     },
-    dateClick(date: string): void {
-      this.date = new Date(date);
+    dateClick(date: Date): void {
+      this.date = date;
       this.visibleFullDateView = true;
     },
     eventClick(event: any): void {
