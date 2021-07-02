@@ -4,3 +4,5 @@ export declare interface FLocation {
   latitude: number,  // 纬度
 }
 
+// notion api 相关
+export type { Page } from './api-endpoints';

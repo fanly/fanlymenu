@@ -2,6 +2,7 @@
 import axios from 'axios';
 import wrapper from 'axios-cache-plugin';
 import type { EventInput } from '@fullcalendar/vue3';
+import type { Page } from '../renderer/types/custom';
 export default class EventService {
   notion_api_key: string;
   notion_database_id: string;
@@ -38,7 +39,7 @@ export default class EventService {
         maxCacheSize: 15,
       });
       const res = await http({
-        url: import.meta.env.VITE_NOTION_PAGE_API + '/' + id,
+        url: import.meta.env.VITE_NOTION_PAGE_API + '/' + event.id,
         method: 'patch',
         headers: this.getHeaders(),
         data: {
@@ -59,12 +60,11 @@ export default class EventService {
       method: 'post',
       headers: this.getHeaders(),
     });
-
     return this.list2Events(res.data.results);
   }
 
   list2Events(results: []): EventInput[] {
-    const events = results.map((element: any) => {
+    const events = results.map((element: Page) => {
       return {
         'id': element.id,
         'title': element.properties?.title?.rich_text[0].plain_text,
