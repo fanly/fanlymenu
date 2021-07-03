@@ -4,7 +4,7 @@
     v-model:changeShowWeather="changeShowWeather"
     v-model:events="events"
     v-model:location="location"
-    @dateClick="dateClick"
+    @date-click="dateClick"
     @eventClick="eventClick"
   />
   <weather-sub
@@ -38,7 +38,7 @@
       v-if="visibleFullSetting"
       v-model:changeShowWeather="changeShowWeather"
       v-model:changeShowFestivals="changeShowFestivals"
-      @updateLocation="updateLocation"
+      @update-location="updateLocation"
       @focusClick="focusClick"
       @updateNotionClick="updateEvents"
       @goCreateEventView="goCreateEventView"
@@ -50,7 +50,7 @@
     <event-create-sub
       v-if="visibleECSub"
       v-model:event="event"
-      @addEventClick="addEventClick"
+      @add-event-click="addEventClick"
     />
   </n-drawer>
 </template>
@@ -99,11 +99,13 @@ export default defineComponent({
       store.state.notion.api_key,
       store.state.notion.database_id,
     ));
+    const event = ref(undefined);
     return {
       weather,
       eventService,
       visibleFullSetting,
       store,
+      event,
     };
   },
   data() {
@@ -115,7 +117,6 @@ export default defineComponent({
       date: new Date(),
       visibleECSub: false,
       events: [] as EventInput[],
-      event: undefined,
       settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
       options: [
         {
@@ -207,7 +208,6 @@ export default defineComponent({
       this.visibleECSub = true;
     },
     dropdownClick(key: any): void {
-      console.log(key);
       const result = this.options.find((item: { key: string; }) => item.key == key);
       if (result !== undefined && result.on !== undefined) {
         result.on();
