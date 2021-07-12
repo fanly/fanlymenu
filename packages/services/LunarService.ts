@@ -32,8 +32,19 @@ export default class LunarService {
       }
     }
 
-    return this.lunar.getJieQi() ||
-    `${this.lunar.getMonthInChinese()}月${this.lunar.getDayInChinese()}`;
+    return this.lunar.getJieQi() || this.getStringInChinese(this.lunar.getDayInChinese());
+  }
+
+  /**
+   *
+   * @returns 获取初一时，拿到月份
+   */
+  getStringInChinese(dayString: string): string {
+    if (dayString == '初一') {
+      return `${this.lunar.getMonthInChinese()}月${this.lunar.getDayInChinese()}`;
+    }
+
+    return dayString;
   }
 
   /**

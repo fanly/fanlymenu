@@ -83,9 +83,9 @@ export default defineComponent({
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
         headerToolbar: {
-          left: 'prev,next',
+          left: '',
           center: 'title',
-          right: '',
+          right: 'prev,next',
         },
         selectable: true,
         select: this.dateClick,
@@ -94,8 +94,9 @@ export default defineComponent({
         eventChange: this.updateView,
         editable: false,
         height: Number(import.meta.env.VITE_APP_HEIGHT) - 4,
-        // aspectRatio: 1.4,
+        contentHeight: Number(import.meta.env.VITE_APP_HEIGHT) - 68,
         fixedWeekCount: false,
+        handleWindowResize: false,
         views: this.dayCellNewContent(),
         locale: zhLocale,
       } as CalendarOptions,
@@ -174,13 +175,23 @@ export default defineComponent({
 ::v-deep(.fc-daygrid-day-top) {
   display: flex;
   text-align: center;
-  flex-direction: column-reverse;
+  justify-content: space-between;
 }
 
 ::v-deep(.fc-daygrid-day-chinese) {
   position: relative;
   z-index: 4;
   padding: 4px;
+}
+
+::v-deep(.fc-day-today .fc-daygrid-day-number) {
+  width: 25px;
+  height: 25px;
+  color: var(--base-color);
+  background: var(--primary-color);
+  padding: 2px;
+  margin: 2px;
+  border-radius: 50%;
 }
 
 ::v-deep(.fc-daygrid-dayweather) {
@@ -199,7 +210,7 @@ export default defineComponent({
 }
 
 ::v-deep(.fc-day-today) {
-  --fc-today-bg-color: var(--green-100);
+  --fc-today-bg-color: var(--clear-color);// rgba(var(--primary-color), var(--opacity-2));
 }
 
 ::v-deep(.fc-day-sat) {
