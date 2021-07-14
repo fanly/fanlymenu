@@ -56,8 +56,8 @@ export default defineComponent({
 
 .weather {
   position: absolute;
-  top: 15px;
-  left: 600px;
+  top: 10px;
+  left: 550px;
   z-index: 1000;
 }
 

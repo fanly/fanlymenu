@@ -41,6 +41,7 @@ export default defineConfig({
     target: `chrome${chrome}`,
     outDir: 'dist',
     assetsDir: '.',
+    assetsInlineLimit: 0,
     terserOptions: {
       ecma: 2020,
       compress: {

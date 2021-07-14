@@ -93,8 +93,9 @@ export default defineComponent({
         eventClick: this.eventClick,
         eventChange: this.updateView,
         editable: false,
+        footerToolbar: false,
         height: Number(import.meta.env.VITE_APP_HEIGHT) - 4,
-        contentHeight: Number(import.meta.env.VITE_APP_HEIGHT) - 68,
+        aspectRatio: 1,
         fixedWeekCount: false,
         handleWindowResize: false,
         views: this.dayCellNewContent(),
@@ -176,6 +177,8 @@ export default defineComponent({
   display: flex;
   text-align: center;
   justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 ::v-deep(.fc-daygrid-day-chinese) {
