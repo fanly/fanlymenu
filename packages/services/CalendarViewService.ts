@@ -1,8 +1,7 @@
-import * as Moment from 'moment';
+import { format } from 'date-fns';
 import LunarService from './LunarService';
-import weathericons from '~/images/weathericons/100.png';
 import type { WeatherDaily, WeatherValueMap } from '../renderer/types/custom';
-
+import WeatherService from './WeatherService';
 export default class CalendarViewService {
   // 综合显示
   showView(
@@ -25,7 +24,7 @@ export default class CalendarViewService {
         html: `<div class="fc-daygrid-day-number">${dayNumberTextSub}</div><div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>`,
       };
     } else {
-      const imgSrc = weathericons + '/../' + dateWeather.iconDay +'.png';
+      const imgSrc = WeatherService.getIcon(dateWeather.iconDay);
       return {
         html: `<div class="fc-daygrid-day-number">${dayNumberTextSub}</div><div class="fc-daygrid-day-chinese">${dayTextInChinese}</div>
           <div class="fc-daygrid-dayweather">
@@ -41,7 +40,7 @@ export default class CalendarViewService {
     if (weather == null || weather.weatherDailies == null) {
       return undefined;
     }
-    const dateString = Moment(date).format('YYYY-MM-DD');
+    const dateString = format(date, 'yyyy-MM-dd');
     const result = weather.weatherDailies.find((dateWeather: { fxDate: string; }) => dateWeather.fxDate == dateString);
     return result;
   }

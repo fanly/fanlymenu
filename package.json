@@ -61,6 +61,7 @@
     "@fullcalendar/vue3": "^5.8.0",
     "axios": "^0.21.1",
     "axios-cache-plugin": "^0.1.0",
+    "date-fns": "^2.22.1",
     "electron-updater": "^4.3.8",
     "lunar-typescript": "^1.2.1",
     "moment": "^2.29.1",

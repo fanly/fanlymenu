@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
 import { NBadge, NImage } from 'naive-ui';
-import weathericons from '~/images/weathericons/100.png';
+import WeatherService from '../../../services/WeatherService';
 
 export default defineComponent({
   name: 'WeatherSub',
@@ -35,7 +35,7 @@ export default defineComponent({
   computed: {
     weatherIcon(): string {
       if (this.weather.weatherNow) {
-        return weathericons + '/../' + this.weather.weatherNow.icon +'.png';
+        return WeatherService.getIcon(this.weather.weatherNow.icon);
       }
 
       return '';
