@@ -7,6 +7,7 @@
         <full-calendar
           ref="fullcalendar"
           :options="calendarOptions"
+          :style="{ '--fc-today-bg-color': fc_today_bg_color }"
         >
           <template #eventContent="arg">
             <i>{{ arg.event.title }}</i>
@@ -64,6 +65,7 @@ export default defineComponent({
     const weather = inject('weather', {} as WeatherValueMap);
     const store = useStore();
     const themeVars = ref(useThemeVars());
+    const fc_today_bg_color = ref(themeVars.value.primaryColor);
     const fullcalendar = ref(null);
     let fullcalendarApi = ref<InstanceType<typeof CalendarApi>>();
     onMounted(() => {
@@ -74,6 +76,7 @@ export default defineComponent({
       darkTheme,
       store,
       themeVars,
+      fc_today_bg_color,
       fullcalendar,
       fullcalendarApi,
     };
@@ -130,6 +133,7 @@ export default defineComponent({
   methods: {
     updateColors() {
       this.calendarOptions.eventColor = this.themeVars.primaryColor;
+      this.fc_today_bg_color = this.convertHexToRGBA(this.themeVars.primaryColor, Number(this.themeVars.opacity5));
     },
     updateView() {
       if (this.fullcalendarApi == null) {
@@ -143,6 +147,14 @@ export default defineComponent({
     },
     eventClick(clickInfo: EventClickArg) {
       this.$emit('eventClick', clickInfo.event);
+    },
+    convertHexToRGBA(hex: string, opacity: number) {
+      const tempHex = hex.replace('#', '');
+      const r = parseInt(tempHex.substring(0, 2), 16);
+      const g = parseInt(tempHex.substring(2, 4), 16);
+      const b = parseInt(tempHex.substring(4, 6), 16);
+
+      return `rgba(${r}, ${g}, ${b}, ${opacity})`;
     },
     dayCellNewContent() {
       const that = this;
@@ -212,9 +224,9 @@ export default defineComponent({
   font-size: 0.6rem;
 }
 
-::v-deep(.fc-day-today) {
-  --fc-today-bg-color: var(--clear-color);// rgba(var(--primary-color), var(--opacity-2));
-}
+// ::v-deep(.fc-day-today) {
+//   --fc-today-bg-color: var(--clear-color);// rgba(var(--primary-color), var(--opacity-2));
+// }
 
 ::v-deep(.fc-day-sat) {
   color: var(--cyan-300) !important;

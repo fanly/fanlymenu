@@ -13,7 +13,7 @@ export default class App {
   env: ImportMetaEnv
 
   constructor() {
-    // app.dock.hide();
+    app.dock.hide();
     this.env = import.meta.env;
     this.trayService = new TrayService();
     this.clockService = new ClockService();

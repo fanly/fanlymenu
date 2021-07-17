@@ -40,7 +40,6 @@ export default defineConfig({
     sourcemap: true,
     target: `chrome${chrome}`,
     outDir: 'dist',
-    assetsInlineLimit: 0,
     terserOptions: {
       ecma: 2020,
       compress: {
