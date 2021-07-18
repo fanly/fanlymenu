@@ -195,11 +195,4 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "~/styles/default.scss";
-
-.dropdown {
-  position: fixed;
-  top: 7.5px;
-  left: 10px;
-  font-size: 24px;
-}
 </style>

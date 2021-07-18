@@ -65,6 +65,14 @@
               @update:value="changeLocalLocation"
             />
           </n-space>
+          <n-divider dashed />
+          <n-button
+            type="error"
+            block
+            @click="quit"
+          >
+            退出应用
+          </n-button>
         </n-space>
       </n-tab-pane>
       <n-tab-pane
@@ -179,7 +187,6 @@
 <script lang="ts">
 import type { ComputedRef } from 'vue';
 import { defineComponent, ref, inject } from 'vue';
-// import type { FLocation } from '/^/';
 import { useStore } from '/@/store';
 import { NDrawerContent, NTabs, NTabPane, NSpace, NRadioGroup, NRadioButton, NSwitch, NForm, NFormItemRow, NInput, NInputNumber, NButton, NDivider, NIcon, NSlider, NGrid, NGridItem } from 'naive-ui';
 import { CaretRight as CaretRightIcon } from '@vicons/fa';
@@ -307,6 +314,9 @@ export default defineComponent({
       this.store.commit('changeFocusTime', this.focus_time);
       this.$emit('focusClick');
       window.electron.ipcRenderer.send('show-focus-window');
+    },
+    quit(): void {
+      window.electron.ipcRenderer.send('quit');
     },
   },
 });

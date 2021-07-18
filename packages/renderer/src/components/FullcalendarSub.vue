@@ -197,6 +197,16 @@ export default defineComponent({
   background-color: var(--base-color, #2C3E50);
   border-color: var(--border-color, #2C3E50);
 }
+::v-deep(.fc .fc-settingButton-button) {
+  border-color: var(--base-color);
+}
+
+::v-deep(.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child)) {
+  /* margin-left: -1px; */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0 3px;
+}
 ::v-deep(.fc-daygrid-day-top) {
   display: flex;
   text-align: center;
