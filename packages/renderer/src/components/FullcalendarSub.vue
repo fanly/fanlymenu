@@ -24,6 +24,7 @@ import { darkTheme, NCard, NElement as NEl, useThemeVars, NConfigProvider } from
 import '@fullcalendar/core/vdom'; // solve problem with Vite
 import FullCalendar from '@fullcalendar/vue3';
 import type {
+  CustomButtonInput,
   CalendarApi,
   CalendarOptions,
   DateSelectArg,
@@ -60,6 +61,7 @@ export default defineComponent({
   emits: [
     'dateClick',
     'eventClick',
+    'settingClick',
   ],
   setup() {
     const weather = inject('weather', {} as WeatherValueMap);
@@ -85,8 +87,14 @@ export default defineComponent({
     return {
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
+        customButtons: {
+          settingButton: {
+            icon: 'setting',
+            click: this.settingClick,
+          } as CustomButtonInput,
+        } as unknown,
         headerToolbar: {
-          left: '',
+          left: 'settingButton',
           center: 'title',
           right: 'prev,next',
         },
@@ -94,7 +102,7 @@ export default defineComponent({
         select: this.dateClick,
         initialEvents: this.events,
         eventClick: this.eventClick,
-        eventChange: this.updateView,
+        dayMaxEvents: 1,
         editable: false,
         footerToolbar: false,
         height: Number(import.meta.env.VITE_APP_HEIGHT) - 4,
@@ -145,8 +153,11 @@ export default defineComponent({
     dateClick(selectInfo: DateSelectArg) {
       this.$emit('dateClick', selectInfo.start);
     },
-    eventClick(clickInfo: EventClickArg) {
+    eventClick(clickInfo: EventClickArg): void {
       this.$emit('eventClick', clickInfo.event);
+    },
+    settingClick(): void {
+      this.$emit('settingClick');
     },
     convertHexToRGBA(hex: string, opacity: number) {
       const tempHex = hex.replace('#', '');
@@ -177,12 +188,13 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "~/styles/default.scss";
 ::v-deep(.fc-header-toolbar) {
+  height: 64px;
   margin-bottom: 0 !important;
 }
 
 ::v-deep(.fc .fc-button-primary) {
-  color: var(--base-color);
-  background-color: var(--primary-color, #2C3E50);
+  color: var(--text-color-base);
+  background-color: var(--base-color, #2C3E50);
   border-color: var(--border-color, #2C3E50);
 }
 ::v-deep(.fc-daygrid-day-top) {
@@ -223,10 +235,6 @@ export default defineComponent({
   padding-top: 4px;
   font-size: 0.6rem;
 }
-
-// ::v-deep(.fc-day-today) {
-//   --fc-today-bg-color: var(--clear-color);// rgba(var(--primary-color), var(--opacity-2));
-// }
 
 ::v-deep(.fc-day-sat) {
   color: var(--cyan-300) !important;

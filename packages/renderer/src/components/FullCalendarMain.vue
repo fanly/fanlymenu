@@ -6,29 +6,13 @@
     v-model:location="location"
     @date-click="dateClick"
     @eventClick="eventClick"
+    @settingClick="goSettingView"
   />
   <weather-sub
     v-if="changeShowWeather"
     v-model:changeShowWeather="changeShowWeather"
     v-model:location="location"
   />
-  <n-dropdown
-    trigger="hover"
-    placement="bottom-start"
-    :options="options"
-    @select="dropdownClick"
-  >
-    <n-button
-      text
-      type="success"
-      :keyboard="false"
-      class="dropdown"
-    >
-      <n-icon>
-        <list-icon />
-      </n-icon>
-    </n-button>
-  </n-dropdown>
   <n-drawer
     v-model:show="showDrawer"
     :width="settingDrawerWidth"
@@ -56,13 +40,11 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, h, provide, computed } from 'vue';
+import { defineComponent, ref, provide, computed } from 'vue';
 import { useStore } from '/@/store';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
-import { NDropdown, NDrawer, NButton, NIcon } from 'naive-ui';
-import { List as ListIcon, PowerOff as PowerOffIcon } from '@vicons/fa';
-import { LauncherSettings24Filled as LauncherSettings24FilledIcon } from '@vicons/fluent';
+import { NDrawer } from 'naive-ui';
 import SettingSub from '/@/components/SettingSub.vue';
 import DateViewSub from '/@/components/DateViewSub.vue';
 import WeatherService from '../../../services/WeatherService';
@@ -74,16 +56,12 @@ import type { FLocation, WeatherValueMap } from 'types/custom';
 export default defineComponent({
   name: 'FullCalendarMain',
   components: {
-    NDropdown,
     FullcalendarSub,
     WeatherSub,
     NDrawer,
     SettingSub,
     DateViewSub,
     EventCreateSub,
-    NButton,
-    NIcon,
-    ListIcon,
   },
   provide() {
     return {
@@ -118,32 +96,6 @@ export default defineComponent({
       visibleECSub: false,
       events: [] as EventInput[],
       settingDrawerWidth: Number(import.meta.env.VITE_APP_WIDTH) / 4.0 * 3,
-      options: [
-        {
-          label: '设置',
-          key: 'goSettingView',
-          icon() {
-            return h(NIcon, null, {
-              default: () => h(LauncherSettings24FilledIcon),
-            });
-          },
-          on: this.goSettingView,
-        },
-        {
-          type: 'divider',
-          key: 'd1',
-        },
-        {
-          label: '退出应用',
-          key: 'quit',
-          icon() {
-            return h(NIcon, null, {
-              default: () => h(PowerOffIcon),
-            });
-          },
-          on: this.quit,
-        },
-      ],
     };
   },
   computed: {
@@ -206,12 +158,6 @@ export default defineComponent({
     eventClick(event: any): void {
       this.event = event;
       this.visibleECSub = true;
-    },
-    dropdownClick(key: any): void {
-      const result = this.options.find((item: { key: string; }) => item.key == key);
-      if (result !== undefined && result.on !== undefined) {
-        result.on();
-      }
     },
     quit(): void {
       window.electron.ipcRenderer.send('quit');
