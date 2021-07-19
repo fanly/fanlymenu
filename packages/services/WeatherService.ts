@@ -68,7 +68,6 @@ export default class WeatherService {
     const locationStr = location.longitude + ',' + location.latitude;
     const http = wrapper(axios, {
       maxCacheSize: 15,
-      ttl: 7200000, //ms
     });
     http.__addFilter(/weatherdata/);
 

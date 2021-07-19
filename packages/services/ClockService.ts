@@ -3,18 +3,24 @@
 import { app } from 'electron';
 const Moment = require('moment');
 import LunarService from './LunarService';
+import { useIntervalFn } from '@vueuse/core';
+import type { Pausable } from '@vueuse/core';
 
 export default class ClockService {
   format = 'MMMDo HH:mm';
-  // onTickHandler: ((toString: (arg0: ClockService) => string) => void) | null = null;
   onTickHandler: ((arg0: ClockService) => void) | null = null;
-  intervalId: NodeJS.Timeout | null = null;
+  pausable: Pausable;
   params: ClockSettingParams;
   constructor() {
     Moment.locale(app.getLocale());
     this.params = {} as ClockSettingParams;
     // lll MMMDo dddd HH:mm:ss
     this.setFormat('MMMDo HH:mm');
+    this.pausable = useIntervalFn(() => {
+      if (this.onTickHandler) {
+        this.onTickHandler(this);
+      }
+    }, 1000);
     this.start();
   }
 
@@ -23,20 +29,13 @@ export default class ClockService {
       this.onTickHandler = () => {};
     }
 
-    this.intervalId = setInterval(() => {
-      if (this.onTickHandler) {
-        this.onTickHandler(this);
-      }
-    }, 1000);
+    this.pausable.resume();
 
     return this;
   }
 
   stop(): this {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
+    this.pausable.pause();
 
     return this;
   }

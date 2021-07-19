@@ -40,7 +40,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, provide, computed } from 'vue';
+import { defineComponent, ref, reactive, provide, computed } from 'vue';
 import { useStore } from '/@/store';
 import FullcalendarSub from '/@/components/FullcalendarSub.vue';
 import WeatherSub from '/@/components/WeatherSub.vue';
@@ -52,6 +52,8 @@ import EventCreateSub from '/@/components/EventCreateSub.vue';
 import EventService from '../../../services/EventService';
 import type { EventInput } from '@fullcalendar/vue3';
 import type { FLocation, WeatherValueMap } from 'types/custom';
+import { useIntervalFn } from '@vueuse/core';
+import type { IntervalFnOptions } from '@vueuse/core';
 
 export default defineComponent({
   name: 'FullCalendarMain',
@@ -78,19 +80,39 @@ export default defineComponent({
       store.state.notion.database_id,
     ));
     const event = ref(undefined);
+
+    const getWeather = async (location: FLocation) => {
+      const weatherService = new WeatherService();
+      weather.value = await weatherService.getWeathers(location);
+    };
+
+    const changeShowWeather = ref(false);
+
+    const intervalFnOptions = reactive({
+      immediate: changeShowWeather.value,
+    } as IntervalFnOptions);
+
+    const { pause, resume, isActive } = useIntervalFn(() => {
+      getWeather(store.state.location);
+    }, 7200000, intervalFnOptions);
+
     return {
       weather,
       eventService,
       visibleFullSetting,
       store,
       event,
+      getWeather,
+      pause,
+      resume,
+      isActive,
+      changeShowWeather,
     };
   },
   data() {
     return {
       location: {},
       changeShowFestivals: false,
-      changeShowWeather: false,
       visibleFullDateView: false,
       date: new Date(),
       visibleECSub: false,
@@ -118,6 +140,10 @@ export default defineComponent({
       this.store.commit('changeShowWeather', newval);
       if (this.changeShowWeather) {
         this.getWeather(this.store.state.location);
+        // 增加定时器，每隔2个小时更新一次天气预报
+        this.resume();
+      } else {
+        this.pause();
       }
     },
   },
@@ -146,10 +172,6 @@ export default defineComponent({
     setShowData(): void {
       this.changeShowFestivals = this.store.state.showFestivals;
       this.changeShowWeather = this.store.state.showWeather;
-    },
-    getWeather(location: FLocation): void {
-      const weatherService = new WeatherService();
-      weatherService.getWeathers(location).then((data) => (this.weather = data));
     },
     dateClick(date: Date): void {
       this.date = date;

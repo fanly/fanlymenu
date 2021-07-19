@@ -59,6 +59,7 @@
     "@fullcalendar/interaction": "^5.8.0",
     "@fullcalendar/timegrid": "^5.8.0",
     "@fullcalendar/vue3": "^5.8.0",
+    "@vueuse/core": "^5.1.3",
     "axios": "^0.21.1",
     "axios-cache-plugin": "^0.1.0",
     "date-fns": "^2.22.1",
