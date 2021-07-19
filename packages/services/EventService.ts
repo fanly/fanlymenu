@@ -104,7 +104,6 @@ export default class EventService {
   }
 
   getParams(event: EventInput): InputPropertyValueMap {
-    console.log(event);
     return {
       'title': {
         'type': 'rich_text',

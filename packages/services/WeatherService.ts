@@ -76,9 +76,7 @@ export default class WeatherService {
       url: import.meta.env.VITE_WEATHER_API,
       method: 'get',
       params: {
-        param: JSON.stringify({
-          location: locationStr,
-        }),
+        location: locationStr,
       },
     });
 

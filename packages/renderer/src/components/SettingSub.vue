@@ -118,20 +118,12 @@
       >
         <n-grid
           :x-gap="12"
-          :cols="2"
+          :cols="1"
         >
           <n-grid-item>
             <h4>显示节假日(农历)</h4>
             <n-switch
               v-model:value="trayFestivalsModel"
-              size="large"
-              @update-value="updateTraySetting"
-            />
-          </n-grid-item>
-          <n-grid-item>
-            <h4>显示天气预报</h4>
-            <n-switch
-              v-model:value="trayWeatherModel"
               size="large"
               @update-value="updateTraySetting"
             />
