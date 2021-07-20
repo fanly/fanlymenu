@@ -6,7 +6,7 @@ const buildVersion = `${now.getFullYear() - 2020}.${now.getMonth() - 6}.${now.ge
  * @see https://www.electron.build/configuration/configuration
  */
 const config = {
-  appId: 'cn.coding01.fanlymenu',
+  appId: 'cn.coding01.fanlycalendar',
   directories: {
     output: 'dist',
     buildResources: 'buildResources',
