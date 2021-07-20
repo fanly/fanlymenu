@@ -1,5 +1,5 @@
 const now = new Date;
-const buildVersion = `${now.getFullYear() - 2020}.${now.getMonth() - 7}.${now.getDate()}`;
+const buildVersion = `${now.getFullYear() - 2020}.${now.getMonth() - 6}.${now.getDate()}`;
 
 /**
  * @type {import('electron-builder').Configuration}

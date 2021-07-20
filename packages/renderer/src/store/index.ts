@@ -22,7 +22,7 @@ export interface State {
 export const key: InjectionKey<Store<State>> = Symbol();
 
 const dataState = createPersistedState({
-  paths: ['data'],
+  storage: window.sessionStorage,
 });
 
 export const store = createStore<State>({
