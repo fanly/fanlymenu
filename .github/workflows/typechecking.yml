@@ -40,7 +40,7 @@ jobs:
 
       # TODO: Install not all dependencies, but only those required for this workflow
       - name: Install dependencies
-        run: npm install -g yarn && yarn install --immutable
+        run: npm config set registry https://registry.npm.taobao.org && npm install -g yarn && yarn install --immutable
 
       - run: yarn buildEnvTypes
 
