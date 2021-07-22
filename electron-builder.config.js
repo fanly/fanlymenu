@@ -1,12 +1,12 @@
 const now = new Date;
 const buildVersion = `${now.getFullYear() - 2020}.${now.getMonth() - 6}.${now.getDate()}`;
-
+const id = 'cn.coding01.fanlycalendar';
 /**
  * @type {import('electron-builder').Configuration}
  * @see https://www.electron.build/configuration/configuration
  */
 const config = {
-  appId: 'cn.coding01.fanlycalendar',
+  appId: id,
   directories: {
     output: 'dist',
     buildResources: 'buildResources',
@@ -21,6 +21,7 @@ const config = {
     target: 'dmg',
     extendInfo: {
       CFBundlePackageType: 'APPL',
+      CFBundleIdentifier: id,
       CFBundleShortVersionString: buildVersion,
     },
   },
