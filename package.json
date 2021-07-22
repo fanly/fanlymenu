@@ -1,4 +1,5 @@
 {
+  "appId": "cn.coding01.fanlycalendar",
   "name": "FanlyCalendar",
   "private": true,
   "engines": {
