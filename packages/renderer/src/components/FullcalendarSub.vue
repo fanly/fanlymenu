@@ -175,7 +175,13 @@ export default defineComponent({
           dayCellContent(item: DayCellContentArg) {
             const date = new Date(item.date);
             const calendarViewService = new CalendarViewService();
-            return calendarViewService.showView(item.dayNumberText, date, that.changeShowFestivals, that.changeShowWeather, that.weather as WeatherValueMap);
+            return calendarViewService.showView(
+              item.dayNumberText,
+              date,
+              that.changeShowFestivals,
+              that.changeShowWeather,
+              that.weather,
+            );
           },
         },
       };

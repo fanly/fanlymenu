@@ -44,6 +44,7 @@ export default defineConfig({
       external: [
         'electron',
         'electron-updater',
+        'electron-devtools-installer',
         ...builtinModules,
       ],
       output: {

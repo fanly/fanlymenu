@@ -94,21 +94,11 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: 15 # Need for npm >=7.7
-
-      - name: Get npm cache directory
-        id: npm-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
-
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: 16 # Need for npm >=7.7
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install -g yarn && yarn install --immutable
+        run: npm ci
 
       # The easiest way to transfer release notes to a compiled application is create `release-notes.md` in the build resources.
       # See https://github.com/electron-userland/electron-builder/issues/1511#issuecomment-310160119
