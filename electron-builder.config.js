@@ -19,6 +19,9 @@ const config = {
   },
   mac: {
     target: 'dmg',
+    extendInfo: {
+      CFBundlePackageType: 'APPL',
+    },
   },
 };
 
