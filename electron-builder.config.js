@@ -21,6 +21,7 @@ const config = {
     target: 'dmg',
     extendInfo: {
       CFBundlePackageType: 'APPL',
+      CFBundleShortVersionString: buildVersion,
     },
   },
 };
