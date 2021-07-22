@@ -18,7 +18,7 @@ const config = {
     version: buildVersion,
   },
   mac: {
-    target: 'dmg',
+    target: 'pkg',
     extendInfo: {
       CFBundlePackageType: 'APPL',
       CFBundleIdentifier: id,
