@@ -19,6 +19,7 @@ const config = {
   },
   mac: {
     target: 'pkg',
+    entitlements: 'buildResources/entitlements.mas.plist',
     extendInfo: {
       CFBundlePackageType: 'APPL',
       CFBundleIdentifier: id,
