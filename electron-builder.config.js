@@ -1,5 +1,5 @@
 const now = new Date;
-const buildVersion = `${now.getFullYear() - 2020}.${now.getMonth() - 6}.${now.getDate()}`;
+const buildVersion = `${now.getFullYear() - 2020}.${now.getMonth() - 6}.${now.getDate() + 4}`;
 const id = 'cn.coding01.fanlycalendar';
 /**
  * @type {import('electron-builder').Configuration}
@@ -17,8 +17,26 @@ const config = {
   extraMetadata: {
     version: buildVersion,
   },
+  dmg: {
+    contents: [
+      {
+        x: 410,
+        y: 150,
+        type: 'link',
+        path: '/Applications',
+      },
+      {
+        x: 130,
+        y: 150,
+        type: 'file',
+      },
+    ],
+  },
   mac: {
-    target: 'pkg',
+    target: 'dmg',
+    type: 'distribution',
+    hardenedRuntime : true,
+    gatekeeperAssess: false,
     entitlements: 'buildResources/entitlements.mas.plist',
     entitlementsInherit: 'buildResources/entitlements.mas.inherit.plist',
     extendInfo: {
@@ -27,6 +45,7 @@ const config = {
       CFBundleShortVersionString: buildVersion,
     },
   },
+  afterSign: 'electron-builder-notarize',
 };
 
 module.exports = config;
