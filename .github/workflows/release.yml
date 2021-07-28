@@ -126,7 +126,8 @@ jobs:
           github_token: ${{ secrets.github_token }}
           mac_certs: ${{ secrets.mac_certs }}
           mac_certs_password: ${{ secrets.mac_certs_password }}
-          # macOS notarization API key
+          apple_id: ${{ secrets.apple_id }}
+          apple_id_password: ${{ secrets.apple_id_password }}
           api_key_id: ${{ secrets.api_key_id }}
           api_key_issuer_id: ${{ secrets.api_key_issuer_id }}
           # If the commit is tagged with a version (e.g. "v1.0.0"),
