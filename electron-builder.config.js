@@ -31,6 +31,7 @@ const config = {
         type: 'file',
       },
     ],
+    format: 'UDRW',
   },
   mac: {
     target: 'dmg',
