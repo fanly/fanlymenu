@@ -57,6 +57,11 @@
 
 ![](https://komarev.com/ghpvc/?username=fanly&color=green)
 
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/fanly/fanlymenu.svg)](https://starchart.cc/fanly/fanlymenu)
+
 ## License 
 
 fanlymenu is freely distributable under the terms of the [MIT license](https://github.com/fanly/fanlymenu/blob/main/LICENSE).
